@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: 5
+  port: 5432
+  host: localhost
+
+development:
+  <<: *default
+  database: talker-signupper_development
+  username: postgres
+  password: passw0rd
+
+test:
+  <<: *default
+  database: talker-signupper_test
+  username: postgres
+  password: passw0rd
+
+production:
+  <<: *default
+  database: talker-signupper_production
+  username:
+  password:
