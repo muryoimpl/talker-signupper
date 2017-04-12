@@ -8,7 +8,7 @@ end
 
 gem 'rails', '~> 5.1.0.rc1'
 gem 'webpacker', github: "rails/webpacker"
-gem 'sqlite3'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', github: "rails/sass-rails"
 
