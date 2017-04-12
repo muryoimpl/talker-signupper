@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/rails/webpacker.git
-  revision: 7b83822d34b6508a5eb15bfddd9f96b653bb5abd
+  revision: a06421ffe300e4f32af186f09ed5d1c64b311f5e
   specs:
     webpacker (1.1)
       activesupport (>= 4.2)
@@ -158,7 +158,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
-    uglifier (3.1.13)
+    uglifier (3.2.0)
       execjs (>= 0.3.0, < 3)
     web-console (3.5.0)
       actionview (>= 5.0)
