@@ -15,7 +15,7 @@ gem 'sass-rails', github: "rails/sass-rails"
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'material_design_lite-rails'
-gem 'haml'
+gem 'haml', '~> 5.0.0.beta.2'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
