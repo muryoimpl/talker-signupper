@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %title TalkerSignupper
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag    'https://fonts.googleapis.com/icon?family=Material+Icons', media: 'all'
+    = javascript_include_tag 'application'
+  %body
+    = yield
