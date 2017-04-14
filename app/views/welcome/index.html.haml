@@ -1,2 +1,56 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.erb
+.mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+  .mdl-layout__header.mdl-layout__header--waterfall
+    .mdl-layout__header-row
+      %span.mdl-layout-title
+        %span Talker SignUpper
+
+      / Add spacer, to align navigation to the right in desktop
+      .mdl-layout-spacer
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right.mdl-textfield--full-width
+
+  .mdl-layout__content
+    .p-welcome__tab-panel.is-active.mt10
+      %section.p-welcome__section--center.mdl-grid
+        %form.p-welcome__card--wide
+          .mdl-card__title
+            %h2.mdl-card__title-text Create yout talk room
+          .mdl-card__supporting-text.p-welcome__card-body
+            %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if request.port.present?}/rooms/
+            .mdl-textfield.mdl-js-textfield.ml5
+              %input.mdl-textfield__input{type: :text, id: 'room-name'}
+              %label.mdl-textfield__label{for: 'room name'} Room Name
+            .p-welcome__error
+
+          .mdl-card__actions.mdl-card--border
+            %button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.p-welcome__button--create
+              Create new room
+
+    .mdl-grid.p-welcome__typography-area
+      .p-welcome__typography-text.mdl-cell.mdl-cell--6-col
+        .mdl-typography--display-2.mdl-typography--font-bold
+          .p-welcome__typography-text--title Talker SignUpper is a tool for Lightning Talks
+          .mdl-typography--headline.mdl-typography--font-thin.tac
+            %p.mdl-typography--headline.mdl-typography--font-thin.mt10.pt20
+              Welcome to Talker SignUpper!
+            %p.mdl-typography--font-thin
+              Talker SignUpper helps your talk event. Take it easy! Let's start your Lightning Talks event.
+
+
+    .p-welcome__typography-text--title
+      .mdl-typography--font-light.mdl-typography--display-1-color-contrast.pt20
+        Features
+      %ul.p-welcome__list
+        %li.mdl-list__item
+          %i.material-icons.mdl-list__item-icon checkbox
+          create room and share the URL
+        %li.mdl-list__item
+          %i.material-icons.mdl-list__item-icon checkbox
+          register talk content and reflect it in realtime
+        %li.mdl-list__item
+          %i.material-icons.mdl-list__item-icon checkbox
+          shuffle order in your room
+        %li.mdl-list__item
+          %i.material-icons.mdl-list__item-icon checkbox
+          vote favorite talk in your room
+
+  .p-welcome__spacer
