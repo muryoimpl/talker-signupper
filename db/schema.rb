@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170415193520) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_rooms_on_name"
+    t.index ["name"], name: "index_rooms_on_name", unique: true
   end
 
 end
