@@ -11,15 +11,19 @@
   .mdl-layout__content
     .p-welcome__tab-panel.is-active.mt10
       %section.p-welcome__section--center.mdl-grid
-        %form.p-welcome__card--wide
+        = form_for @room, url: rooms_path, method: :post, html: {class: 'p-welcome__card--wide'} do |f|
           .mdl-card__title
             %h2.mdl-card__title-text Create yout talk room
           .mdl-card__supporting-text.p-welcome__card-body
             %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if request.port.present?}/rooms/
             .mdl-textfield.mdl-js-textfield.ml5
-              %input.mdl-textfield__input{type: :text, id: 'room-name'}
-              %label.mdl-textfield__label{for: 'room name'} Room Name
+              = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}'
+              = f.label :name, class: 'mdl-textfield__label', value: 'Room name'
             .p-welcome__error
+              - unless @room.errors.empty?
+                %ul
+                  - @room.errors.full_messages.each do |message|
+                    %li "#{message}"
 
           .mdl-card__actions.mdl-card--border
             %button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.p-welcome__button--create
