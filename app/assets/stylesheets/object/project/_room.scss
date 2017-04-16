@@ -1,40 +1,41 @@
-.p-welcome__card--wide {
+.p-room__card--wide {
   width: 100%;
   border: solid 1px #ccc;
   border-radius: 5px;
   box-shadow: 0 0 7px 2px #ccc;
 }
 
-.p-welcome__card-body {
+.p-room__card-body {
   width: 95.5%;
 }
 
-.p-welcome__error {
+.p-room__error {
   color: $red;
 }
-.p-welcome__tab-panel {
+.p-room__tab-panel {
   padding: 8px;
   padding-top: 350px;
   background: url('/assets/orange-31528_640.png') center 5px no-repeat;
   height: 300px;
 }
 
-.p-welcome__section--center {
+.p-room__section--center {
   width: 700px;
   text-align: center;
 }
 
-.p-welcome__button--create {
+.p-room__button--create {
   width: 60%;
 }
 
-.p-welcome__typography-area {
+.p-room__typography-area {
+  margin-top: 50px;
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: $gray;
 }
 
-.p-welcome__typography-text {
+.p-room__typography-text {
   margin: auto;
   min-height: 200px;
   font-weight: bold;
@@ -42,21 +43,26 @@
   width: 70%;
 }
 
-.p-welcome__typography-text--title {
+.p-room__typography-text--title {
   text-align: center;
 }
 
-.p-welcome__item {
+.p-room__item {
   color: $white;
 }
 
-.p-welcome__list {
+.p-room__list {
   padding-left: 80px;
   max-width: 400px;
   margin: auto;
   text-align: left;
 }
 
-.p-welcome__spacer {
+.p-room__spacer {
   margin-bottom: 80px;
+}
+
+.p-room__error-item {
+  margin: auto;
+  color: $red;
 }
