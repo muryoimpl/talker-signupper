@@ -6,7 +6,11 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
 
-    redirect_to room_path(id: @room.id) and return if @room.save
+    if @room.save
+      redirect_to room_path(id: @room.id)
+    else
+      render action: :index
+    end
   end
 
   def show
