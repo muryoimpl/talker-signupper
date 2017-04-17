@@ -6,7 +6,7 @@
           %h2.mdl-card__title-text Create yout talk room
         .mdl-card__supporting-text.p-room__card-body
           %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if request.port.present?}/rooms/
-          .mdl-textfield.mdl-js-textfield.ml5
+          .mdl-textfield.mdl-js-textfield.ml5.p-room__name
             = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}'
             = f.label :name, class: 'mdl-textfield__label', value: 'Room name'
           .p-room__error

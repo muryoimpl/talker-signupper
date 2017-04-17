@@ -20,8 +20,12 @@
 }
 
 .p-room__section--center {
-  width: 700px;
+  width: 800px;
   text-align: center;
+}
+
+.p-room__name {
+  width: 400px !important;
 }
 
 .p-room__button--create {
