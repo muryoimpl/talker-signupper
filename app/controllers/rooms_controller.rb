@@ -7,13 +7,14 @@ class RoomsController < ApplicationController
     @room = Room.new(room_params)
 
     if @room.save
-      redirect_to room_path(id: @room.id)
+      redirect_to rooms_show_path(name: @room.name)
     else
       render action: :index
     end
   end
 
   def show
+    @room = Room.find_by(name: params[:name])
   end
 
   private
