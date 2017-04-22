@@ -18,7 +18,7 @@
           .mdl-card__supporting-text.p-room__card-body
             %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if request.port.present?}/rooms/
             .mdl-textfield.mdl-js-textfield.ml5.p-room__name
-              = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}'
+              = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}', autocomplete: :off
               = f.label :name, class: 'mdl-textfield__label', value: 'Room name'
             %p available characters: number, alphabet, !$+-@_
             .p-room__error
