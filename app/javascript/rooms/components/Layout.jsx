@@ -1,17 +1,18 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class Layout extends React.Component {
   render() {
     return (
       <div>
-        hi
+        {this.props.children}
       </div>
     );
   }
 }
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

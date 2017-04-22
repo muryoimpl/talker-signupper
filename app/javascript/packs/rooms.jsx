@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import routes from '../rooms/routes';
-import { configureStore } from '../rooms/stores';
+import configureStore from '../rooms/stores';
 
 const store = configureStore();
 
