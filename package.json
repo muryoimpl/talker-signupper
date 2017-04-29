@@ -1,6 +1,25 @@
 {
   "name": "talker-signupper",
   "private": true,
+  "ava": {
+    "files": [
+      "app/javascript/test/**/*.js"
+    ],
+    "source": [
+      "app/javascript/packs/*.{js,jsx}",
+      "app/javascript/rooms/**/*.{js,jsx}"
+    ],
+    "babel": {
+      "babelrc": true
+    },
+    "require": [
+      "babel-polyfill",
+      "babel-register"
+    ]
+  },
+  "scripts": {
+    "test": "ava --verbose"
+  },
   "dependencies": {
     "autoprefixer": "^6.7.7",
     "babel-core": "^6.24.1",
@@ -41,11 +60,16 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "ava": "^0.19.1",
+    "babel-register": "^6.24.1",
+    "cheerio": "^0.22.0",
+    "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "react-addons-test-utils": "^15.5.1",
     "webpack-dev-server": "^2.4.2"
   }
 }
