@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 class Room extends React.Component {
   render() {
@@ -11,4 +10,4 @@ class Room extends React.Component {
 
 Room.propTypes = {};
 
-export default connect(state => state)(Room);
+export default Room;
