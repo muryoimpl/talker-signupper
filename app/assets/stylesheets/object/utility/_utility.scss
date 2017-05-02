@@ -41,3 +41,16 @@
 .ok {
   color: $green;
 }
+
+a.text-like {
+  text-decoration: none;
+
+  &:link {
+    text-decoration: inherit;
+  }
+
+  &:visited {
+    color: $white;
+    text-decoration: inherit;
+  }
+}

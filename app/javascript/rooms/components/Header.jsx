@@ -18,7 +18,7 @@ class Header extends React.Component {
       <div className="mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
-            <span><a href="/">Talker SignUpper</a></span>
+            <span><a className="text-like" href="/">Talker SignUpper</a></span>
           </span>
 
           <div className="mdl-layout-spacer" />
