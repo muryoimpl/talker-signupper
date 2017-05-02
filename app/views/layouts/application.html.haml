@@ -11,7 +11,8 @@
     = javascript_include_tag 'application'
   %body
     .mdl-layout__container
-      = yield
+      .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+        = yield
 
     %footer.mdl-mega-footer
       %p.tac Copyright &copy; 2017 muryoimpl
