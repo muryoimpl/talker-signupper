@@ -2,10 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions/headers';
+
 class Header extends React.Component {
-  render() {
+  handleClickSignUp(e) {
+    e.preventDefault();
+    const { store } = this.context;
     const { signup } = this.props;
 
+    store.dispatch(actions.toggleSignUp(signup));
+  }
+
+  render() {
     return (
       <div className="mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
@@ -16,9 +24,7 @@ class Header extends React.Component {
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
-            { signup &&
-              <a className="mdl-navigation__link" href="#signup">sign up</a>
-            }
+            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={this.handleClickSignUp}>sign up</a>
           </nav>
         </div>
       </div>
@@ -27,7 +33,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  signup: PropTypes.bool,
+  signup: PropTypes.string.isRequired,
 };
 
 Header.contextTypes = {
@@ -35,7 +41,7 @@ Header.contextTypes = {
 };
 
 Header.defaultProps = {
-  signup: true,
+  signup: 'open',
 };
 
 export default connect(state => ({

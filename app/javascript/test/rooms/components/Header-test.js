@@ -1,17 +1,17 @@
 import test from 'ava';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 
 import Header from '../../../rooms/components/Header';
 
 const mockStore = configureStore();
-const initialState = { headers: { signup: true } };
 
 test('contains "Talker SignUpper" link', (t) => {
+  const initialState = { headers: { signup: 'open' } };
   const store = mockStore(initialState);
-  const wrapper = shallow(<Header store={store} />);
+  const wrapper = mount(<Header store={store} />);
 
-  t.regex(wrapper.render().text(), /Talker SignUpper/);
+  t.true(wrapper.contains(<a href="/">Talker SignUpper</a>));
   t.regex(wrapper.render().text(), /sign up/);
 });
