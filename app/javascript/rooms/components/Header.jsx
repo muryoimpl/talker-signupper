@@ -24,7 +24,7 @@ class Header extends React.Component {
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
-            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={this.handleClickSignUp}>sign up</a>
+            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={e => this.handleClickSignUp(e)}>sign up</a>
           </nav>
         </div>
       </div>
