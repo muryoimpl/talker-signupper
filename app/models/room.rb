@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 class Room < ApplicationRecord
-  validates :name, presence: true, length: {in: 4..30}, uniqueness: true
-  validates :name, format: {with: /\A[0-9a-zA-Z!$\+\-@_]+\z/, message: 'only allows these characters 0-9a-zA-Z!$@+-_'}
+  ALLOWED_PATTERN = /\A[0-9a-zA-Z!$\+\-@_]+\z/
+  validates :name, presence: true, length: {in: 4..30, allow_blank: true}, uniqueness: true
+  validates :name, format: {with: ALLOWED_PATTERN, message: I18n.t('errors.not_allowed_character'), allow_blank: true}
 end

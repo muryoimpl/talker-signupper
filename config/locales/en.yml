@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  errors:
+    not_allowed_character: 'only allows these characters 0-9a-zA-Z!$@+-_'
