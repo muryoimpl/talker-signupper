@@ -14,7 +14,8 @@
     },
     "require": [
       "babel-polyfill",
-      "babel-register"
+      "babel-register",
+      "./app/javascript/test/helpers/setup-test-env"
     ]
   },
   "scripts": {
