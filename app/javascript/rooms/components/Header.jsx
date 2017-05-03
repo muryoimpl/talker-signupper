@@ -24,7 +24,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { roomName } = this.props;
+    const { signup, roomName } = this.props;
 
     return (
       <div className="mdl-layout__header mdl-layout__header--waterfall">
@@ -37,7 +37,9 @@ class Header extends React.Component {
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
-            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={e => this.handleClickSignUp(e)}>sign up</a>
+            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={e => this.handleClickSignUp(e)}>
+              {signup === 'open' ? 'hide' : 'sign up'}
+            </a>
           </nav>
         </div>
       </div>

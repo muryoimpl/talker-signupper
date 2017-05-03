@@ -1,3 +1,10 @@
 .mdl-layout__header-row {
   background-color: $dark-black;
 }
+
+.mdl-navigation__link {
+  &:hover {
+    border-bottom: 4px solid $white;
+    background-color: $gray;
+  }
+}
