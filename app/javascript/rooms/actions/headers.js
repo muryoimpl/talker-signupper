@@ -14,3 +14,7 @@ export function toggleSignUp(currentState) {
     open: closeSignUp(),
   })[state])(currentState);
 }
+
+export function setRoomName(roomName) {
+  return { type: Types.SET_ROOM_NAME, room: roomName };
+}

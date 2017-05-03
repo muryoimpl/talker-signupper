@@ -20,3 +20,12 @@ test('CLOSE_SIGN_UP', (t) => {
     initialState.merge({ signup: 'close' }),
   );
 });
+
+test('SET_ROOM_NAME', (t) => {
+  const initialState = Immutable.Record({ signup: 'open', roomName: '' })();
+
+  t.deepEqual(
+    headers(initialState, { type: 'SET_ROOM_NAME', room: 'yay' }),
+    initialState.merge({ roomName: 'yay' }),
+  );
+});

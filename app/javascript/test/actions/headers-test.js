@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { toggleSignUp, signUpTalk, closeSignUp } from '../../rooms/actions/headers';
+import { toggleSignUp, signUpTalk, closeSignUp, setRoomName } from '../../rooms/actions/headers';
 
 test('signUpTalk action', (t) => {
   t.deepEqual(signUpTalk(), { type: 'SIGN_UP_TALK' });
@@ -21,5 +21,12 @@ test('toggleSignUp close -> open', (t) => {
   t.deepEqual(
     toggleSignUp('close'),
     { type: 'SIGN_UP_TALK' },
+  );
+});
+
+test('setRoomName', (t) => {
+  t.deepEqual(
+    setRoomName('yay'),
+    { type: 'SET_ROOM_NAME', room: 'yay' },
   );
 });

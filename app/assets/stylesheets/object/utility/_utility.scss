@@ -42,6 +42,14 @@
   color: $green;
 }
 
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
 a.text-like {
   text-decoration: none;
 

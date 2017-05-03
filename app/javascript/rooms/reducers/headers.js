@@ -3,6 +3,7 @@ import * as Types from '../constants/actions';
 
 const initialState = new Immutable.Record({
   signup: 'open',
+  roomName: '',
 })();
 
 export default function headers(state = initialState, action) {
@@ -11,6 +12,8 @@ export default function headers(state = initialState, action) {
       return state.merge({ signup: 'close' });
     case Types.SIGN_UP_TALK:
       return state.merge({ signup: 'open' });
+    case Types.SET_ROOM_NAME:
+      return state.merge({ roomName: action.room });
     default:
       return state;
   }
