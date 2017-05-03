@@ -1,9 +1,14 @@
 import React from 'react';
 
+import SignUp from './SignUp';
+
 class Room extends React.Component {
   render() {
     return (
-      <p>hi</p>
+      <div>
+        <SignUp />
+        <p>hi</p>
+      </div>
     );
   }
 }
