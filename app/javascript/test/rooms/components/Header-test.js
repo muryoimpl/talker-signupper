@@ -12,6 +12,6 @@ test('contains "Talker SignUpper" link', (t) => {
   const store = mockStore(initialState);
   const wrapper = mount(<Header store={store} />);
 
-  t.true(wrapper.contains(<a href="/">Talker SignUpper</a>));
+  t.true(wrapper.contains(<a className="text-like" href="/">Talker SignUpper</a>));
   t.regex(wrapper.render().text(), /sign up/);
 });
