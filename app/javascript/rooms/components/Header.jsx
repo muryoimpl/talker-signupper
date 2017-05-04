@@ -33,7 +33,7 @@ class Header extends React.Component {
             <span><a className="text-like" href="/">Talker SignUpper</a></span>
           </span>
 
-          <span className="p-room__room-name">Room: {roomName}</span>
+          <span className="p-room__room-name">#{roomName}</span>
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
