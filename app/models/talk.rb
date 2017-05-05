@@ -4,4 +4,8 @@ class Talk < ApplicationRecord
 
   validates :title, presence: true
   validates :talker_name, presence: true
+
+  def json_attributes(room)
+    attributes.merge(room: room.attributes)
+  end
 end
