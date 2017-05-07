@@ -50,3 +50,4 @@ config/secrets.yml.key
 /vendor/data
 
 .eslintrc.yml
+.babelrc
