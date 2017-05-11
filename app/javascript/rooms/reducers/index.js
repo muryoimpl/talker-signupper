@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 
-import rooms from './rooms';
+import signups from './signups';
 import headers from './headers';
 
 const rootReducer = combineReducers({
-  rooms,
   headers,
+  signups,
 });
 
 export default rootReducer;
