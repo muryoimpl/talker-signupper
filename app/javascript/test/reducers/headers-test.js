@@ -29,3 +29,12 @@ test('SET_ROOM_NAME', (t) => {
     initialState.merge({ roomName: 'yay' }),
   );
 });
+
+test('GET_ROOM_NAME', (t) => {
+  const initialState = Immutable.Record({ signup: 'open', roomName: 'Heya' })();
+
+  t.deepEqual(
+    headers(initialState, { type: 'GET_ROOM_NAME' }),
+    initialState,
+  );
+});

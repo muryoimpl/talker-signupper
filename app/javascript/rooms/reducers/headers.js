@@ -14,6 +14,7 @@ export default function headers(state = initialState, action) {
       return state.merge({ signup: 'open' });
     case Types.SET_ROOM_NAME:
       return state.merge({ roomName: action.room });
+    case Types.GET_ROOM_NAME:
     default:
       return state;
   }
