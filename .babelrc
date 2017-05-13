@@ -1,14 +1,11 @@
 {
   "presets": [
-    [
-      "env", {
-        "module": false,
-        "targets": {
-          "node": "current"
-        },
-        "useBuiltIns": true
-      }
-    ],
-    "react"
+    ["env", {
+      "modules": false,
+      "targets": {
+        "node": "current"
+      },
+      "useBuiltIns": true
+    }]
   ]
 }
