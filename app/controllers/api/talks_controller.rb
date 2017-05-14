@@ -31,6 +31,6 @@ class Api::TalksController < Api::ApplicationController
   end
 
   def status(talk)
-    talk.valid? ? 200 : 400
+    talk.valid? ? 201 : 400
   end
 end
