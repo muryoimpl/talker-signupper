@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "test": "ava --verbose"
+    "test": "NODE_ENV=test ava --verbose"
   },
   "dependencies": {
     "autoprefixer": "^7.0.1",
