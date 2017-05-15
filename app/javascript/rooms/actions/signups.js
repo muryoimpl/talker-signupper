@@ -19,3 +19,7 @@ export function clearSignupState() {
 export function storeResponse(response) {
   return { type: Types.STORE_RESPONSE, response };
 }
+
+export function clearResponse() {
+  return { type: Types.CLEAR_RESPONSE };
+}

@@ -13,6 +13,8 @@ export default function signups(state = initialState, action) {
       return state.merge({ title: '', talker_name: '', response: null });
     case Types.STORE_RESPONSE:
       return state.merge({ response: action.response });
+    case Types.CLEAR_RESPONSE:
+      return state.merge({ response: null });
     case Types.REGISTER_SIGNUPPER_TALK:
     default:
       return state;

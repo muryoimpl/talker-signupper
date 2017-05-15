@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { changeTitle, changeName, registerSignuppersTalk, clearSignupState, storeResponse } from '../../rooms/actions/signups';
+import { changeTitle, changeName, registerSignuppersTalk, clearSignupState, storeResponse, clearResponse } from '../../rooms/actions/signups';
 
 test('changeTitle action', (t) => {
   t.deepEqual(changeTitle('hi'), { type: 'CHANGE_TITLE', title: 'hi' });
@@ -20,4 +20,8 @@ test('clearSignupState', (t) => {
 
 test('storeResponse', (t) => {
   t.deepEqual(storeResponse({ status: 200 }), { type: 'STORE_RESPONSE', response: { status: 200 } });
+});
+
+test('clearResponse', (t) => {
+  t.deepEqual(clearResponse(), { type: 'CLEAR_RESPONSE' });
 });

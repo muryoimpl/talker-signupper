@@ -1,13 +1,14 @@
 import test from 'ava';
 import { take, put, call, select } from 'redux-saga/effects';
 import nock from 'nock';
+import Immutable from 'immutable';
 
 import * as Types from '../../rooms/constants/actions';
 import { registerSignuppersTalk, postTalk, getAllState } from '../../rooms/sagas/requestForTalk';
 import * as headerActions from '../../rooms/actions/headers';
 import * as signupActions from '../../rooms/actions/signups';
 
-const getSignup = () => ({ signups: { title: 'hi', talker_name: 'Ken' } });
+const getSignup = () => ({ signups: { title: 'hi', talker_name: 'Ken', response: null } });
 const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
 const getState = () => Object.assign({}, getSignup(), getHeader());
 const createdResponse = {
@@ -37,16 +38,22 @@ test('registerSignuppersTalk: request success', async (t) => {
   ret = saga.next(getSignup());
   t.deepEqual(ret.value, put(headerActions.getRoomName()));
 
+  ret = saga.next(Object.assign({}, getSignup(), { signups: { response: { status: 200 } } }));
+  t.deepEqual(ret.value, put(signupActions.clearResponse()));
+
   ret = saga.next(getState());
   t.deepEqual(ret.value, select(getAllState));
 
   nock('http://localhost:3000')
-    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken' } })
+    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken', response: null } })
     .reply(201, createdResponse);
 
   ret = saga.next(getState());
-  t.deepEqual(ret.value, await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken' } }));
+  t.deepEqual(ret.value, await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken', response: null } }));
 
   ret = saga.next(createdResponse);
   t.deepEqual(ret.value, put(signupActions.storeResponse(createdResponse)));
+
+  ret = saga.next(Object.assign({}, getState(), { signups: { response: createdResponse } }));
+  t.deepEqual(ret.value, select(getAllState));
 });

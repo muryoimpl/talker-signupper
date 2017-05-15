@@ -18,11 +18,13 @@ export function* registerSignuppersTalk() {
   while (true) {
     yield take(Types.REGISTER_SIGNUPPER_TALK);
     yield put(headerActions.getRoomName());
+    yield put(signupActions.clearResponse());
 
-    const state = yield select(getAllState);
+    let state = yield select(getAllState);
     const response = yield call(postTalk, state.headers.roomName, { talk: state.signups });
     yield put(signupActions.storeResponse(response));
 
+    state = yield select(getAllState);
     // TODO: response の分岐を書け
     // if (response.status === 201) {
     //   yield put(signupActions.clearState());

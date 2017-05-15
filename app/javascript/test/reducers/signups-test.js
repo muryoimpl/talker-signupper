@@ -47,3 +47,12 @@ test('STORE_RESPONSE', (t) => {
     initialState.merge({ response: { status: 201 } }),
   );
 });
+
+test('CLEAR_RESPONSE', (t) => {
+  const initialState = Immutable.Record({ title: 'hi', talker_name: 'Ken', response: { status: 200 } })();
+
+  t.deepEqual(
+    signups(initialState, { type: 'CLEAR_RESPONSE' }),
+    initialState.merge({ response: null }),
+  );
+});
