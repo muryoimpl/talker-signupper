@@ -6,9 +6,9 @@ import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../sagas';
 
-const sagaMiddleware = createSagaMiddleware({ sagaMonitor: true });
+const sagaMiddleware = createSagaMiddleware();
 const finalCreateStore = compose(
-  applyMiddleware(logger, sagaMiddleware()),
+  applyMiddleware(logger, sagaMiddleware),
 )(createStore);
 
 export default function configureStore(initialState) {
