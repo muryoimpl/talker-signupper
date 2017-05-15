@@ -7,7 +7,7 @@ test('changeTitle action', (t) => {
 });
 
 test('changeName action', (t) => {
-  t.deepEqual(changeName('Ken'), { type: 'CHANGE_NAME', name: 'Ken' });
+  t.deepEqual(changeName('Ken'), { type: 'CHANGE_NAME', talker_name: 'Ken' });
 });
 
 test('registerSignuppersTalk action', (t) => {

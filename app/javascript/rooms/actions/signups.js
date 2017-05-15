@@ -9,5 +9,5 @@ export function changeTitle(title) {
 }
 
 export function changeName(name) {
-  return { type: Types.CHANGE_NAME, name };
+  return { type: Types.CHANGE_NAME, talker_name: name };
 }

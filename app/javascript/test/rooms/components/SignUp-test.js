@@ -28,7 +28,7 @@ test('hide form when signup is `close`', (t) => {
 });
 
 test('call changeTitle when title is changed', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: '', name: '' } };
+  const initialState = { headers: { signup: 'close' }, signups: { title: '', talker_name: '' } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
@@ -38,17 +38,17 @@ test('call changeTitle when title is changed', (t) => {
 });
 
 test('call changeName when name is changed', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: '', name: '' } };
+  const initialState = { headers: { signup: 'close' }, signups: { title: '', talker_name: '' } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
   wrapper.find('#signup-name').simulate('change', { target: { value: 'Ken' } });
   const actions = store.getActions();
-  t.deepEqual(actions, [{ type: 'CHANGE_NAME', name: 'Ken' }]);
+  t.deepEqual(actions, [{ type: 'CHANGE_NAME', talker_name: 'Ken' }]);
 });
 
 test('call handleClickSignUp when signup button is clicked', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: 'hi', name: 'Ken' } };
+  const initialState = { headers: { signup: 'close' }, signups: { title: 'hi', talker_name: 'Ken' } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
