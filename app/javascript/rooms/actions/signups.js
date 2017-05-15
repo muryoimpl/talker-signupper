@@ -11,3 +11,7 @@ export function changeTitle(title) {
 export function changeName(name) {
   return { type: Types.CHANGE_NAME, talker_name: name };
 }
+
+export function clearSignupState() {
+  return { type: Types.CLEAR_SIGNUP_STATE };
+}

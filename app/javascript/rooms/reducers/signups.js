@@ -5,12 +5,13 @@ const initialState = new Immutable.Record({ title: '', talker_name: '' })();
 
 export default function signups(state = initialState, action) {
   switch (action.type) {
-    case Types.REGISTER_SIGNUPPER_TALK:
-      return state;
     case Types.CHANGE_TITLE:
       return state.merge({ title: action.title });
     case Types.CHANGE_NAME:
-      return state.merge({ title: action.talker_name });
+      return state.merge({ talker_name: action.talker_name });
+    case Types.CLEAR_SIGNUP_STATE:
+      return state.merge({ title: '', talker_name: '' });
+    case Types.REGISTER_SIGNUPPER_TALK:
     default:
       return state;
   }
