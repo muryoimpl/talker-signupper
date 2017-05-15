@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import * as Types from '../constants/actions';
 
-const initialState = new Immutable.Record({ title: '', talker_name: '' })();
+const initialState = new Immutable.Record({ title: '', talker_name: '', response: null })();
 
 export default function signups(state = initialState, action) {
   switch (action.type) {
@@ -10,7 +10,9 @@ export default function signups(state = initialState, action) {
     case Types.CHANGE_NAME:
       return state.merge({ talker_name: action.talker_name });
     case Types.CLEAR_SIGNUP_STATE:
-      return state.merge({ title: '', talker_name: '' });
+      return state.merge({ title: '', talker_name: '', response: null });
+    case Types.STORE_RESPONSE:
+      return state.merge({ response: action.response });
     case Types.REGISTER_SIGNUPPER_TALK:
     default:
       return state;

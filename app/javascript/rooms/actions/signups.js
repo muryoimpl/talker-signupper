@@ -15,3 +15,7 @@ export function changeName(name) {
 export function clearSignupState() {
   return { type: Types.CLEAR_SIGNUP_STATE };
 }
+
+export function storeResponse(response) {
+  return { type: Types.STORE_RESPONSE, response };
+}
