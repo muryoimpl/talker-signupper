@@ -1,0 +1,13 @@
+.p-signup__form--active {
+  opacity: 1;
+}
+
+.p-signup__form--inactive {
+  opacity: 0.4;
+}
+
+.p-signup__spinner {
+  position: fixed;
+  z-index: 999;
+  margin-top: 9%;
+}

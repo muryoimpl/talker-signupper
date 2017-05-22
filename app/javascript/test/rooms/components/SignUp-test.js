@@ -10,7 +10,7 @@ import SignUp from '../../../rooms/components/SignUp';
 const mockStore = configureStore();
 
 test('show form when signup is `open`', (t) => {
-  const initialState = { headers: { signup: 'open' } };
+  const initialState = { headers: { signup: 'open' }, signups: { submitted: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
@@ -19,7 +19,7 @@ test('show form when signup is `open`', (t) => {
 });
 
 test('hide form when signup is `close`', (t) => {
-  const initialState = { headers: { signup: 'close' } };
+  const initialState = { headers: { signup: 'close' }, signups: { submitted: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
@@ -28,7 +28,7 @@ test('hide form when signup is `close`', (t) => {
 });
 
 test('call changeTitle when title is changed', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: '', talker_name: '' } };
+  const initialState = { headers: { signup: 'close' }, signups: { title: '', talker_name: '', submitted: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
@@ -38,7 +38,7 @@ test('call changeTitle when title is changed', (t) => {
 });
 
 test('call changeName when name is changed', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: '', talker_name: '' } };
+  const initialState = { headers: { signup: 'close', submitted: false }, signups: { title: '', talker_name: '', submitted: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 
@@ -48,7 +48,7 @@ test('call changeName when name is changed', (t) => {
 });
 
 test('call handleClickSignUp when signup button is clicked', (t) => {
-  const initialState = { headers: { signup: 'close' }, signups: { title: 'hi', talker_name: 'Ken' } };
+  const initialState = { headers: { signup: 'close', submitted: false }, signups: { title: 'hi', talker_name: 'Ken', submitted: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><SignUp /></Provider>);
 

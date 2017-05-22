@@ -23,3 +23,7 @@ export function storeResponse(response) {
 export function clearResponse() {
   return { type: Types.CLEAR_RESPONSE };
 }
+
+export function changeFormState(isSubmitted) {
+  return { type: Types.CHANGE_FORM_STATE, submitted: isSubmitted };
+}

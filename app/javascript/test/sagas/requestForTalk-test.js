@@ -1,12 +1,12 @@
 import test from 'ava';
 import { take, put, call, select } from 'redux-saga/effects';
 import nock from 'nock';
-import Immutable from 'immutable';
 
 import * as Types from '../../rooms/constants/actions';
 import { registerSignuppersTalk, postTalk, getAllState } from '../../rooms/sagas/requestForTalk';
 import * as headerActions from '../../rooms/actions/headers';
 import * as signupActions from '../../rooms/actions/signups';
+import Immutable from 'immutable';
 
 const getSignup = () => ({ signups: { title: 'hi', talker_name: 'Ken', response: null } });
 const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
@@ -35,6 +35,9 @@ test('registerSignuppersTalk: request success', async (t) => {
   let ret = saga.next();
   t.deepEqual(ret.value, take(Types.REGISTER_SIGNUPPER_TALK));
 
+  ret = saga.next();
+  t.deepEqual(ret.value, put(signupActions.changeFormState(true)));
+
   ret = saga.next(getSignup());
   t.deepEqual(ret.value, put(headerActions.getRoomName()));
 
@@ -56,4 +59,13 @@ test('registerSignuppersTalk: request success', async (t) => {
 
   ret = saga.next(Object.assign({}, getState(), { signups: { response: createdResponse } }));
   t.deepEqual(ret.value, select(getAllState));
+
+  ret = saga.next(Object.assign({}, getState(), { signups: { response: Immutable.Record(createdResponse)() } }));
+  t.deepEqual(ret.value, put(signupActions.clearSignupState()));
+
+  ret = saga.next();
+  t.deepEqual(ret.value, put(headerActions.closeSignUp()));
+
+  ret = saga.next();
+  t.deepEqual(ret.value, put(signupActions.changeFormState(false)));
 });

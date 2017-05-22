@@ -17,6 +17,9 @@ export function postTalk(roomName, talk) {
 export function* registerSignuppersTalk() {
   while (true) {
     yield take(Types.REGISTER_SIGNUPPER_TALK);
+
+    yield put(signupActions.changeFormState(true));
+
     yield put(headerActions.getRoomName());
     yield put(signupActions.clearResponse());
 
@@ -25,9 +28,11 @@ export function* registerSignuppersTalk() {
     yield put(signupActions.storeResponse(response));
 
     state = yield select(getAllState);
-    // TODO: response の分岐を書け
-    // if (response.status === 201) {
-    //   yield put(signupActions.clearState());
-    // }
+    if (state.signups.response.get('status') === 201) {
+      yield put(signupActions.clearSignupState());
+      yield put(headerActions.closeSignUp());
+    }
+
+    yield put(signupActions.changeFormState(false));
   }
 }
