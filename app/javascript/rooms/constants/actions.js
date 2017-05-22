@@ -12,3 +12,6 @@ export const CLEAR_SIGNUP_STATE = 'CLEAR_SIGNUP_STATE';
 export const STORE_RESPONSE = 'STORE_RESPONSE';
 export const CLEAR_RESPONSE = 'CLEAR_RESPONSE';
 export const CHANGE_FORM_STATE = 'CHANGE_FORM_STATE';
+
+// talks
+export const FETCH_TALKS = 'FETCH_TALKS';
