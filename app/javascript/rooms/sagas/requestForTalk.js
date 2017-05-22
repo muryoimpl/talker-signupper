@@ -11,7 +11,7 @@ export const getAllState = state => state;
 
 export function postTalk(roomName, talk) {
   const url = `${config.API_HOST}/api/rooms/${roomName}/talks`;
-  return axios.post(url, talk).then(response => response).catch(response => response);
+  return axios.post(url, talk).then(response => response).catch(error => error.response.data);
 }
 
 export function* registerSignuppersTalk() {

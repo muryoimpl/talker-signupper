@@ -22,11 +22,11 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { signup, submitted, title, talkerName } = this.props;
+    const { signup, submitted, title, talkerName, response } = this.props;
     return (
       <section className={`p-room__section--center mdl-grid ${signup === 'open' ? 'show' : 'hidden'}`}>
 
-        <div className={`mdl-spinner mdl-js-spinner is-active p-signup__spinner ${submitted ? 'show' : 'hidden'}`} />
+        <div className={`mdl-spinner mdl-js-spinner is-active p-signup__spinner ${'hidden'}`} />
 
         <form className={`p-room__card--wide ${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
           <div className="mdl-card__title">
@@ -57,6 +57,11 @@ class SignUp extends React.Component {
               />
               <label className="mdl-textfield__label" htmlFor="title">Talk title</label>
             </div>
+            <div className="mdl-card__supporting-text">
+              {response && response.get('errors') && response.get('errors').map(e =>
+                <p key={e}>{e}</p>,
+              )}
+            </div>
           </div>
           <div className="mdl-card__actions mdl-card--border">
             <button
@@ -79,12 +84,14 @@ SignUp.propTypes = {
   submitted: PropTypes.bool,
   title: PropTypes.string,
   talkerName: PropTypes.string,
+  response: PropTypes.object,
 };
 
 SignUp.defaultProps = {
   submitted: false,
   title: '',
   talkerName: '',
+  response: null,
 };
 
 SignUp.contextTypes = {
@@ -96,4 +103,5 @@ export default connect(state => ({
   submitted: state.signups.submitted,
   title: state.signups.title,
   talkerName: state.signups.talker_name,
+  response: state.signups.response,
 }))(SignUp);
