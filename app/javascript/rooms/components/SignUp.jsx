@@ -26,8 +26,6 @@ class SignUp extends React.Component {
     return (
       <section className={`p-room__section--center mdl-grid ${signup === 'open' ? 'show' : 'hidden'}`}>
 
-        <div className={`mdl-spinner mdl-js-spinner is-active p-signup__spinner ${'hidden'}`} />
-
         <form className={`p-room__card--wide ${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
           <div className="mdl-card__title">
             <h2 className="mdl-card__title-text"> Sign up your talk</h2>
