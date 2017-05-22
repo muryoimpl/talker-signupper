@@ -41,7 +41,7 @@ class SignUp extends React.Component {
                 value={talkerName}
                 disabled={submitted}
               />
-              <label className="mdl-textfield__label" htmlFor="your name">Your name</label>
+              <label className="mdl-textfield__label" htmlFor="your name">Talker name</label>
             </div>
 
             <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
@@ -53,7 +53,7 @@ class SignUp extends React.Component {
                 value={title}
                 disabled={submitted}
               />
-              <label className="mdl-textfield__label" htmlFor="title">Talk title</label>
+              <label className="mdl-textfield__label" htmlFor="title">Title</label>
             </div>
             <div className="mdl-card__supporting-text">
               {response && response.get('errors') && response.get('errors').map(e =>
