@@ -16,10 +16,10 @@ RSpec.describe Api::TalksController, type: :controller do
         end
 
         specify do
-          expect(response).to have_http_status :ok
+          expect(response).to have_http_status :created
 
           body = JSON.parse(response.body)
-          expect(body['status']).to eq 200
+          expect(body['status']).to eq 201
           expect(body['errors']).to be_blank
           expect(body['talk']['title']).to eq 'hi'
           expect(body['talk']['talker_name']).to eq 'muryoimpl'
