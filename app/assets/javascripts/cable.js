@@ -5,9 +5,9 @@
 //= require_self
 //= require_tree ./channels
 
-(function() {
+/* eslint func-names: [0, "always"], no-unused-expressions: 0*/
+(function () {
   this.App || (this.App = {});
 
   App.cable = ActionCable.createConsumer();
-
 }).call(this);
