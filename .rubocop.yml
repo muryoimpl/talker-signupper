@@ -1,0 +1,17 @@
+inherit_gem:
+  deka_eiwakun: "config/rubocop.yml"
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/*'
+    - 'node_modules/**/*'
+    - 'spec/factories/*.rb'
+    - db/*
+
+Metrics/AbcSize:
+  Max: 20
