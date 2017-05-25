@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/rails/webpacker.git
-  revision: 9d579e8f00a0bf163fa99d900b605d5e05a233f5
+  revision: d2ca8d0c124a8a48b8ca2b5054f7c56ec76c7235
   specs:
-    webpacker (1.2)
+    webpacker (2.0)
       activesupport (>= 4.2)
       multi_json (~> 1.2)
       railties (>= 4.2)
@@ -129,7 +129,7 @@ GEM
       pry (>= 0.10.4)
     public_suffix (2.0.5)
     puma (3.8.2)
-    rack (2.0.2)
+    rack (2.0.3)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.1.1)

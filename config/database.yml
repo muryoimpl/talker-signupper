@@ -21,6 +21,4 @@ test:
 
 production:
   <<: *default
-  database: talker-signupper_production
-  username:
-  password:
+  url: <%= ENV['DATABASE_URL'] %>
