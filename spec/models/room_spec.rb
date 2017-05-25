@@ -47,4 +47,13 @@ RSpec.describe Room, type: :model do
       end
     end
   end
+
+  describe '#json_attributes' do
+    let(:room) { create(:room) }
+    let!(:talk) { create(:talk, room_id: room.id) }
+
+    specify do
+      expect(room.json_attributes).to eq room.attributes.merge(talks: room.talks.map(&:attributes))
+    end
+  end
 end
