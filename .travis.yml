@@ -8,18 +8,6 @@ cache:
     - node_modules
   yarn: true
 
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-
-before_install:
-  - export CXX=g++
-  - export CC=gcc
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then export CXX=g++-4.8; fi
-
 services:
   - postgresql
   - redis-server
@@ -28,7 +16,7 @@ bundler_args: "--without development --deployment"
 
 install:
   - bundle install
-  - nvm install node -v v7.9.0
+  - nvm install node
   - node -v
   - npm i -g yarn
   - bin/yarn
