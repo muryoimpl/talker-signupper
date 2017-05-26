@@ -35,6 +35,7 @@ install:
 
 before_script:
   - cp -f config/database.travis.yml config/database.yml
+  - cp -f config/secrets.travis.yml config/secrets.yml
   - bundle exec rake db:create
   - bundle exec rake db:migrate
 
