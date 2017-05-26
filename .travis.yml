@@ -1,0 +1,32 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.4.1
+cache:
+  bundler: true
+  directories:
+    - node_modules
+  yarn: true
+
+services:
+  - postgresql
+  - redis-server
+
+bundler_args: "--without development --deployment"
+
+install:
+  - bundle install
+  - nvm install node -v v7.9.0
+  - node -v
+  - npm i -g yarn@0.22.0
+  - bin/yarn
+
+before_script:
+  - cp -f config/database.travis.yml config/database.yml
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+
+script:
+  - yarn test
+  - bundle exec rubocop
+  - bundle exec rspec spec
