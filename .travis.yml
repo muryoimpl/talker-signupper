@@ -18,7 +18,7 @@ install:
   - bundle install
   - nvm install node -v v7.9.0
   - node -v
-  - npm i -g yarn@0.22.0
+  - npm i -g yarn
   - bin/yarn
 
 before_script:
