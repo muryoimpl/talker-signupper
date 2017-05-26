@@ -33,3 +33,4 @@ en:
   hello: "Hello world"
   errors:
     not_allowed_character: 'only allows these characters 0-9a-zA-Z!$@+-_'
+    room_is_not_found: 'room is not found'

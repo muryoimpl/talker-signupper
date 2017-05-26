@@ -16,6 +16,11 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find_by(name: params[:name])
+
+    if @room.nil?
+      redirect_to rooms_path, alert: I18n.t('errors.room_is_not_found')
+      return
+    end
   end
 
   private

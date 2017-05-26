@@ -29,6 +29,12 @@
                   %li.mdl-list__item
                     %span.p-room__error-item #{message}
 
+            - if flash[:alert]
+              %ul.mdl-list
+                %li.mdl-list__item
+                  %span.p-room__error-item #{flash[:alert]}
+
+
         .mdl-card__actions.mdl-card--border
           %button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.p-room__button--create
             Create new room
