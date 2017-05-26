@@ -4,6 +4,6 @@ import { registerSignuppersTalk } from './requestForTalk';
 import { fetchTalks } from './fetchTalks';
 
 export default function* rootSaga() {
-  yield fork(fetchTalks);
   yield fork(registerSignuppersTalk);
+  yield fork(fetchTalks);
 }
