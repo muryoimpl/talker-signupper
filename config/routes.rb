@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
   root to: 'rooms#index'
 
-  resources :rooms, only: %i(index create)
+  resources :rooms, only: %i(index create show), param: :name
 
   namespace :api do
     resources :rooms, only: %i(show), param: :name
