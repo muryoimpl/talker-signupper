@@ -40,6 +40,6 @@ before_script:
   - bundle exec rake db:migrate
 
 script:
-  - yarn test
+  - yarn run test
   - bundle exec rubocop
   - bundle exec rspec spec
