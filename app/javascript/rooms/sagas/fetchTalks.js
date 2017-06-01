@@ -4,6 +4,7 @@ import axios from 'axios';
 import config from '../config';
 
 import * as Types from '../constants/actions';
+import * as talksActions from '../actions/talks';
 
 export const getAllState = state => state;
 export const getHeaders = state => state.headers;
@@ -19,5 +20,9 @@ export function* fetchTalks() {
 
     const headers = yield select(getHeaders);
     const response = yield call(fetchTalksByRoom, headers.roomName);
+
+    if (response.status === 200) {
+      yield put(talksActions.setTalks(response.room.talks));
+    }
   }
 }

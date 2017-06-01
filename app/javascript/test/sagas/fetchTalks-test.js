@@ -1,7 +1,6 @@
 import test from 'ava';
-import { take, put, call, select } from 'redux-saga/effects';
+import { take, call, select } from 'redux-saga/effects';
 import nock from 'nock';
-import Immutable from 'immutable';
 
 import * as Types from '../../rooms/constants/actions';
 import { fetchTalksByRoom, fetchTalks, getHeaders } from '../../rooms/sagas/fetchTalks';
