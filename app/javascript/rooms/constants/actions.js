@@ -15,3 +15,7 @@ export const CHANGE_FORM_STATE = 'CHANGE_FORM_STATE';
 
 // talks
 export const FETCH_TALKS = 'FETCH_TALKS';
+
+// dialogs
+export const SHOW_DIALOG = 'SHOW_DIALOG';
+export const CLOSE_DIALOG = 'CLOSE_DIALOG';
