@@ -1,5 +1,5 @@
 {
   status: status,
-  errors: errors,
+  error: error,
   room: room
 }

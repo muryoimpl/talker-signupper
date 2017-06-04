@@ -5,12 +5,12 @@ class Api::RoomsController < Api::ApplicationController
 
     render action: :show, status: status(room), locals: {
       status: status(room),
-      errors: [],
+      error: error_message(room),
       room: room&.json_attributes
     }
   rescue => e
     log_error(e)
-    render action: :show, status: :bad_request, locals: {status: 400, errors: [e.message], room: nil}
+    render action: :show, status: :bad_request, locals: {status: 400, error: e.message, room: nil}
   end
 
   private
@@ -21,5 +21,9 @@ class Api::RoomsController < Api::ApplicationController
 
   def status(room)
     room ? 200 : 404
+  end
+
+  def error_message(room)
+    room ? nil : I18n.t('errors.room_is_not_found')
   end
 end

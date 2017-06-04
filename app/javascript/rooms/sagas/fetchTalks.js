@@ -5,13 +5,14 @@ import config from '../config';
 
 import * as Types from '../constants/actions';
 import * as talksActions from '../actions/talks';
+import * as dialogsActions from '../actions/dialogs';
 
 export const getAllState = state => state;
 export const getHeaders = state => state.headers;
 
 export function fetchTalksByRoom(roomName) {
   const url = `${config.API_HOST}/api/rooms/${roomName}`;
-  return axios.get(url).then(response => response).catch(error => error.response.data);
+  return axios.get(url).then(response => response).catch(error => error.response);
 }
 
 export function* fetchTalks() {
@@ -22,7 +23,11 @@ export function* fetchTalks() {
     const response = yield call(fetchTalksByRoom, headers.roomName);
 
     if (response.status === 200) {
-      yield put(talksActions.setTalks(response.room.talks));
+      const talks = response.data.room.talks;
+      yield put(talksActions.setTalks(talks));
+    } else {
+      const message = response.data.error;
+      yield put(dialogsActions.showDialog(message));
     }
   }
 }
