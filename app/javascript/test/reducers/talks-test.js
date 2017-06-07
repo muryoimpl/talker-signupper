@@ -13,11 +13,11 @@ test('FETCH_TALKS', (t) => {
 });
 
 test('SET_TALKS', (t) => {
-  const initialState = Immutable.Record({ entries: [] })();
+  const initialState = Immutable.Record({ entries: new Immutable.List() })();
   const entryTalks = [{ id: 1, title: 'hi', talkerName: 'impl', room_id: 1 }];
 
   t.deepEqual(
-    talks(initialState, { type: 'SET_TALKS', talks: entryTalks }),
+    talks(initialState, { type: 'SET_TALKS', entries: entryTalks }),
     initialState.merge({ entries: entryTalks }),
   );
 });
