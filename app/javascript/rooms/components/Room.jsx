@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SignUp from './SignUp';
+import Talks from './Talks';
 
 class Room extends React.Component {
   render() {
@@ -8,6 +9,7 @@ class Room extends React.Component {
       <div>
         <SignUp />
         <p>hi</p>
+        <Talks />
       </div>
     );
   }
