@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Dialog from './Dialog';
 import Header from './Header';
 
 class Layout extends React.Component {
   render() {
     return (
       <div>
+        <Dialog />
         <Header />
         {this.props.children}
       </div>
