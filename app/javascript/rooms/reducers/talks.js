@@ -1,14 +1,12 @@
-import Immutable from 'immutable';
+import Talk from '../models/talk';
 import * as Types from '../constants/actions';
 
-const initialState = new Immutable.Record({ entries: new Immutable.List() })();
-
-export default function talks(state = initialState, action) {
+export default function talks(talk = new Talk(), action) {
   switch (action.type) {
     case Types.SET_TALKS:
-      return state.merge({ entries: action.entries });
+      return talk.merge({ entries: action.entries });
     case Types.FETCH_TALKS:
     default:
-      return state;
+      return talk;
   }
 }

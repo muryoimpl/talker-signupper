@@ -1,18 +1,13 @@
-import Immutable from 'immutable';
+import Dialog from '../models/dialog';
 import * as Types from '../constants/actions';
 
-const initialState = new Immutable.Record({
-  message: '',
-  isDisplay: false,
-})();
-
-export default function dialogs(state = initialState, action) {
+export default function dialogs(dialog = new Dialog(), action) {
   switch (action.type) {
     case Types.SHOW_DIALOG:
-      return state.merge({ isDisplay: true, message: action.message });
+      return dialog.merge({ isDisplay: true, message: action.message });
     case Types.CLOSE_DIALOG:
-      return state.merge({ isDisplay: false, message: '' });
+      return dialog.merge({ isDisplay: false, message: '' });
     default:
-      return state;
+      return dialog;
   }
 }
