@@ -1,21 +1,16 @@
-import Immutable from 'immutable';
+import Header from '../models/header';
 import * as Types from '../constants/actions';
 
-const initialState = new Immutable.Record({
-  signup: 'open',
-  roomName: '',
-})();
-
-export default function headers(state = initialState, action) {
+export default function headers(header = new Header(), action) {
   switch (action.type) {
     case Types.CLOSE_SIGN_UP:
-      return state.merge({ signup: 'close' });
+      return header.merge({ signup: 'close' });
     case Types.SIGN_UP_TALK:
-      return state.merge({ signup: 'open' });
+      return header.merge({ signup: 'open' });
     case Types.SET_ROOM_NAME:
-      return state.merge({ roomName: action.room });
+      return header.merge({ roomName: action.room });
     case Types.GET_ROOM_NAME:
     default:
-      return state;
+      return header;
   }
 }
