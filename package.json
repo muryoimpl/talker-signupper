@@ -64,6 +64,7 @@
     "redux-mock-store": "^1.2.3",
     "redux-saga": "^0.15.6",
     "regenerator-runtime": "^0.10.5",
+    "reselect": "^3.0.1",
     "resolve-url-loader": "^2.1.0",
     "sass-loader": "^6.0.6",
     "sinon": "^3.2.0",
