@@ -32,28 +32,31 @@ class SignUp extends React.Component {
           </div>
           <div className="mdl-card__supporting-text p-room__card-body">
             <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <input
-                id="signup-name"
-                className="mdl-textfield__input"
-                type="text"
-                autoFocus
-                onChange={e => this.changeName(e.target.value)}
-                value={talkerName}
-                disabled={submitted}
-              />
-              <label className="mdl-textfield__label" htmlFor="your name">Talker name</label>
+              <label className="mdl-textfield__label" htmlFor="signup-name">
+                <input
+                  id="signup-name"
+                  className="mdl-textfield__input"
+                  type="text"
+                  onChange={e => this.changeName(e.target.value)}
+                  value={talkerName}
+                  disabled={submitted}
+                />
+                Talker name
+              </label>
             </div>
 
             <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <input
-                id="signup-title"
-                className="mdl-textfield__input"
-                type="text"
-                onChange={e => this.changeTitle(e.target.value)}
-                value={title}
-                disabled={submitted}
-              />
-              <label className="mdl-textfield__label" htmlFor="title">Title</label>
+              <label className="mdl-textfield__label" htmlFor="signup-title">
+                <input
+                  id="signup-title"
+                  className="mdl-textfield__input"
+                  type="text"
+                  onChange={e => this.changeTitle(e.target.value)}
+                  value={title}
+                  disabled={submitted}
+                />
+                Title
+              </label>
             </div>
             <div className="mdl-card__supporting-text">
               {response && response.get('errors') && response.get('errors').map(e =>

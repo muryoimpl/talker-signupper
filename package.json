@@ -19,7 +19,8 @@
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test ava --verbose"
+    "test": "NODE_ENV=test ava --verbose",
+    "lint": "eslint --color ./app/javascript"
   },
   "dependencies": {
     "autoprefixer": "^7.1.2",
