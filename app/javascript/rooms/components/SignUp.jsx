@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/signups';
+import signupFormSelector from '../selectors/signupFormSelector';
 
 class SignUp extends React.Component {
   handleClickSignUp(e) {
@@ -22,7 +23,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { signup, submitted, title, talkerName, response } = this.props;
+    const { signup, submitted, title, talkerName, response, isValid } = this.props;
     return (
       <section className={`p-room__section--center mdl-grid ${signup === 'open' ? 'show' : 'hidden'}`}>
 
@@ -32,31 +33,27 @@ class SignUp extends React.Component {
           </div>
           <div className="mdl-card__supporting-text p-room__card-body">
             <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <label className="mdl-textfield__label" htmlFor="signup-name">
-                <input
-                  id="signup-name"
-                  className="mdl-textfield__input"
-                  type="text"
-                  onChange={e => this.changeName(e.target.value)}
-                  value={talkerName}
-                  disabled={submitted}
-                />
-                Talker name
-              </label>
+              <input
+                id="signup-name"
+                className="mdl-textfield__input"
+                type="text"
+                onChange={e => this.changeName(e.target.value)}
+                value={talkerName}
+                disabled={submitted}
+              />
+              <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
             </div>
 
             <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <label className="mdl-textfield__label" htmlFor="signup-title">
-                <input
-                  id="signup-title"
-                  className="mdl-textfield__input"
-                  type="text"
-                  onChange={e => this.changeTitle(e.target.value)}
-                  value={title}
-                  disabled={submitted}
-                />
-                Title
-              </label>
+              <input
+                id="signup-title"
+                className="mdl-textfield__input"
+                type="text"
+                onChange={e => this.changeTitle(e.target.value)}
+                value={title}
+                disabled={submitted}
+              />
+              <label className="mdl-textfield__label" htmlFor="signup-title">Title</label>
             </div>
             <div className="mdl-card__supporting-text">
               {response && response.get('errors') && response.get('errors').map(e =>
@@ -69,7 +66,7 @@ class SignUp extends React.Component {
               id="signup"
               className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent p-room__button--create"
               onClick={e => this.handleClickSignUp(e)}
-              disabled={submitted}
+              disabled={submitted || !isValid}
             >
               SignUp
             </button>
@@ -86,6 +83,7 @@ SignUp.propTypes = {
   title: PropTypes.string,
   talkerName: PropTypes.string,
   response: PropTypes.object,
+  isValid: PropTypes.bool,
 };
 
 SignUp.defaultProps = {
@@ -93,6 +91,7 @@ SignUp.defaultProps = {
   title: '',
   talkerName: '',
   response: null,
+  isValid: false,
 };
 
 SignUp.contextTypes = {
@@ -105,4 +104,5 @@ export default connect(state => ({
   title: state.signups.title,
   talkerName: state.signups.talker_name,
   response: state.signups.response,
+  isValid: signupFormSelector(state.signups),
 }))(SignUp);
