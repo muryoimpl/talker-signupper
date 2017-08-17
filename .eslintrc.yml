@@ -6,6 +6,9 @@ globals:
   React: true
   App: true
   ActionCable: true
+  test: true
+  it: true
+  expect: true
 
 rules:
   react/prefer-stateless-function: 0

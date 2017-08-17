@@ -1,25 +1,13 @@
 {
   "name": "talker-signupper",
   "private": true,
-  "ava": {
-    "files": [
-      "app/javascript/test/**/*.js"
-    ],
-    "source": [
-      "app/javascript/packs/*.{js,jsx}",
-      "app/javascript/rooms/**/*.{js,jsx}"
-    ],
-    "babel": {
-      "babelrc": true
-    },
-    "require": [
-      "babel-polyfill",
-      "babel-register",
-      "./app/javascript/test/helpers/setup-test-env"
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test ava --verbose",
+    "test": "NODE_ENV=test jest --verbose",
     "lint": "eslint --color ./app/javascript"
   },
   "dependencies": {
@@ -75,13 +63,15 @@
     "webpack-merge": "^4.1.0"
   },
   "devDependencies": {
+    "babel-jest": "^20.0.3",
     "cheerio": "^1.0.0-rc.2",
     "eslint": "^4.4.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.2.0",
-    "react-addons-test-utils": "^15.6.0",
+    "jest": "^20.0.4",
+    "react-test-renderer": "^15.6.1",
     "webpack-dev-server": "^2.7.1"
   }
 }
