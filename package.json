@@ -1,25 +1,13 @@
 {
   "name": "talker-signupper",
   "private": true,
-  "ava": {
-    "files": [
-      "app/javascript/test/**/*.js"
-    ],
-    "source": [
-      "app/javascript/packs/*.{js,jsx}",
-      "app/javascript/rooms/**/*.{js,jsx}"
-    ],
-    "babel": {
-      "babelrc": true
-    },
-    "require": [
-      "babel-polyfill",
-      "babel-register",
-      "./app/javascript/test/helpers/setup-test-env"
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.test.js?(x)"
     ]
   },
   "scripts": {
-    "test": "NODE_ENV=test ava --verbose",
+    "test": "NODE_ENV=test jest --verbose",
     "lint": "eslint --color ./app/javascript"
   },
   "dependencies": {
