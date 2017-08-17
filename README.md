@@ -1,6 +1,6 @@
 # talker-signupper
 
-[![Build Status](https://travis-ci.org/muryoimpl/talker-signupper.svg?branch=master)](https://travis-ci.org/muryoimpl/talker-signupper)
+[![Build Status(develop)](https://travis-ci.org/muryoimpl/talker-signupper.svg?branch=develop)](https://travis-ci.org/muryoimpl/talker-signupper)
 
 **Now Under Building...**
 
