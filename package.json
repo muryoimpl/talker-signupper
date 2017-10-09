@@ -11,6 +11,7 @@
     "lint": "eslint --color ./app/javascript"
   },
   "dependencies": {
+    "@rails/webpacker": "^3.0.2",
     "autoprefixer": "^7.1.2",
     "ava": "^0.21.0",
     "axios": "^0.16.2",
@@ -24,6 +25,7 @@
     "babel-register": "^6.24.1",
     "coffee-loader": "^0.7.3",
     "coffee-script": "^1.12.7",
+    "coffeescript": "1.12.7",
     "compression-webpack-plugin": "^1.0.0",
     "css-loader": "^0.28.4",
     "enzyme": "^2.9.1",
@@ -39,11 +41,11 @@
     "postcss-loader": "^2.0.6",
     "postcss-smart-import": "^0.7.5",
     "precss": "^2.0.0",
-    "prop-types": "^15.5.8",
+    "prop-types": "^15.6.0",
     "rails-erb-loader": "^5.1.0",
-    "react": "^15.6.1",
+    "react": "^16.0.0",
     "react-create-class": "^1.0.0",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.1.2",
     "react-router-dom": "^4.1.2",
@@ -72,6 +74,6 @@
     "eslint-plugin-react": "^7.2.0",
     "jest": "^20.0.4",
     "react-test-renderer": "^15.6.1",
-    "webpack-dev-server": "^2.7.1"
+    "webpack-dev-server": "^2.9.1"
   }
 }
