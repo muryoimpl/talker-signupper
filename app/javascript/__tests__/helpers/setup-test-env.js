@@ -1,5 +1,8 @@
 require('babel-register')
 
+import 'babel-polyfill'
+import 'raf/polyfill'
+
 const { JSDOM } = require('jsdom');
 
 const dom = new JSDOM('</body></body>');
