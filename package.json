@@ -4,6 +4,9 @@
   "jest": {
     "testMatch": [
       "**/__tests__/**/*.test.js?(x)"
+    ],
+    "setupFiles": [
+      "./app/javascript/__tests__/helpers/setup-test-env.js"
     ]
   },
   "scripts": {
