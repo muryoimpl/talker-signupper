@@ -51,3 +51,6 @@ config/secrets.yml.key
 
 .eslintrc.yml
 .babelrc
+/public/packs
+/public/packs-test
+/node_modules
