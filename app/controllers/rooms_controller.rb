@@ -17,7 +17,10 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find_by(name: params[:name])
 
-    redirect_to rooms_path, alert: I18n.t('errors.room_is_not_found') && return if @room.nil?
+    unless @room
+      flash[:not_exist_alert] = I18n.t('errors.room_is_not_found')
+      redirect_to rooms_path
+    end
   end
 
   private

@@ -8,7 +8,14 @@
 
     / Add spacer, to align navigation to the right in desktop
     .mdl-layout-spacer
-    .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--floating-label.mdl-textfield--align-right.mdl-textfield--full-width
+    %span.bold Enter existing room
+    .mdl-textfield.mdl-js-textfield.ml10.mdl-textfield--floating-label
+      %input.p-room__name-input{type: 'text', id: 'existing-name'}
+      %button{class: "ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect", id: 'enter'}
+        Enter room
+    - if flash[:not_exist_alert]
+      %span.header-error
+        = flash[:not_exist_alert]
 
 .mdl-layout__content
   .p-room__tab-panel.is-active.mt10
@@ -68,3 +75,11 @@
         vote favorite talk in your room
 
 .p-room__spacer
+
+:javascript
+  (function(){
+    document.getElementById('enter').addEventListener('click', function() {
+      var name = document.getElementById('existing-name').value;
+      if (name) window.location.href = '/rooms/' + name
+    });
+  })()
