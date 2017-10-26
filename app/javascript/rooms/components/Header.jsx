@@ -12,10 +12,8 @@ class Header extends React.Component {
 
   handleClickSignUp(e) {
     e.preventDefault();
-    const { store } = this.context;
-    const { signup } = this.props;
 
-    store.dispatch(actions.toggleSignUp(signup));
+    document.querySelector('dialog#signup-form').showModal();
   }
 
   roomName() {
@@ -24,7 +22,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { signup, roomName } = this.props;
+    const { roomName } = this.props;
 
     return (
       <div className="mdl-layout__header mdl-layout__header--waterfall">
@@ -38,7 +36,7 @@ class Header extends React.Component {
 
           <nav className="mdl-navigation">
             <a id="signup" className="mdl-navigation__link" href="#signup" onClick={e => this.handleClickSignUp(e)}>
-              {signup === 'open' ? 'hide' : 'sign up'}
+              sign up
             </a>
           </nav>
         </div>
@@ -48,7 +46,6 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  signup: PropTypes.string.isRequired,
   roomName: PropTypes.string,
 };
 

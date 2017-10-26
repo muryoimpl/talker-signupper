@@ -1,7 +1,6 @@
 import Immutable from 'immutable';
 
 const HeaderBase = Immutable.Record({
-  signup: 'open',
   roomName: '',
 });
 

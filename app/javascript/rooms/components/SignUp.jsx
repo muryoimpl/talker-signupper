@@ -23,7 +23,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { signup, submitted, title, talkerName, response, isValid } = this.props;
+    const { submitted, title, talkerName, response, isValid } = this.props;
     return (
       <section className={`p-room__section--center mdl-grid ${signup === 'open' ? 'show' : 'hidden'}`}>
 
@@ -78,7 +78,6 @@ class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
-  signup: PropTypes.string.isRequired,
   submitted: PropTypes.bool,
   title: PropTypes.string,
   talkerName: PropTypes.string,
@@ -99,7 +98,6 @@ SignUp.contextTypes = {
 };
 
 export default connect(state => ({
-  signup: state.headers.signup,
   submitted: state.signups.submitted,
   title: state.signups.title,
   talkerName: state.signups.talker_name,
