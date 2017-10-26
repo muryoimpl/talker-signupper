@@ -14,7 +14,7 @@ class Dialog extends React.Component {
     const { store } = this.context;
 
     store.dispatch(actions.closeDialog());
-    document.querySelector('dialog').close();
+    document.querySelector('dialog#dialog').close();
   }
 
   handleShowDialog() {
@@ -27,7 +27,7 @@ class Dialog extends React.Component {
     const { message, isDisplay } = this.props;
 
     return (
-      <dialog className="mdl-dialog">
+      <dialog id="dialog" className="mdl-dialog">
         <div className="mdl-dialog__content">
           <p >{message}</p>
         </div>

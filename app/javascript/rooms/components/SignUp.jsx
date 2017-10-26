@@ -12,6 +12,13 @@ class SignUp extends React.Component {
     store.dispatch(actions.registerSignuppersTalk());
   }
 
+  handleClickClose(e) {
+    e.preventDefault();
+    const { store } = this.context;
+    store.dispatch(actions.clearSignupState());
+    document.querySelector('dialog#signup-form').close();
+  }
+
   changeTitle(title) {
     const { store } = this.context;
     store.dispatch(actions.changeTitle(title));
@@ -25,54 +32,60 @@ class SignUp extends React.Component {
   render() {
     const { submitted, title, talkerName, response, isValid } = this.props;
     return (
-      <section className={`p-room__section--center mdl-grid ${signup === 'open' ? 'show' : 'hidden'}`}>
+      <dialog className="mdl-dialog p-room__section--center" id="signup-form">
+        <button className="mdl-button mdl-js-button mdl-button--icon p-signup__close" onClick={e => this.handleClickClose(e)}>
+          <i className="material-icons">cancel</i>
+        </button>
 
-        <form className={`p-room__card--wide ${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
-          <div className="mdl-card__title">
-            <h2 className="mdl-card__title-text"> Sign up your talk</h2>
-          </div>
-          <div className="mdl-card__supporting-text p-room__card-body">
-            <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <input
-                id="signup-name"
-                className="mdl-textfield__input"
-                type="text"
-                onChange={e => this.changeName(e.target.value)}
-                value={talkerName}
-                disabled={submitted}
-              />
-              <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
-            </div>
+        <section className={'mdl-grid'}>
 
-            <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
-              <input
-                id="signup-title"
-                className="mdl-textfield__input"
-                type="text"
-                onChange={e => this.changeTitle(e.target.value)}
-                value={title}
-                disabled={submitted}
-              />
-              <label className="mdl-textfield__label" htmlFor="signup-title">Title</label>
+          <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
+            <div className="mdl-card__title">
+              <h2 className="mdl-card__title-text"> Sign up your talk</h2>
             </div>
-            <div className="mdl-card__supporting-text">
-              {response && response.get('errors') && response.get('errors').map(e =>
-                <p key={e}>{e}</p>,
-              )}
+            <div className="mdl-card__supporting-text p-room__card-body">
+              <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
+                <input
+                  id="signup-name"
+                  className="mdl-textfield__input"
+                  type="text"
+                  onChange={e => this.changeName(e.target.value)}
+                  value={talkerName}
+                  disabled={submitted}
+                />
+                <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
+              </div>
+
+              <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
+                <input
+                  id="signup-title"
+                  className="mdl-textfield__input"
+                  type="text"
+                  onChange={e => this.changeTitle(e.target.value)}
+                  value={title}
+                  disabled={submitted}
+                />
+                <label className="mdl-textfield__label" htmlFor="signup-title">Title</label>
+              </div>
+              <div className="mdl-card__supporting-text">
+                {response && response.get('errors') && response.get('errors').map(e =>
+                  <p key={e}>{e}</p>,
+                )}
+              </div>
             </div>
-          </div>
-          <div className="mdl-card__actions mdl-card--border">
-            <button
-              id="signup"
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent p-room__button--create"
-              onClick={e => this.handleClickSignUp(e)}
-              disabled={submitted || !isValid}
-            >
-              SignUp
-            </button>
-          </div>
-        </form>
-      </section>
+            <div className="mdl-card__actions mdl-card--border">
+              <button
+                id="signup"
+                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent p-room__button--create"
+                onClick={e => this.handleClickSignUp(e)}
+                disabled={submitted || !isValid}
+              >
+                SignUp
+              </button>
+            </div>
+          </form>
+        </section>
+      </dialog>
     );
   }
 }

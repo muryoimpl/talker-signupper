@@ -4,8 +4,8 @@ const SignupFormBase = Immutable.Record({
   title: '',
   talker_name: '',
   response: null,
-  submitted: false },
-);
+  submitted: false,
+});
 
 export default class SignupForm extends SignupFormBase {
 }
