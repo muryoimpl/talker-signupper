@@ -5,9 +5,9 @@ import Layout from './components/Layout';
 import Room from './components/Room';
 
 export default (
-  <BrowserRouter basename="/rooms/:name">
+  <BrowserRouter basename="/rooms">
     <Layout>
-      <Route exact path="" component={Room} />
+      <Route exact path="/:name" component={Room} />
     </Layout>
   </BrowserRouter>
 );
