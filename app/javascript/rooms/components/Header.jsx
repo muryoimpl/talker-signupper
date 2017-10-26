@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import createHistory from 'history/createBrowserHistory';
 
 import * as actions from '../actions/headers';
 
@@ -14,6 +15,13 @@ class Header extends React.Component {
     e.preventDefault();
 
     document.querySelector('dialog#signup-form').showModal();
+  }
+
+  handleClickLeave(e) {
+    e.preventDefault();
+    const history = createHistory();
+    history.push('/');
+    history.go();
   }
 
   roomName() {
@@ -34,10 +42,15 @@ class Header extends React.Component {
           <span className="p-room__room-name">#{roomName}</span>
           <div className="mdl-layout-spacer" />
 
-          <nav className="mdl-navigation">
-            <a id="signup" className="mdl-navigation__link" href="#signup" onClick={e => this.handleClickSignUp(e)}>
+          <nav className="mdl-navigation ">
+            <button id="signup" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={e => this.handleClickSignUp(e)}>
               sign up
-            </a>
+            </button>
+          </nav>
+          <nav className="mdl-navigation">
+            <button id="leave" className="ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={e => this.handleClickLeave(e)}>
+              leave this room
+            </button>
           </nav>
         </div>
       </div>
