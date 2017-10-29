@@ -67,3 +67,8 @@ a.text-like {
     text-decoration: inherit;
   }
 }
+
+.disabled {
+  background-color: $disabled !important;
+  color: rgba(0,0,0,.26) !important;
+}

@@ -10,8 +10,8 @@
     .mdl-layout-spacer
     %span.bold Enter existing room
     .mdl-textfield.mdl-js-textfield.ml10.mdl-textfield--floating-label
-      %input.p-room__name-input{type: 'text', id: 'existing-name'}
-      %button{class: "ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect", id: 'enter'}
+      %input.p-room__name-input{type: 'text', id: 'existing-name', value: @name, maxlength: 35}
+      %button{class: "ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect #{@name ? nil : 'disabled'}", id: 'enter'}
         Enter room
     - if flash[:not_exist_alert]
       %span.header-error
@@ -80,6 +80,19 @@
   (function(){
     document.getElementById('enter').addEventListener('click', function() {
       var name = document.getElementById('existing-name').value;
-      if (name) window.location.href = '/rooms/' + name
+      if (name) window.location.href = '/rooms/' + name;
     });
+
+    var $existingName = document.getElementById('existing-name');
+    $existingName.addEventListener('focus', function() {
+      var elm = document.getElementById('enter');
+      elm.classList.remove('disabled');
+    })
+
+    $existingName.addEventListener('blur', function() {
+      if (!$existingName.value) {
+        var elm = document.getElementById('enter');
+        document.querySelector('.header-error').textContent = null;
+      }
+    })
   })()

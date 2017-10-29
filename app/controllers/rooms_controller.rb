@@ -2,6 +2,7 @@
 class RoomsController < ApplicationController
   def index
     @room = Room.new
+    @name = params[:name] if params[:name]
   end
 
   def create
@@ -19,7 +20,7 @@ class RoomsController < ApplicationController
 
     unless @room
       flash[:not_exist_alert] = I18n.t('errors.room_is_not_found')
-      redirect_to rooms_path
+      redirect_to rooms_path(name: params[:name])
     end
   end
 
