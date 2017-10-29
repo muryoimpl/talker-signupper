@@ -10,13 +10,22 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { store } = this.context;
     store.dispatch(actions.registerSignuppersTalk());
+
+    let isSuccess = false;
+    if (this.props.response.status === 201) {
+      store.dispatch(actions.clearSignupState());
+      isSuccess = true;
+      this.close();
+    }
+
+    store.dispatch(actions.changeFormState(isSuccess));
   }
 
   handleClickClose(e) {
     e.preventDefault();
     const { store } = this.context;
     store.dispatch(actions.clearSignupState());
-    document.querySelector('dialog#signup-form').close();
+    this.close();
   }
 
   changeTitle(title) {
@@ -27,6 +36,10 @@ class SignUp extends React.Component {
   changeName(name) {
     const { store } = this.context;
     store.dispatch(actions.changeName(name));
+  }
+
+  close() {
+    document.querySelector('dialog#signup-form').close();
   }
 
   render() {

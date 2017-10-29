@@ -1,4 +1,4 @@
-import { changeTitle, changeName, registerSignuppersTalk, clearSignupState, storeResponse, clearResponse } from '../../rooms/actions/signups';
+import { changeTitle, changeName, registerSignuppersTalk, clearSignupState, storeResponse, clearResponse, changeFormState } from '../../rooms/actions/signups';
 
 test('changeTitle action', () => {
   expect(changeTitle('hi')).toEqual({ type: 'CHANGE_TITLE', title: 'hi' });
@@ -22,4 +22,9 @@ test('storeResponse', () => {
 
 test('clearResponse', () => {
   expect(clearResponse()).toEqual({ type: 'CLEAR_RESPONSE' });
+});
+
+test('changeFormState', () => {
+  expect(changeFormState(true)).toEqual({ type: 'CHANGE_FORM_STATE', submitted: true });
+  expect(changeFormState(false)).toEqual({ type: 'CHANGE_FORM_STATE', submitted: false});
 });

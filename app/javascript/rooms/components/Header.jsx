@@ -67,11 +67,9 @@ Header.contextTypes = {
 };
 
 Header.defaultProps = {
-  signup: 'open',
   roomName: '',
 };
 
 export default connect(state => ({
-  signup: state.headers.signup,
   roomName: state.headers.roomName,
 }))(Header);

@@ -23,16 +23,8 @@ export function* registerSignuppersTalk() {
     yield put(headerActions.getRoomName());
     yield put(signupActions.clearResponse());
 
-    let state = yield select(getAllState);
+    const state = yield select(getAllState);
     const response = yield call(postTalk, state.headers.roomName, { talk: state.signups });
     yield put(signupActions.storeResponse(response));
-
-    state = yield select(getAllState);
-    if (state.signups.response.get('status') === 201) {
-      yield put(signupActions.clearSignupState());
-      yield put(headerActions.closeSignUp());
-    }
-
-    yield put(signupActions.changeFormState(false));
   }
 }

@@ -2,18 +2,6 @@ import Immutable from 'immutable';
 
 import headers from '../../rooms/reducers/headers';
 
-test('SIGN_UP_TALK', () => {
-  const initialState = Immutable.Record({ signup: 'close' })();
-
-  expect(headers(initialState, { type: 'SIGN_UP_TALK' })).toEqual(initialState.merge({ signup: 'open' }));
-});
-
-test('CLOSE_SIGN_UP', () => {
-  const initialState = Immutable.Record({ signup: 'open' })();
-
-  expect(headers(initialState, { type: 'CLOSE_SIGN_UP' })).toEqual(initialState.merge({ signup: 'close' }));
-});
-
 test('SET_ROOM_NAME', () => {
   const initialState = Immutable.Record({ signup: 'open', roomName: '' })();
 

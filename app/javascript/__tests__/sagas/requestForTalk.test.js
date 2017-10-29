@@ -1,6 +1,5 @@
 import { take, put, call, select } from 'redux-saga/effects';
 import nock from 'nock';
-import Immutable from 'immutable';
 
 import * as Types from '../../rooms/constants/actions';
 import { registerSignuppersTalk, postTalk, getAllState } from '../../rooms/sagas/requestForTalk';
@@ -55,16 +54,4 @@ test('registerSignuppersTalk: request success', async () => {
 
   ret = saga.next(createdResponse);
   expect(ret.value).toEqual(put(signupActions.storeResponse(createdResponse)));
-
-  ret = saga.next(Object.assign({}, getState(), { signups: { response: createdResponse } }));
-  expect(ret.value).toEqual(select(getAllState));
-
-  ret = saga.next(Object.assign({}, getState(), { signups: { response: Immutable.Record(createdResponse)() } }));
-  expect(ret.value).toEqual(put(signupActions.clearSignupState()));
-
-  ret = saga.next();
-  expect(ret.value).toEqual(put(headerActions.closeSignUp()));
-
-  ret = saga.next();
-  expect(ret.value).toEqual(put(signupActions.changeFormState(false)));
 });
