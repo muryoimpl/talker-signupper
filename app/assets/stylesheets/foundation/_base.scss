@@ -5,3 +5,14 @@ footer {
   bottom:0;
   background-color: $dark-black !important;
 }
+
+header {
+  position:fixed;
+  top:0;
+  right:0;
+  left:0;
+}
+
+.content {
+  margin: 70px 40px 80px 40px;
+}

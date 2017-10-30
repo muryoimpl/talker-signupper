@@ -7,7 +7,7 @@ import Header from './Header';
 class Layout extends React.Component {
   render() {
     return (
-      <div>
+      <div className="content">
         <Dialog />
         <Header />
         {this.props.children}

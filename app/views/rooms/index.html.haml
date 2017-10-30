@@ -92,7 +92,10 @@
     $existingName.addEventListener('blur', function() {
       if (!$existingName.value) {
         var elm = document.getElementById('enter');
-        document.querySelector('.header-error').textContent = null;
+        var headerError = document.querySelector('.header-error')
+        if (headerError) {
+          headerError.textContent = null;
+        }
       }
     })
   })()
