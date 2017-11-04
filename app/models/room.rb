@@ -7,6 +7,6 @@ class Room < ApplicationRecord
   validates :name, format: {with: ALLOWED_PATTERN, message: I18n.t('errors.not_allowed_character'), allow_blank: true}
 
   def json_attributes
-    attributes.merge(talks: talks.map(&:attributes))
+    attributes.merge(talks: talks.order(:created_at).map(&:attributes))
   end
 end
