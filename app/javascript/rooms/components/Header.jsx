@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 
 import * as actions from '../actions/headers';
+import * as signupActions from '../actions/signups';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -14,7 +15,17 @@ class Header extends React.Component {
   handleClickSignUp(e) {
     e.preventDefault();
 
+    const { store } = this.context;
+    this.clearDirty();
     document.querySelector('dialog#signup-form').showModal();
+    store.dispatch(signupActions.updateDialogOpen(true));
+  }
+
+  clearDirty() {
+    const mdlInputs = document.querySelectorAll('.mdl-js-textfield');
+    for (let i = 0, l = mdlInputs.length; i < l; i += 1) {
+      mdlInputs[i].MaterialTextfield.checkDirty();
+    }
   }
 
   handleClickLeave(e) {

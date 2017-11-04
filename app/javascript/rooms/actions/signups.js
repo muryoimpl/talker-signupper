@@ -27,3 +27,7 @@ export function clearResponse() {
 export function changeFormState(isSubmitted) {
   return { type: Types.CHANGE_FORM_STATE, submitted: isSubmitted };
 }
+
+export function updateDialogOpen(isOpen) {
+  return { type: Types.UPDATE_DIALOG_OPEN, open: isOpen };
+}

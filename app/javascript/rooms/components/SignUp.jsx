@@ -9,16 +9,8 @@ class SignUp extends React.Component {
   handleClickSignUp(e) {
     e.preventDefault();
     const { store } = this.context;
-    store.dispatch(actions.registerSignuppersTalk());
-
-    let isSuccess = false;
-    if (this.props.response.status === 201) {
-      store.dispatch(actions.clearSignupState());
-      isSuccess = true;
-      this.close();
-    }
-
-    store.dispatch(actions.changeFormState(isSuccess));
+    const { title, talkerName } = this.props;
+    store.dispatch(actions.registerSignuppersTalk(this.props.roomName, { title, talker_name: talkerName }));
   }
 
   handleClickClose(e) {
@@ -39,11 +31,20 @@ class SignUp extends React.Component {
   }
 
   close() {
-    document.querySelector('dialog#signup-form').close();
+    const { store } = this.context;
+    const dom = document.querySelector('dialog#signup-form');
+    if (dom && dom.getAttribute('open') === '') dom.close();
+
+    store.dispatch(actions.updateDialogOpen(false));
+  }
+
+  open() {
+    const { store } = this.context;
+    store.dispatch(actions.updateDialogOpen(true));
   }
 
   render() {
-    const { submitted, title, talkerName, response, isValid } = this.props;
+    const { submitted, title, talkerName, response, isValid, open } = this.props;
     return (
       <dialog className="mdl-dialog p-room__section--center" id="signup-form">
         <button className="mdl-button mdl-js-button mdl-button--icon p-signup__close" onClick={e => this.handleClickClose(e)}>
@@ -65,6 +66,7 @@ class SignUp extends React.Component {
                   onChange={e => this.changeName(e.target.value)}
                   value={talkerName}
                   disabled={submitted}
+                  autoComplete="off"
                 />
                 <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
               </div>
@@ -77,12 +79,13 @@ class SignUp extends React.Component {
                   onChange={e => this.changeTitle(e.target.value)}
                   value={title}
                   disabled={submitted}
+                  autoComplete="off"
                 />
                 <label className="mdl-textfield__label" htmlFor="signup-title">Title</label>
               </div>
               <div className="mdl-card__supporting-text">
                 {response && response.get('errors') && response.get('errors').map(e =>
-                  <p key={e}>{e}</p>,
+                  <p className="error" key={e}>{e}</p>,
                 )}
               </div>
             </div>
@@ -98,6 +101,7 @@ class SignUp extends React.Component {
             </div>
           </form>
         </section>
+        {open ? this.open() : this.close()}
       </dialog>
     );
   }
@@ -109,6 +113,8 @@ SignUp.propTypes = {
   talkerName: PropTypes.string,
   response: PropTypes.object,
   isValid: PropTypes.bool,
+  roomName: PropTypes.string,
+  open: PropTypes.bool,
 };
 
 SignUp.defaultProps = {
@@ -117,6 +123,8 @@ SignUp.defaultProps = {
   talkerName: '',
   response: null,
   isValid: false,
+  roomName: '',
+  open: false,
 };
 
 SignUp.contextTypes = {
@@ -128,5 +136,7 @@ export default connect(state => ({
   title: state.signups.title,
   talkerName: state.signups.talker_name,
   response: state.signups.response,
+  roomName: state.headers.roomName,
   isValid: signupFormSelector(state.signups),
+  open: state.signups.open,
 }))(SignUp);
