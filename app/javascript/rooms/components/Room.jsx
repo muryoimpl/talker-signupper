@@ -10,7 +10,6 @@ class Room extends React.Component {
     return (
       <div style={style}>
         <SignUp />
-        <p>hi</p>
         <Talks />
       </div>
     );
