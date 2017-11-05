@@ -13,7 +13,7 @@ export function postTalk(roomName, talk) {
   return axios.post(url, talk).then(res => res.data).catch(error => error.response.data);
 }
 
-function* postEntry() {
+export function* postEntry() {
   yield put(signupActions.changeFormState(true));
   yield put(headerActions.getRoomName());
   yield put(signupActions.clearResponse());
