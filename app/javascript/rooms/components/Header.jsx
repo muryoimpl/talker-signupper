@@ -55,7 +55,7 @@ class Header extends React.Component {
 
           <nav className="mdl-navigation ">
             <button id="signup" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={e => this.handleClickSignUp(e)}>
-              sign up
+              entry
             </button>
           </nav>
           <nav className="mdl-navigation">
