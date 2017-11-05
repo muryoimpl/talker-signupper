@@ -44,7 +44,7 @@ class Header extends React.Component {
     const { roomName } = this.props;
 
     return (
-      <header className="mdl-layout__header mdl-layout__header--waterfall">
+      <header className="layout-header mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             <span><a className="text-like" href="/">Talker SignUpper</a></span>
