@@ -58,7 +58,7 @@ class SignUp extends React.Component {
               <h2 className="mdl-card__title-text"> Sign up your talk</h2>
             </div>
             <div className="mdl-card__supporting-text p-room__card-body">
-              <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
+              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__name">
                 <input
                   id="signup-name"
                   className="mdl-textfield__input"
@@ -71,7 +71,7 @@ class SignUp extends React.Component {
                 <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
               </div>
 
-              <div className="mdl-textfield mdl-js-textfield ml5 p-room__name">
+              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__name">
                 <input
                   id="signup-title"
                   className="mdl-textfield__input"
