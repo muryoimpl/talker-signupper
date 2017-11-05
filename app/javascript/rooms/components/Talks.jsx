@@ -28,7 +28,7 @@ class Talks extends React.Component {
 
     return (
       <div>
-        {entries.map(talk => <Talk talk={talk} key={Math.random()} />)}
+        {entries.map((talk, i) => <Talk talk={talk} key={talk.get('id')} i={i} />)}
       </div>
     );
   }
