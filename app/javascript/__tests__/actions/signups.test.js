@@ -26,5 +26,5 @@ test('clearResponse', () => {
 
 test('changeFormState', () => {
   expect(changeFormState(true)).toEqual({ type: 'CHANGE_FORM_STATE', submitted: true });
-  expect(changeFormState(false)).toEqual({ type: 'CHANGE_FORM_STATE', submitted: false});
+  expect(changeFormState(false)).toEqual({ type: 'CHANGE_FORM_STATE', submitted: false });
 });

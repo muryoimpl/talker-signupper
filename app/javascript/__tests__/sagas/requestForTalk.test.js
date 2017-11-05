@@ -1,4 +1,4 @@
-import { put, call, select, cancel, cancelled } from 'redux-saga/effects';
+import { put, call, select, cancelled } from 'redux-saga/effects';
 import nock from 'nock';
 
 // import * as Types from '../../rooms/constants/actions';
