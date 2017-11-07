@@ -1,16 +1,16 @@
 /* eslint no-constant-condition: ["error", {"checkLoops": false }], import/prefer-default-export: 0 */
-import { call, put, select, cancelled, cancel } from 'redux-saga/effects';
-import axios from 'axios';
+import { call, put, select } from 'redux-saga/effects';
 import config from '../config';
 
 import * as headerActions from '../actions/headers';
 import * as signupActions from '../actions/signups';
+import * as restClient from '../utils/restClient';
 
 export const getAllState = state => state;
 
 export function postTalk(roomName, talk) {
   const url = `${config.API_HOST}/api/rooms/${roomName}/talks`;
-  return axios.post(url, talk).then(res => res.data).catch(error => error.response.data);
+  return restClient.post(url, talk);
 }
 
 export function* postEntry() {

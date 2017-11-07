@@ -1,18 +1,18 @@
 /* eslint no-constant-condition: ["error", {"checkLoops": false }], import/prefer-default-export: 0 */
 import { call, take, put, select } from 'redux-saga/effects';
-import axios from 'axios';
 import config from '../config';
 
 import * as Types from '../constants/actions';
 import * as talksActions from '../actions/talks';
 import * as dialogsActions from '../actions/dialogs';
+import * as restClient from '../utils/restClient';
 
 export const getAllState = state => state;
 export const getHeaders = state => state.headers;
 
 export function fetchTalksByRoom(roomName) {
   const url = `${config.API_HOST}/api/rooms/${roomName}`;
-  return axios.get(url).then(response => response).catch(error => error.response);
+  return restClient.get(url);
 }
 
 export function* fetchTalks() {
