@@ -31,9 +31,5 @@ export function* postEntry() {
 }
 
 export function* registerSignuppersTalk() {
-  try {
-    yield call(postEntry);
-  } finally {
-    if (!(yield cancelled())) yield cancel();
-  }
+  yield call(postEntry);
 }

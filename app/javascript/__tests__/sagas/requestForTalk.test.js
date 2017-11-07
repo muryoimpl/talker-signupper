@@ -1,4 +1,4 @@
-import { put, call, select, cancelled } from 'redux-saga/effects';
+import { put, call, select } from 'redux-saga/effects';
 import nock from 'nock';
 
 // import * as Types from '../../rooms/constants/actions';
@@ -51,7 +51,7 @@ test('registerSignuppersTalk: request success and cancel saga', async () => {
   expect(ret.value).toEqual(call(postEntry));
 
   ret = saga.next();
-  expect(ret.value).toEqual(cancelled());
+  expect(ret.value).toBeUndefined();
 });
 
 test('postEntry: request success', async () => {
