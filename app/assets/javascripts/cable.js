@@ -5,7 +5,7 @@
 //= require_self
 //= require_tree ./channels
 
-/* eslint func-names: [0, "always"], no-unused-expressions: 0*/
+/* eslint func-names: [0, "always"], no-unused-expressions: 0 */
 (function () {
   this.App || (this.App = {});
 
