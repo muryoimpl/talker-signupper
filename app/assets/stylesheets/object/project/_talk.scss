@@ -1,0 +1,41 @@
+.p-talk {
+  margin: 20px auto;
+  width: $talk-card-width;
+}
+
+.p-talk-card {
+  width: 90%;
+  z-index: 0 !important;
+  min-height: $talk-card-min-height;
+}
+
+.p-talk-card__text {
+  width: initial !important;
+}
+
+.p-talk-card-button {
+  width: 10% !important;
+  min-height: $talk-card-min-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.p-talk-card-button__active {
+  width: 10% !important;
+  min-height: $talk-card-min-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.p-talk-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  word-break: break-all;
+}
+
+.p-talk-talker {
+  margin-top: 5px;
+}
