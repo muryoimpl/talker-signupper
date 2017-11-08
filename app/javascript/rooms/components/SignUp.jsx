@@ -35,12 +35,16 @@ class SignUp extends React.Component {
     const dom = document.querySelector('dialog#signup-form');
     if (dom && dom.getAttribute('open') === '') dom.close();
 
-    store.dispatch(actions.updateDialogOpen(false));
+    if (this.props.open) {
+      store.dispatch(actions.updateDialogOpen(false));
+    }
   }
 
   open() {
     const { store } = this.context;
-    store.dispatch(actions.updateDialogOpen(true));
+    if (!this.props.open) {
+      store.dispatch(actions.updateDialogOpen(true));
+    }
   }
 
   render() {
