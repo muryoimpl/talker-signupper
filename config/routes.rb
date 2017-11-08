@@ -11,4 +11,6 @@ Rails.application.routes.draw do
       resources :talks, only: %i(create update destroy)
     end
   end
+
+  mount ActionCable.server => '/cable'
 end
