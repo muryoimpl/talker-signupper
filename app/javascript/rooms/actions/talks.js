@@ -7,3 +7,7 @@ export function fetchTalks() {
 export function setTalks(talks) {
   return { type: Types.SET_TALKS, entries: talks };
 }
+
+export function addTalk(talk) {
+  return { type: Types.ADD_TALK, talk };
+}

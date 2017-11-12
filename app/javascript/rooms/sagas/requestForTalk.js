@@ -21,7 +21,7 @@ export function* postEntry() {
   const state = yield select(getAllState);
 
   const response = yield call(postTalk, state.headers.roomName, { talk: state.signups });
-  yield put(signupActions.storeResponse(response));
+  yield put(signupActions.storeResponse(response.data));
   yield put(signupActions.changeFormState(false));
 
   if (response.status < 300) {

@@ -2,16 +2,18 @@
 class Api::TalksController < Api::ApplicationController
   def create
     room = find_room!
-    talk = Talk.create(talk_params.merge(room_id: room.id))
+    talk = Talk.new(talk_params.merge(room_id: room.id))
+    status = talk.save ? :ok : :bad_request
 
-    render action: :create, status: status(talk), locals: {
-      status: status(talk),
-      errors: talk.errors.full_messages,
-      talk: talk.json_attributes(room)
-    }
-  rescue => e
-    log_error(e)
-    render action: :create, status: :bad_request, locals: {status: 400, errors: [e.message], talk: nil}
+    ActionCable.server.broadcast(
+      "room-#{params[:name]}",
+      render(action: :create, status: status, locals: {
+        status: status(talk),
+        errors: talk.errors.full_messages,
+        talk: talk.json_attributes(room)
+      })
+    )
+    head :ok
   end
 
   def update

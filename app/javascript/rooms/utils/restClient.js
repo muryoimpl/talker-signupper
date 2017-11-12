@@ -9,9 +9,9 @@ export function get(url, body) {
 }
 
 export function post(url, body) {
-  return axios.post(url, body).then(res => res.data).catch(error => error.response.data);
+  return axios.post(url, body).then(res => res).catch(error => error.response);
 }
 
 export function patch(url, body) {
-  return axios.patch(url, body).then(res => res.data).catch(error => error.response.data);
+  return axios.patch(url, body).then(res => res).catch(error => error.response);
 }

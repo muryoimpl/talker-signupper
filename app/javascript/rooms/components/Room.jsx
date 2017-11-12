@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SignUp from './SignUp';
 import Talks from './Talks';
@@ -10,12 +11,14 @@ class Room extends React.Component {
     return (
       <div style={style}>
         <SignUp />
-        <Talks />
+        <Talks name={this.props.match.params.name} />
       </div>
     );
   }
 }
 
-Room.propTypes = {};
+Room.propTypes = {
+  match: PropTypes.object.isRequired,
+};
 
 export default Room;

@@ -15,12 +15,16 @@ class Talks extends React.Component {
       store.dispatch(talkActions.fetchTalks());
     }
 
-    // TODO: WebSocket のコントロールをここらへんで行う
-    // App.talks = App.cable.subscriptions.create('TalkChannel', {
-    //   received: (data) => {
-    //     store.dispatch(talkActions.addTalk(JSON.parse(data)));
-    //   },
-    // });
+    App.talks = App.cable.subscriptions.create({ channel: 'RoomChannel', name: `${this.props.name}` }, {
+      received: (data) => {
+        this.receiveJSON(data);
+      },
+    });
+  }
+
+  receiveJSON(data) {
+    const response = JSON.parse(data);
+    this.context.store.dispatch(talkActions.addTalk(response.talk));
   }
 
   render() {
@@ -36,6 +40,7 @@ class Talks extends React.Component {
 
 Talks.propTypes = {
   entries: PropTypes.instanceOf(Immutable.List),
+  name: PropTypes.string.isRequired,
 };
 
 Talks.contextTypes = {

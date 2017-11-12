@@ -115,7 +115,7 @@ SignUp.propTypes = {
   submitted: PropTypes.bool,
   title: PropTypes.string,
   talkerName: PropTypes.string,
-  response: PropTypes.object,
+  response: PropTypes.any, // TODO: proper type
   isValid: PropTypes.bool,
   roomName: PropTypes.string,
   open: PropTypes.bool,
