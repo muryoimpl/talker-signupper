@@ -17,7 +17,7 @@ test('call changeTitle when title is changed', () => {
 
   wrapper.find('#signup-title').simulate('change', { target: { value: 'hi' } });
   const actions = store.getActions();
-  expect(actions).toEqual([{ type: 'UPDATE_DIALOG_OPEN', open: true }, { type: 'CHANGE_TITLE', title: 'hi' }]);
+  expect(actions).toEqual([{ type: 'CHANGE_TITLE', title: 'hi' }]);
 });
 
 test('call changeName when name is changed', () => {
@@ -27,7 +27,7 @@ test('call changeName when name is changed', () => {
 
   wrapper.find('#signup-name').simulate('change', { target: { value: 'Ken' } });
   const actions = store.getActions();
-  expect(actions).toEqual([{ type: 'UPDATE_DIALOG_OPEN', open: true }, { type: 'CHANGE_NAME', talker_name: 'Ken' }]);
+  expect(actions).toEqual([{ type: 'CHANGE_NAME', talker_name: 'Ken' }]);
 });
 
 test('call handleClickSignUp when signup button is clicked', () => {
@@ -38,5 +38,5 @@ test('call handleClickSignUp when signup button is clicked', () => {
 
   wrapper.find('#signup').simulate('click');
   const actions = store.getActions();
-  expect(actions).toEqual([{ type: 'UPDATE_DIALOG_OPEN', open: false }, { type: 'REGISTER_SIGNUPPER_TALK' }]);
+  expect(actions).toEqual([{ type: 'REGISTER_SIGNUPPER_TALK' }]);
 });

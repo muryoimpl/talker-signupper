@@ -11,35 +11,39 @@ const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
 const getState = () => Object.assign({}, getSignup(), getHeader());
 const createdResponse = {
   status: 201,
-  errors: [],
-  talk: {
-    id: 1,
-    title: 'hi',
-    talker_name: 'Ken',
-    created_at: '2017-05-05T12:00:00.000Z',
-    updated_at: '2017-05-05T12:00:00.000Z',
-    room: {
+  data: {
+    errors: [],
+    talk: {
       id: 1,
-      name: 'aaaa',
-      created_at: '2017-05-05T11:00:00.000Z',
-      updated_at: '2017-05-05T11:00:00.000Z',
+      title: 'hi',
+      talker_name: 'Ken',
+      created_at: '2017-05-05T12:00:00.000Z',
+      updated_at: '2017-05-05T12:00:00.000Z',
+      room: {
+        id: 1,
+        name: 'aaaa',
+        created_at: '2017-05-05T11:00:00.000Z',
+        updated_at: '2017-05-05T11:00:00.000Z',
+      },
     },
   },
 };
 const bad400Response = {
   status: 400,
-  errors: ['Title has already been taken'],
-  talk: {
-    id: 1,
-    title: 'hi',
-    talker_name: 'Ken',
-    created_at: '2017-05-05T12:00:00.000Z',
-    updated_at: '2017-05-05T12:00:00.000Z',
-    room: {
+  data: {
+    errors: ['Title has already been taken'],
+    talk: {
       id: 1,
-      name: 'aaaa',
-      created_at: '2017-05-05T11:00:00.000Z',
-      updated_at: '2017-05-05T11:00:00.000Z',
+      title: 'hi',
+      talker_name: 'Ken',
+      created_at: '2017-05-05T12:00:00.000Z',
+      updated_at: '2017-05-05T12:00:00.000Z',
+      room: {
+        id: 1,
+        name: 'aaaa',
+        created_at: '2017-05-05T11:00:00.000Z',
+        updated_at: '2017-05-05T11:00:00.000Z',
+      },
     },
   },
 };
@@ -77,7 +81,7 @@ test('postEntry: request success', async () => {
   expect(ret.value).toEqual(await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken', response: null } }));
 
   ret = saga.next(createdResponse);
-  expect(ret.value).toEqual(put(signupActions.storeResponse(createdResponse)));
+  expect(ret.value).toEqual(put(signupActions.storeResponse(createdResponse.data)));
 
   ret = saga.next();
   expect(ret.value).toEqual(put(signupActions.changeFormState(false)));
@@ -115,7 +119,7 @@ test('postEntry: request failed, returned 400', async () => {
   expect(ret.value).toEqual(await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken', response: null } }));
 
   ret = saga.next(bad400Response);
-  expect(ret.value).toEqual(put(signupActions.storeResponse(bad400Response)));
+  expect(ret.value).toEqual(put(signupActions.storeResponse(bad400Response.data)));
 
   ret = saga.next();
   expect(ret.value).toEqual(put(signupActions.changeFormState(false)));
