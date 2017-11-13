@@ -24,7 +24,7 @@ export function* postEntry() {
   yield put(signupActions.storeResponse(response.data));
   yield put(signupActions.changeFormState(false));
 
-  if (response.status < 300) {
+  if ([200, 201].includes(response.status)) {
     yield put(signupActions.updateDialogOpen(false));
     yield put(signupActions.clearSignupState());
   }
