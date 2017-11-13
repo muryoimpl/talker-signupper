@@ -21,4 +21,8 @@ class Api::ApplicationController < ActionController::API
       #{e.backtrace.join("\n")}
     WARN
   end
+
+  def status_to_number(status)
+    Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+  end
 end
