@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Immutable from 'immutable';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import * as talkActions from '../actions/talks';
 import Talk from './Talk';
@@ -35,7 +36,13 @@ class Talks extends React.Component {
 
     return (
       <div>
-        {entries.map((talk, i) => <Talk talk={talk} key={talk.get('id')} i={i} />)}
+        <ReactCSSTransitionGroup
+          transitionName="p-talk-entry"
+          transitionEnterTimeout={300}
+          transitionLeaveTimeout={300}
+        >
+          {entries.map((talk, i) => <Talk talk={talk} key={talk.get('id')} i={i} />)}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
