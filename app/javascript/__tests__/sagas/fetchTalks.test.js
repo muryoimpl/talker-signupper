@@ -44,6 +44,9 @@ test('registerSignuppersTalk: request success', async () => {
 
   ret = saga.next(getResponse);
   expect(ret.value, put(talksActions.setTalks(getResponse.data.room.talks)));
+
+  ret = saga.next();
+  expect(ret.value, put(talksActions.loading(false)));
 });
 
 test('registerSignuppersTalk: request not found', async () => {
@@ -73,6 +76,9 @@ test('registerSignuppersTalk: request not found', async () => {
 
   ret = saga.next(getNotFoundResponse);
   expect(ret.value).toEqual(put(dialogsActions.showDialog(getNotFoundResponse.data.error)));
+
+  ret = saga.next();
+  expect(ret.value, put(talksActions.loading(false)));
 });
 
 test('registerSignuppersTalk: request occurs error', async () => {
@@ -102,4 +108,7 @@ test('registerSignuppersTalk: request occurs error', async () => {
 
   ret = saga.next(getErrorResponse);
   expect(ret.value).toEqual(put(dialogsActions.showDialog(getErrorResponse.data.error)));
+
+  ret = saga.next();
+  expect(ret.value, put(talksActions.loading(false)));
 });

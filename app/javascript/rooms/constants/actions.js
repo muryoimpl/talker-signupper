@@ -16,6 +16,7 @@ export const UPDATE_DIALOG_OPEN = 'UPDATE_DIALOG_OPEN';
 export const FETCH_TALKS = 'FETCH_TALKS';
 export const SET_TALKS = 'SET_TALKS';
 export const ADD_TALK = 'ADD_TALK';
+export const LOADING = 'LOADING';
 
 // dialogs
 export const SHOW_DIALOG = 'SHOW_DIALOG';

@@ -29,5 +29,7 @@ export function* fetchTalks() {
       const message = response.data.error;
       yield put(dialogsActions.showDialog(message));
     }
+
+    yield put(talksActions.loading(false));
   }
 }

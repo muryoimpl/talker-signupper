@@ -17,3 +17,8 @@ test('SET_TALKS', () => {
     initialState.merge({ entries: entryTalks }),
   );
 });
+
+test('LOADING', () => {
+  const initialState = Immutable.Record({ entries: [], loading: true })();
+  expect(talks(initialState, { type: 'LOADING', loading: false })).toEqual(initialState.merge({ loading: false }));
+});

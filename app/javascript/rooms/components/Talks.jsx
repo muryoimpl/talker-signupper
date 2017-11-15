@@ -13,6 +13,8 @@ class Talks extends React.Component {
     const { store } = this.context;
     const { entries } = this.props;
 
+    store.dispatch(talkActions.loading(true));
+
     if (!entries || entries.size === 0) {
       store.dispatch(talkActions.fetchTalks());
     }
@@ -30,9 +32,20 @@ class Talks extends React.Component {
   }
 
   render() {
-    const { entries } = this.props;
+    const { entries, loading } = this.props;
 
-    if (entries.size === 0) return <NoEntry />;
+    if (loading) {
+      const height = window.innerHeight - 150;
+      return (
+        <div className="p-talk-body__no-entry" style={{ height }}>
+          <div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />
+        </div>
+      );
+    }
+
+    if (entries.size === 0) {
+      return <NoEntry />;
+    }
 
     return (
       <div>
@@ -51,6 +64,7 @@ class Talks extends React.Component {
 Talks.propTypes = {
   entries: PropTypes.instanceOf(Immutable.List),
   name: PropTypes.string.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 Talks.contextTypes = {
@@ -59,8 +73,10 @@ Talks.contextTypes = {
 
 Talks.defaultProps = {
   entries: [],
+  loading: true,
 };
 
 export default connect(state => ({
   entries: state.talks.entries,
+  loading: state.talks.loading,
 }))(Talks);

@@ -11,3 +11,7 @@ export function setTalks(talks) {
 export function addTalk(talk) {
   return { type: Types.ADD_TALK, talk };
 }
+
+export function loading(isLoading) {
+  return { type: Types.LOADING, loading: isLoading };
+}
