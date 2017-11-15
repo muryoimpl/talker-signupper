@@ -13,7 +13,7 @@ test.skip('show dialog', () => {
   const store = mockStore(initialState);
 
   const close = sinon.mock(document).expects('querySelector').withArgs('dialog');
-  const showModal = sinon.mock(document, 'querySelector').withArgs('dialog').expects('showModal'); // TODO
+  const showModal = sinon.mock(document, 'querySelector').withArgs('dialog').expects('showModal');
 
   const wrapper = mount(<Provider store={store}><Dialog /></Provider>);
   wrapper.find('#dialog-toggle').simulate('change', { target: { value: 'true' } });
