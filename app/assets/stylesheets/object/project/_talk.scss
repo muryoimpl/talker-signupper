@@ -39,3 +39,15 @@
 .p-talk-talker {
   margin-top: 5px;
 }
+
+.p-talk-body__no-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-talk-sign__no-entry {
+  margin-top: 0;
+  color: $disabled;
+  text-align: center;
+}

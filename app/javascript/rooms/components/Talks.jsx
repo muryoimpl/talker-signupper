@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 
 import * as talkActions from '../actions/talks';
 import Talk from './Talk';
+import NoEntry from './NoEntry';
 
 class Talks extends React.Component {
   componentDidMount() {
@@ -29,6 +30,8 @@ class Talks extends React.Component {
 
   render() {
     const { entries } = this.props;
+
+    if (entries.size === 0) return <NoEntry />;
 
     return (
       <div>
