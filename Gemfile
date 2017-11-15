@@ -20,6 +20,7 @@ gem 'material_design_lite-rails'
 gem 'haml', '~> 5.0.0'
 gem 'jbuilder'
 gem 'jb'
+gem 'rack-cors'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
