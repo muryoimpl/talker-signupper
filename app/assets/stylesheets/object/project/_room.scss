@@ -73,6 +73,15 @@
   right: 0;
 }
 
+.p-room__room-name-link {
+  text-decoration: none;
+  color: $white;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .p-room__name-input {
   backgroud-color: $white;
   border-radius: 5px;

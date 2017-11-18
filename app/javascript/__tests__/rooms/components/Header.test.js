@@ -18,8 +18,9 @@ test('contains "Talker SignUpper" link', () => {
 test('show room name', () => {
   const initialState = { headers: { signup: 'open', roomName: 'Hi' } };
   const store = mockStore(initialState);
+  Object.defineProperty(window.location, 'href', { writable: false, value: 'http://localhost:3000/rooms/Hi' });
   const wrapper = mount(<Provider store={store}><Header /></Provider>);
 
   expect(wrapper.contains(<a className="text-like" href="/">Talker SignUpper</a>)).toBe(true);
-  expect(wrapper.render().text()).toMatch(/Hi/);
+  expect(wrapper.contains(<a className="p-room__room-name-link" href="http://localhost:3000/rooms/Hi">#Hi</a>)).toBe(true);
 });
