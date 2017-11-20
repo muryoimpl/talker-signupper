@@ -5,9 +5,7 @@ import Immutable from 'immutable';
 export default class Talk extends React.Component {
   handleClickStart(e) {
     e.preventDefault();
-    const talk = this.props.talk.toJS();
-    console.log(talk.id);
-    console.log(talk.room_id);
+    // TODO: write something to start talk
   }
 
   render() {
