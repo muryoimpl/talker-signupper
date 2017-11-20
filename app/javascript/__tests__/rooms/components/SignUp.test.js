@@ -3,7 +3,6 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import Immutable from 'immutable';
-// import sinon from 'sinon';
 
 import SignUp from '../../../rooms/components/SignUp';
 
