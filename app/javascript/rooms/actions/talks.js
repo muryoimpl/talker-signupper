@@ -15,3 +15,7 @@ export function addTalk(talk) {
 export function loading(isLoading) {
   return { type: Types.LOADING, loading: isLoading };
 }
+
+export function shuffleOrder() {
+  return { type: Types.SHUFFLE_ORDER };
+}

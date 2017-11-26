@@ -11,6 +11,7 @@ export default function talks(talk = new Talk(), action) {
     case Types.LOADING:
       return talk.merge({ loading: action.loading });
     case Types.FETCH_TALKS:
+    case Types.SHUFFLE_ORDER:
     default:
       return talk;
   }

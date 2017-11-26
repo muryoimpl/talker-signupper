@@ -22,3 +22,8 @@ test('LOADING', () => {
   const initialState = Immutable.Record({ entries: [], loading: true })();
   expect(talks(initialState, { type: 'LOADING', loading: false })).toEqual(initialState.merge({ loading: false }));
 });
+
+test('SHUFFLE_ORDER', () => {
+  const initialState = Immutable.Record({ entries: [], loading: false })();
+  expect(talks(initialState, { type: 'SHUFFLE_ORDER' })).toEqual(initialState);
+});

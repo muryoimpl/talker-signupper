@@ -1,4 +1,4 @@
-import { fetchTalks, setTalks, loading } from '../../rooms/actions/talks';
+import { fetchTalks, setTalks, loading, shuffleOrder } from '../../rooms/actions/talks';
 
 test('fetchTalks action', () => {
   expect(fetchTalks()).toEqual({ type: 'FETCH_TALKS' });
@@ -11,4 +11,8 @@ test('setTalks action', () => {
 
 test('loading action', () => {
   expect(loading(true)).toEqual({ type: 'LOADING', loading: true });
+});
+
+test('shuffleOrder action', () => {
+  expect(shuffleOrder()).toEqual({ type: 'SHUFFLE_ORDER' });
 });

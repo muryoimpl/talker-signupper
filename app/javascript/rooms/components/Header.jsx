@@ -5,6 +5,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import * as actions from '../actions/headers';
 import * as signupActions from '../actions/signups';
+import * as talkActions from '../actions/talks';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -35,6 +36,12 @@ class Header extends React.Component {
     history.go();
   }
 
+  handleShuffleOrder(e) {
+    e.preventDefault();
+    const { store } = this.context;
+    store.dispatch(talkActions.shuffleOrder());
+  }
+
   roomName() {
     const resources = window.location.pathname.split('/');
     return resources[resources.findIndex(elm => elm === 'rooms') + 1];
@@ -55,7 +62,13 @@ class Header extends React.Component {
           </span>
           <div className="mdl-layout-spacer" />
 
-          <nav className="mdl-navigation ">
+          <nav className="mdl-navigation">
+            <button id="shuffle" className="mdl-button mdl-js-button mdl-button--raised p-header__shuffle" onClick={e => this.handleShuffleOrder(e)}>
+              shuffle
+            </button>
+          </nav>
+
+          <nav className="mdl-navigation">
             <button id="signup" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={e => this.handleClickSignUp(e)}>
               entry
             </button>
