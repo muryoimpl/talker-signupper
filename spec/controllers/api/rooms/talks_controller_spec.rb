@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-RSpec.describe Api::TalksController, type: :controller do
+RSpec.describe Api::Rooms::TalksController, type: :controller do
   render_views
 
   before do

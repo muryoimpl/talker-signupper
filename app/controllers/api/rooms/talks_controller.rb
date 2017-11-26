@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-class Api::TalksController < Api::ApplicationController
+class Api::Rooms::TalksController < Api::ApplicationController
   def create
     find_room!
     talk = Talk.new(talk_params.merge(room_id: @room.id))

@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   namespace :api do
     resources :rooms, only: %i(show), param: :name
 
-    scope '/rooms/:name' do
-      resources :talks, only: %i(create update destroy)
+    namespace :rooms do
+      scope ':name' do
+        resources :talks, only: %i(create update destroy)
+      end
     end
   end
 
