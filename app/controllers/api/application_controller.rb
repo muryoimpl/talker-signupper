@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 class Api::ApplicationController < ActionController::API
+  include ExceptionAppRenderer
+  include LoggerUtility
+
+  # override
   def render_404(e = nil)
     log_error(e)
     head :not_found
@@ -7,22 +11,16 @@ class Api::ApplicationController < ActionController::API
 
   private
 
-  def log_error(e)
-    return unless e
-    Rails.logger.error(<<~ERR)
-      #{e.class} #{e.message}
-      #{e.backtrace.join("\n")}
-    ERR
+  def broadcast_to(channel_name)
+    ActionCable.server.broadcast(channel_name, yield)
   end
 
-  def log_warn(e)
-    Rails.logger.warn(<<~WARN)
-      #{e.class} #{e.message}
-      #{e.backtrace.join("\n")}
-    WARN
+  def render_json(action, status, locals)
+    locals[:status] = status_to_number(status)
+    render(action: action, status: status, locals: locals)
   end
 
-  def status_to_number(status)
-    Rack::Utils::SYMBOL_TO_STATUS_CODE[status]
+  def status_to_number(status_symbol)
+    Rack::Utils::SYMBOL_TO_STATUS_CODE[status_symbol]
   end
 end
