@@ -1,6 +1,6 @@
 {
   status: status,
   errors: errors,
-  action: 'create',
+  action: 'create-talk',
   talk: talk
 }

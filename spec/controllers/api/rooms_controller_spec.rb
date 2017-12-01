@@ -20,6 +20,7 @@ RSpec.describe Api::RoomsController, type: :controller do
         expect(response.body).to eq({
           status: 200,
           error: nil,
+          action: 'show-room',
           room: room.attributes.merge(talks: talks.map(&:attributes))
         }.to_json)
       end
@@ -32,7 +33,7 @@ RSpec.describe Api::RoomsController, type: :controller do
 
       specify do
         expect(response.status).to eq 404
-        expect(response.body).to eq({status: 404, error: 'room is not found', room: nil}.to_json)
+        expect(response.body).to eq({status: 404, error: 'room is not found', action: 'show-room', room: nil}.to_json)
       end
     end
 
@@ -44,7 +45,7 @@ RSpec.describe Api::RoomsController, type: :controller do
 
       specify do
         expect(response.status).to eq 400
-        expect(response.body).to eq({status: 400, error: 'ArgumentError', room: nil}.to_json)
+        expect(response.body).to eq({status: 400, error: 'ArgumentError', action: 'show-room', room: nil}.to_json)
       end
     end
   end
