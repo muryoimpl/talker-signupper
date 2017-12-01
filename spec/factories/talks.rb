@@ -4,5 +4,6 @@ FactoryGirl.define do
     sequence(:title) {|n| "title-#{n}" }
     sequence(:talker_name) {|n| "talker-#{n}" }
     room_id nil
+    order_number nil
   end
 end
