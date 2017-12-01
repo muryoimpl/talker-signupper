@@ -56,4 +56,28 @@ RSpec.describe Room, type: :model do
       expect(room.json_attributes).to eq room.attributes.merge(talks: room.talks.map(&:attributes))
     end
   end
+
+  describe '#shuffle_talks!' do
+    let(:room) { create(:room) }
+    let!(:talk_1) { create(:talk, room_id: room.id) }
+    let!(:talk_2) { create(:talk, room_id: room.id) }
+    let(:talks) { [talk_2, talk_1] }
+
+    describe 'done with arguments' do
+      before do
+        talks.each(&:reload)
+        allow_any_instance_of(Array).to receive(:shuffle).and_return(talks)
+      end
+
+      specify do
+        talks.each_with_index do |talk, i|
+          talk.order_number = i * 10
+        end
+        target_columns = Talk.column_names - %w(updated_at created_at id)
+
+        expect(Talk).to receive(:import).with(talks, on_duplicate_key_update: target_columns)
+        room.shuffle_talks!
+      end
+    end
+  end
 end

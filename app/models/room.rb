@@ -9,4 +9,14 @@ class Room < ApplicationRecord
   def json_attributes
     attributes.merge(talks: talks.ordered_by_number.map(&:attributes))
   end
+
+  def shuffle_talks!
+    re_numbered_talks = talks.to_a.shuffle.map.with_index {|talk, i|
+      talk.order_number = i * 10
+      talk
+    }
+
+    target_columns = Talk.column_names - %w(created_at updated_at id)
+    Talk.import re_numbered_talks, on_duplicate_key_update: target_columns
+  end
 end
