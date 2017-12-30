@@ -6,6 +6,7 @@ import { TransitionGroup } from 'react-transition-group';
 
 import TalksGroup from './TalksGroup';
 import * as talkActions from '../actions/talks';
+import * as globalActions from '../actions/globals';
 import Talk from './Talk';
 import NoEntry from './NoEntry';
 
@@ -24,6 +25,12 @@ class Talks extends React.Component {
       received: (data) => {
         this.receiveJSON(data);
       },
+      connected: () => {
+        store.dispatch(globalActions.changeSocketState(true));
+      },
+      disconnected: () => {
+        store.dispatch(globalActions.changeSocketState(false));
+      }
     });
   }
 

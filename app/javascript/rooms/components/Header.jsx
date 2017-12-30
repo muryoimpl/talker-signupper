@@ -48,13 +48,14 @@ class Header extends React.Component {
   }
 
   render() {
-    const { roomName } = this.props;
+    const { roomName, connected } = this.props;
 
     return (
       <header className="layout-header mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             <span><a className="text-like" href="/">Talker SignUpper</a></span>
+            <i className="material-icons p-header__badge">{ connected ? 'sync' : 'sync_disabled' }</i>
           </span>
 
           <span className="p-room__room-name">
@@ -86,6 +87,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   roomName: PropTypes.string,
+  connected: PropTypes.bool,
 };
 
 Header.contextTypes = {
@@ -94,8 +96,10 @@ Header.contextTypes = {
 
 Header.defaultProps = {
   roomName: '',
+  connected: false,
 };
 
 export default connect(state => ({
   roomName: state.headers.roomName,
+  connected: state.globals.connected,
 }))(Header);

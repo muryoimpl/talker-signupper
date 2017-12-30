@@ -1,3 +1,6 @@
+// globals
+export const CHANGE_SOCKET_STATE = 'CHANGE_SOCKET_STATE';
+
 // headers
 export const SET_ROOM_NAME = 'SET_ROOM_NAME';
 export const GET_ROOM_NAME = 'GET_ROOM_NAME';
