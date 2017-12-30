@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 import * as actions from '../actions/headers';
 import * as signupActions from '../actions/signups';
 import * as talkActions from '../actions/talks';
+import ConnectedIcon from './ConnectedIcon';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -55,7 +56,7 @@ class Header extends React.Component {
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             <span><a className="text-like" href="/">Talker SignUpper</a></span>
-            <i className="material-icons p-header__badge">{ connected ? 'sync' : 'sync_disabled' }</i>
+            <ConnectedIcon connected={connected} />
           </span>
 
           <span className="p-room__room-name">
