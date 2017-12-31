@@ -9,6 +9,7 @@ import * as talkActions from '../actions/talks';
 import * as globalActions from '../actions/globals';
 import Talk from './Talk';
 import NoEntry from './NoEntry';
+import Spinner from './Spinner';
 
 class Talks extends React.Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Talks extends React.Component {
       },
       disconnected: () => {
         store.dispatch(globalActions.changeSocketState(false));
-      }
+      },
     });
   }
 
@@ -45,9 +46,7 @@ class Talks extends React.Component {
     if (loading) {
       const height = window.innerHeight - 150;
       return (
-        <div className="p-talk-body__no-entry" style={{ height }}>
-          <div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />
-        </div>
+        <Spinner height={height} />
       );
     }
 
