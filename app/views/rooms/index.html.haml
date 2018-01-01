@@ -19,32 +19,32 @@
 
 .mdl-layout__content
   .p-room__tab-panel.is-active.mt10
-    %section.p-room__section--center.mdl-grid
-      = form_for @room, url: rooms_path, method: :post, html: {class: 'p-room__card--wide'} do |f|
-        .mdl-card__title
-          %h2.mdl-card__title-text Create yout talk room
-        .mdl-card__supporting-text.p-room__card-body
-          %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if Rails.env.development?}/rooms/
-          .mdl-textfield.mdl-js-textfield.ml5.p-room__name
-            = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}', autocomplete: :off
-            = f.label :name, class: 'mdl-textfield__label', value: 'Room name'
-          %p available characters: number, alphabet, !$+-@_
-          .p-room__error
-            - unless @room.errors.empty?
-              %ul.mdl-list
-                - @room.errors.full_messages.each do |message|
-                  %li.mdl-list__item
-                    %span.p-room__error-item #{message}
+  %section.p-room__section--center.mdl-grid
+    = form_for @room, url: rooms_path, method: :post, html: {class: 'p-room__card--wide'} do |f|
+      .mdl-card__title
+        %h2.mdl-card__title-text Create yout talk room
+      .mdl-card__supporting-text.p-room__card-body
+        - # %span.bold #{request.protocol}#{request.host}#{":#{request.port}" if Rails.env.development?}/rooms/
+        .mdl-textfield.mdl-js-textfield.ml5.p-room__name
+          = f.text_field :name, class: 'mdl-textfield__input', id: 'room-name', pattern: '[0-9a-zA-Z!$\+\-@_]{4,30}', autocomplete: :off
+          = f.label :name, class: 'mdl-textfield__label', value: 'Room name'
+        %p available characters: number, alphabet, !$+-@_
 
-            - if flash[:alert]
-              %ul.mdl-list
+        .p-room__error
+          - unless @room.errors.empty?
+            %ul.mdl-list
+              - @room.errors.full_messages.each do |message|
                 %li.mdl-list__item
-                  %span.p-room__error-item #{flash[:alert]}
+                  %span.p-room__error-item #{message}
 
+          - if flash[:alert]
+            %ul.mdl-list
+              %li.mdl-list__item
+                %span.p-room__error-item #{flash[:alert]}
 
-        .mdl-card__actions.mdl-card--border
-          %button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.p-room__button--create
-            Create new room
+      .mdl-card__actions
+        %button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--accent.p-room__button--create
+          Create new room
 
   .mdl-grid.p-room__typography-area
     .p-room__typography-text.mdl-cell.mdl-cell--6-col

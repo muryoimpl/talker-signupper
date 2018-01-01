@@ -6,18 +6,27 @@
   color: $red;
 }
 .p-room__tab-panel {
+  margin-left: -120px;
+  margin-bottom:8px;
   padding: 8px;
   padding-top: 350px;
   background: image-url('orange-31528_640.png') center 5px no-repeat;
-  height: 300px;
 }
 
 .p-room__section--center {
-  width: 620px;
+  width: 800px;
   text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  box-shadow: 3px 5px 5px lightgray;
 }
 
-.p-room__name {
+.p-room__card--wide {
+  width: inherit;
+}
+
+.p-room__name,
+.p-room__password {
   width: 400px !important;
 }
 
