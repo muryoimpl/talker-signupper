@@ -17,7 +17,7 @@ RSpec.describe Room, type: :model do
       end
 
       context 'length' do
-        let(:room) { Room.new(name: 'abc') }
+        let(:room) { Room.new(name: 'abc', password: 'password') }
 
         specify do
           expect(room.errors[:name]).to include 'is too short (minimum is 4 characters)'
@@ -35,7 +35,7 @@ RSpec.describe Room, type: :model do
       end
 
       context 'format' do
-        let(:room) { Room.new(name: '09azAZ!$+-@_') }
+        let(:room) { Room.new(name: '09azAZ!$+-@_', password: 'password') }
 
         specify do
           expect(room).to be_valid
@@ -46,6 +46,36 @@ RSpec.describe Room, type: :model do
         end
       end
     end
+
+    describe '#password' do
+      let(:room) { Room.new(name: 'abcdef', password: password) }
+
+      context 'presence' do
+        let(:password) { nil }
+
+        specify do
+          expect(room.errors[:password]).to include "can't be blank"
+        end
+      end
+
+      context 'length' do
+        describe 'minimum' do
+          let(:password) { 'abcde' }
+
+          specify do
+            expect(room.errors[:password]).to include 'is too short (minimum is 6 characters)'
+          end
+        end
+
+        describe 'maximum' do
+          let(:password) { 'a' * 73 }
+
+          specify do
+            expect(room.errors[:password]).to include 'is too long (maximum is 72 characters)'
+          end
+        end
+      end
+    end
   end
 
   describe '#json_attributes' do
@@ -53,7 +83,7 @@ RSpec.describe Room, type: :model do
     let!(:talk) { create(:talk, room_id: room.id) }
 
     specify do
-      expect(room.json_attributes).to eq room.attributes.merge(talks: room.talks.map(&:attributes))
+      expect(room.json_attributes).to eq room.attributes.except('password_digest').merge(talks: room.talks.map(&:attributes))
     end
   end
 

@@ -21,7 +21,7 @@ RSpec.describe Api::RoomsController, type: :controller do
           status: 200,
           error: nil,
           action: 'show-room',
-          room: room.attributes.merge(talks: talks.map(&:attributes))
+          room: room.attributes.except('password_digest').merge(talks: talks.map(&:attributes))
         }.to_json)
       end
     end
