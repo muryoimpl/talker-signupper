@@ -18,13 +18,13 @@ class Dialog extends React.Component {
   }
 
   handleShowDialog() {
-    if (this.props.isDisplay === 'true') {
+    if (this.props.isDisplay) {
       document.querySelector('dialog').showModal();
     }
   }
 
   render() {
-    const { message, isDisplay } = this.props;
+    const { message } = this.props;
 
     return (
       <dialog id="dialog" className="mdl-dialog">
@@ -34,7 +34,6 @@ class Dialog extends React.Component {
         <div className="mdl-dialog__actions">
           <button type="button" className="mdl-button close" onClick={e => this.handleClickClose(e)}>Close</button>
         </div>
-        <input type="hidden" id="dialog-toggle" value={isDisplay} onChange={this.handleShowDialog()} />
       </dialog>
     );
   }
