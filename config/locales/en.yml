@@ -34,3 +34,4 @@ en:
   errors:
     not_allowed_character: 'only allows these characters 0-9a-zA-Z!$@+-_'
     room_is_not_found: 'room is not found'
+    raised_error: 'Error has occurred. Please try again after a while. 🙇'

@@ -103,7 +103,7 @@ RSpec.describe Room, type: :model do
         talks.each_with_index do |talk, i|
           talk.order_number = i * 10
         end
-        target_columns = Talk.column_names - %w(updated_at created_at id)
+        target_columns = Talk.column_names - %w(updated_at created_at)
 
         expect(Talk).to receive(:import).with(talks, on_duplicate_key_update: target_columns)
         room.shuffle_talks!

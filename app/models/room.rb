@@ -18,7 +18,7 @@ class Room < ApplicationRecord
       talk
     }
 
-    target_columns = Talk.column_names - %w(created_at updated_at id)
+    target_columns = Talk.column_names - %w(created_at updated_at)
     Talk.import re_numbered_talks, on_duplicate_key_update: target_columns
   end
 end

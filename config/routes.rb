@@ -9,7 +9,11 @@ Rails.application.routes.draw do
 
     namespace :rooms do
       scope ':name' do
-        resources :talks, only: %i(create update destroy)
+        resources :talks, only: %i(create update destroy) do
+          collection do
+            resources :shuffle, only: %i(create), module: :talks
+          end
+        end
       end
     end
   end

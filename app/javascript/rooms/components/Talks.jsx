@@ -6,6 +6,7 @@ import { TransitionGroup } from 'react-transition-group';
 
 import TalksGroup from './TalksGroup';
 import * as talkActions from '../actions/talks';
+import * as dialogsActions from '../actions/dialogs';
 import * as globalActions from '../actions/globals';
 import Talk from './Talk';
 import NoEntry from './NoEntry';
@@ -36,8 +37,24 @@ class Talks extends React.Component {
   }
 
   receiveJSON(data) {
+    const { store } = this.context;
     const response = JSON.parse(data);
-    this.context.store.dispatch(talkActions.addTalk(response.talk));
+
+    if (response.error) {
+      store.dispatch(dialogsActions.showDialog(response.error));
+      return;
+    }
+
+    switch (response.action) {
+      case 'create-talk':
+        store.dispatch(talkActions.addTalk(response.talk));
+        break;
+      case 'shuffled-talks':
+        store.dispatch(talkActions.setTalks(response.room.talks));
+        break;
+      default:
+        console.error(`unknown action: ${response.action}`); // eslint-disable-line no-console
+    }
   }
 
   render() {
