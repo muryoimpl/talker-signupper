@@ -59,20 +59,16 @@ class Talks extends React.Component {
 
   render() {
     const { entries, loading } = this.props;
-
-    if (loading) {
-      const height = window.innerHeight - 150;
-      return (
-        <Spinner height={height} />
-      );
-    }
-
-    if (entries.size === 0) {
-      return <NoEntry />;
-    }
+    const height = window.innerHeight - 150;
 
     return (
       <div>
+        {loading &&
+          <Spinner height={height} loading={loading} />
+        }
+        {entries.size === 0 &&
+          <NoEntry />
+        }
         <TransitionGroup>
           {entries.map((talk, i) => (
             <TalksGroup timeout={300} key={`talk-group-${talk.get('id')}`}>

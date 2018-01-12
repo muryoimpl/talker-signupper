@@ -7,6 +7,7 @@ import * as actions from '../actions/headers';
 import * as signupActions from '../actions/signups';
 import * as talkActions from '../actions/talks';
 import ConnectedIcon from './ConnectedIcon';
+import { wait } from '../utils/timer';
 
 class Header extends React.Component {
   componentDidMount() {
@@ -37,10 +38,13 @@ class Header extends React.Component {
     history.go();
   }
 
-  handleShuffleOrder(e) {
+  async handleShuffleOrder(e) {
     e.preventDefault();
     const { store } = this.context;
+    store.dispatch(talkActions.loading(true));
     store.dispatch(talkActions.shuffleOrder());
+    await wait(1000);
+    store.dispatch(talkActions.loading(false));
   }
 
   roomName() {

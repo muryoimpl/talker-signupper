@@ -20,7 +20,7 @@ test('Show loading', () => {
   const wrapper = mount(<Provider store={store}><Talks name={'aaaa'} /></Provider>);
 
   expect(
-    wrapper.contains(<div className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />),
+    wrapper.contains(<div id="spinner" className="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active" />),
   ).toBe(true);
 });
 
