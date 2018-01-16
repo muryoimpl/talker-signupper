@@ -21,7 +21,7 @@ const titleSelector = createSelector(
 );
 
 const talkerNameSelector = createSelector(
-  state => state.talker_name,
+  state => state.talkerName,
   talkerName => validateTalkerName(talkerName),
 );
 
