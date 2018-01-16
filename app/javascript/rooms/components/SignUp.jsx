@@ -55,7 +55,7 @@ class SignUp extends React.Component {
           <i className="material-icons">cancel</i>
         </button>
 
-        <section className={'mdl-grid'}>
+        <section className="mdl-grid">
 
           <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
             <div className="mdl-card__title">
