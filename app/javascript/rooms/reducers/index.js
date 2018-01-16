@@ -5,6 +5,7 @@ import headers from './headers';
 import talks from './talks';
 import dialogs from './dialogs';
 import globals from './globals';
+import authorization from './authorization';
 
 const rootReducer = combineReducers({
   globals,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   signups,
   talks,
   dialogs,
+  authorization,
 });
 
 export default rootReducer;

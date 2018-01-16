@@ -6,7 +6,7 @@ import { registerSignuppersTalk, postTalk, getAllState, postEntry } from '../../
 import * as headerActions from '../../rooms/actions/headers';
 import * as signupActions from '../../rooms/actions/signups';
 
-const getSignup = () => ({ signups: { title: 'hi', talker_name: 'Ken', response: null } });
+const getSignup = () => ({ signups: { title: 'hi', talkerName: 'Ken' } });
 const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
 const getState = () => Object.assign({}, getSignup(), getHeader());
 const createdResponse = {
@@ -74,11 +74,11 @@ test('postEntry: request success', async () => {
   expect(ret.value).toEqual(select(getAllState));
 
   nock('http://localhost:3000')
-    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken', response: null } })
+    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken' } })
     .reply(201, createdResponse);
 
   ret = saga.next(getState());
-  expect(ret.value).toEqual(await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken', response: null } }));
+  expect(ret.value).toEqual(await call(postTalk, 'aaaa', { title: 'hi', talkerName: 'Ken' }));
 
   ret = saga.next(createdResponse);
   expect(ret.value).toEqual(put(signupActions.storeResponse(createdResponse.data)));
@@ -112,11 +112,11 @@ test('postEntry: request failed, returned 400', async () => {
   expect(ret.value).toEqual(select(getAllState));
 
   nock('http://localhost:3000')
-    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken', response: null } })
+    .post('/api/rooms/aaaa/talks', { talk: { title: 'hi', talker_name: 'Ken' } })
     .reply(400, bad400Response);
 
   ret = saga.next(getState());
-  expect(ret.value).toEqual(await call(postTalk, 'aaaa', { talk: { title: 'hi', talker_name: 'Ken', response: null } }));
+  expect(ret.value).toEqual(await call(postTalk, 'aaaa', { title: 'hi', talkerName: 'Ken' }));
 
   ret = saga.next(bad400Response);
   expect(ret.value).toEqual(put(signupActions.storeResponse(bad400Response.data)));

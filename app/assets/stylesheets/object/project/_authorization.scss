@@ -1,0 +1,14 @@
+.p-authorization__form--active {
+  opacity: 1;
+  width: 100%;
+}
+
+.p-authorization__form--inactive {
+  opacity: 0.4;
+  width: 100%;
+}
+
+.p-authorization__close {
+  float: right;
+  margin: -30px -30px;
+}

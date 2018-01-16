@@ -8,7 +8,7 @@ import Header from '../../../rooms/components/Header';
 const mockStore = configureStore();
 
 test('contains "Talker SignUpper" link', () => {
-  const initialState = { headers: { signup: 'open' }, globals: { connected: false } };
+  const initialState = { headers: { signup: 'open' }, globals: { connected: false }, authorization: { authorized: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Header /></Provider>);
 
@@ -16,7 +16,7 @@ test('contains "Talker SignUpper" link', () => {
 });
 
 test('show room name', () => {
-  const initialState = { headers: { signup: 'open', roomName: 'Hi' }, globals: { connected: false } };
+  const initialState = { headers: { signup: 'open', roomName: 'Hi' }, globals: { connected: false }, authorization: { authorized: false } };
   const store = mockStore(initialState);
   Object.defineProperty(window.location, 'href', { writable: false, value: 'http://localhost:3000/rooms/Hi' });
   const wrapper = mount(<Provider store={store}><Header /></Provider>);
@@ -26,7 +26,7 @@ test('show room name', () => {
 });
 
 test('show sync icon', () => {
-  const initialState = { headers: { signup: 'open' }, globals: { connected: true } };
+  const initialState = { headers: { signup: 'open' }, globals: { connected: true }, authorization: { authorized: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Header /></Provider>);
 
@@ -34,7 +34,7 @@ test('show sync icon', () => {
 });
 
 test('show sync_disabled icon', () => {
-  const initialState = { headers: { signup: 'open' }, globals: { connected: false } };
+  const initialState = { headers: { signup: 'open' }, globals: { connected: false }, authorization: { authorized: false } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Header /></Provider>);
 

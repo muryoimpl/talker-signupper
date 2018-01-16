@@ -40,11 +40,15 @@ class Header extends React.Component {
 
   async handleShuffleOrder(e) {
     e.preventDefault();
-    const { store } = this.context;
-    store.dispatch(talkActions.loading(true));
-    store.dispatch(talkActions.shuffleOrder());
-    await wait(1000);
-    store.dispatch(talkActions.loading(false));
+    if (this.props.authorized) {
+      const { store } = this.context;
+      store.dispatch(talkActions.loading(true));
+      store.dispatch(talkActions.shuffleOrder());
+      await wait(1000);
+      store.dispatch(talkActions.loading(false));
+    } else {
+      document.querySelector('dialog#authorization-form').showModal();
+    }
   }
 
   roomName() {
@@ -93,6 +97,7 @@ class Header extends React.Component {
 Header.propTypes = {
   roomName: PropTypes.string,
   connected: PropTypes.bool,
+  authorized: PropTypes.bool,
 };
 
 Header.contextTypes = {
@@ -101,10 +106,12 @@ Header.contextTypes = {
 
 Header.defaultProps = {
   roomName: '',
+  authorized: false,
   connected: false,
 };
 
 export default connect(state => ({
   roomName: state.headers.roomName,
+  authorized: state.authorization.authorized,
   connected: state.globals.connected,
 }))(Header);

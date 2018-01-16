@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import SignUp from './SignUp';
 import Talks from './Talks';
+import Authorization from './Authorization';
 
 class Room extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class Room extends React.Component {
     return (
       <div style={style}>
         <SignUp />
+        <Authorization />
         <Talks name={this.props.match.params.name} />
       </div>
     );

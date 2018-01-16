@@ -8,8 +8,9 @@ import * as restClient from '../utils/restClient';
 
 export const getAllState = state => state;
 
-export function postTalk(roomName, talk) {
+export function postTalk(roomName, params) {
   const url = `${config.API_HOST}/api/rooms/${roomName}/talks`;
+  const talk = { talk: { title: params.title, talker_name: params.talkerName } };
   return restClient.post(url, talk);
 }
 
@@ -20,7 +21,7 @@ export function* postEntry() {
 
   const state = yield select(getAllState);
 
-  const response = yield call(postTalk, state.headers.roomName, { talk: state.signups });
+  const response = yield call(postTalk, state.headers.roomName, state.signups);
   yield put(signupActions.storeResponse(response.data));
   yield put(signupActions.changeFormState(false));
 
