@@ -9,7 +9,7 @@ export function changeTitle(title) {
 }
 
 export function changeName(name) {
-  return { type: Types.CHANGE_NAME, talker_name: name };
+  return { type: Types.CHANGE_NAME, talkerName: name };
 }
 
 export function clearSignupState() {

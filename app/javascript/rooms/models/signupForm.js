@@ -2,7 +2,7 @@ import Immutable from 'immutable';
 
 const SignupFormBase = Immutable.Record({
   title: '',
-  talker_name: '',
+  talkerName: '',
   response: null,
   submitted: false,
   open: false,

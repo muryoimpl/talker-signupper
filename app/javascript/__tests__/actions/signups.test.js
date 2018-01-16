@@ -5,7 +5,7 @@ test('changeTitle action', () => {
 });
 
 test('changeName action', () => {
-  expect(changeName('Ken')).toEqual({ type: 'CHANGE_NAME', talker_name: 'Ken' });
+  expect(changeName('Ken')).toEqual({ type: 'CHANGE_NAME', talkerName: 'Ken' });
 });
 
 test('registerSignuppersTalk action', () => {

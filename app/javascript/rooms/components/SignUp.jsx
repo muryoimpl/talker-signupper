@@ -10,7 +10,7 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { store } = this.context;
     const { title, talkerName } = this.props;
-    store.dispatch(actions.registerSignuppersTalk(this.props.roomName, { title, talker_name: talkerName }));
+    store.dispatch(actions.registerSignuppersTalk(this.props.roomName, { title, talkerName }));
   }
 
   handleClickClose(e) {
@@ -138,7 +138,7 @@ SignUp.contextTypes = {
 export default connect(state => ({
   submitted: state.signups.submitted,
   title: state.signups.title,
-  talkerName: state.signups.talker_name,
+  talkerName: state.signups.talkerName,
   response: state.signups.response,
   roomName: state.headers.roomName,
   isValid: signupFormSelector(state.signups),
