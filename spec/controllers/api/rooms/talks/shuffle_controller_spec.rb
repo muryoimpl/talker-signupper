@@ -7,7 +7,7 @@ RSpec.describe Api::Rooms::Talks::ShuffleController, type: :controller do
   end
 
   describe 'POST create' do
-    let!(:room) { create(:room, name: 'yayyay') }
+    let!(:room) { create(:room, name: 'yayyay', password: 'password0') }
 
     context 'parameters are present' do
       let!(:talk_1) { create(:talk, room_id: room.id, title: 'hi') }
@@ -24,7 +24,7 @@ RSpec.describe Api::Rooms::Talks::ShuffleController, type: :controller do
 
       specify do
         expect {
-          post :create, params: {name: 'yayyay'}
+          post :create, params: {name: 'yayyay', password: 'password0'}
         }.to have_broadcasted_to('room-yayyay').with {|data|
           json = JSON.parse(data)
           expect(json['status']).to eq 200
@@ -38,6 +38,14 @@ RSpec.describe Api::Rooms::Talks::ShuffleController, type: :controller do
       end
     end
 
+    context 'password is wrong' do
+      specify do
+        expect(
+          post(:create, params: {name: 'yayyay', password: 'password1'})
+        ).to have_http_status :unauthorized
+      end
+    end
+
     context 'occurs error while processing' do
       before do
         allow_any_instance_of(Array).to receive(:shuffle).and_raise(StandardError.new('hi'))
@@ -46,7 +54,7 @@ RSpec.describe Api::Rooms::Talks::ShuffleController, type: :controller do
 
       specify do
         expect {
-          post :create, params: {name: 'yayyay'}
+          post :create, params: {name: 'yayyay', password: 'password0'}
         }.to have_broadcasted_to('room-yayyay').with {|data|
           json = JSON.parse(data)
           expect(json['status']).to eq 500

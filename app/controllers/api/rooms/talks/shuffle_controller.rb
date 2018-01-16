@@ -2,6 +2,12 @@
 class Api::Rooms::Talks::ShuffleController < Api::ApplicationController
   def create
     room = Room.find_by!(name: params[:name])
+
+    unless room.try(:authenticate, params[:password])
+      head :unauthorized
+      return
+    end
+
     room.shuffle_talks!
 
     broadcast_to("room-#{params[:name]}") do
