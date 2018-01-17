@@ -7,7 +7,7 @@ import sinon from 'sinon';
 import Dialog from '../../../rooms/components/Dialog';
 
 const mockStore = configureStore();
-
+// TODO: テスト書くぞ
 test.skip('show dialog', () => {
   const initialState = { dialogs: { isDisplay: false, message: 'error!' } };
   const store = mockStore(initialState);
