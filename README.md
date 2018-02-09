@@ -1,6 +1,7 @@
 # talker-signupper
 
 [![Build Status(develop)](https://travis-ci.org/muryoimpl/talker-signupper.svg?branch=develop)](https://travis-ci.org/muryoimpl/talker-signupper)
+[![Maintainability](https://api.codeclimate.com/v1/badges/caa1bfd1224c708fdcad/maintainability)](https://codeclimate.com/github/muryoimpl/talker-signupper/maintainability)
 
 **Now Under Building...**
 
