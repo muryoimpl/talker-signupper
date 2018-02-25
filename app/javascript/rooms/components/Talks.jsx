@@ -64,7 +64,7 @@ class Talks extends React.Component {
     return (
       <div>
         {loading &&
-          <Spinner height={height} loading={loading} />
+          <Spinner height={height} />
         }
         {entries.size === 0 &&
           <NoEntry />
