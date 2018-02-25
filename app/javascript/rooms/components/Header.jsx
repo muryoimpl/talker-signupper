@@ -6,7 +6,6 @@ import createHistory from 'history/createBrowserHistory';
 import * as actions from '../actions/headers';
 import * as signupActions from '../actions/signups';
 import * as talkActions from '../actions/talks';
-import ConnectedIcon from './ConnectedIcon';
 import { wait } from '../utils/timer';
 
 class Header extends React.Component {
@@ -33,6 +32,7 @@ class Header extends React.Component {
 
   handleClickLeave(e) {
     e.preventDefault();
+
     const history = createHistory();
     history.push('/');
     history.go();
@@ -40,6 +40,7 @@ class Header extends React.Component {
 
   async handleShuffleOrder(e) {
     e.preventDefault();
+
     if (this.props.authorized) {
       const { store } = this.context;
       store.dispatch(talkActions.loading(true));
@@ -64,7 +65,6 @@ class Header extends React.Component {
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
             <span><a className="text-like" href="/">Talker SignUpper</a></span>
-            <ConnectedIcon connected={connected} />
           </span>
 
           <span className="p-room__room-name">
@@ -73,18 +73,33 @@ class Header extends React.Component {
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
-            <button id="shuffle" className="mdl-button mdl-js-button mdl-button--raised p-header__shuffle" onClick={e => this.handleShuffleOrder(e)}>
+            <button
+              id="shuffle"
+              disabled={!connected}
+              className="mdl-button mdl-js-button mdl-button--raised p-header__shuffle"
+              onClick={e => this.handleShuffleOrder(e)}
+            >
               shuffle
             </button>
           </nav>
 
           <nav className="mdl-navigation">
-            <button id="signup" className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onClick={e => this.handleClickSignUp(e)}>
+            <button
+              id="signup"
+              disabled={!connected}
+              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+              onClick={e => this.handleClickSignUp(e)}
+            >
               entry
             </button>
           </nav>
           <nav className="mdl-navigation">
-            <button id="leave" className="ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={e => this.handleClickLeave(e)}>
+            <button
+              id="leave"
+              disabled={!connected}
+              className="ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+              onClick={e => this.handleClickLeave(e)}
+            >
               leave this room
             </button>
           </nav>

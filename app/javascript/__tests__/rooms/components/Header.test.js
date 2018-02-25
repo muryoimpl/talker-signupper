@@ -24,19 +24,3 @@ test('show room name', () => {
   expect(wrapper.contains(<a className="text-like" href="/">Talker SignUpper</a>)).toBe(true);
   expect(wrapper.contains(<a className="p-room__room-name-link" href="http://localhost:3000/rooms/Hi">#Hi</a>)).toBe(true);
 });
-
-test('show sync icon', () => {
-  const initialState = { headers: { signup: 'open' }, globals: { connected: true }, authorization: { authorized: false } };
-  const store = mockStore(initialState);
-  const wrapper = mount(<Provider store={store}><Header /></Provider>);
-
-  expect(wrapper.contains(<i className="material-icons p-header__badge">sync</i>)).toBe(true);
-});
-
-test('show sync_disabled icon', () => {
-  const initialState = { headers: { signup: 'open' }, globals: { connected: false }, authorization: { authorized: false } };
-  const store = mockStore(initialState);
-  const wrapper = mount(<Provider store={store}><Header /></Provider>);
-
-  expect(wrapper.contains(<i className="material-icons p-header__badge">sync_disabled</i>)).toBe(true);
-});
