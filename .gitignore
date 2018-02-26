@@ -49,7 +49,6 @@ bower.json
 config/secrets.yml.key
 /vendor/data
 
-.eslintrc.yml
 .babelrc
 /public/packs
 /public/packs-test

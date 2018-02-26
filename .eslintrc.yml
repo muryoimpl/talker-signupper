@@ -9,6 +9,7 @@ globals:
   test: true
   it: true
   expect: true
+  jest: true
 
 rules:
   react/prefer-stateless-function: 0
