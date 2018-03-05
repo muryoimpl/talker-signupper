@@ -2,10 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 
+import * as timerActions from '../actions/timer';
+
 export default class Talk extends React.Component {
-  handleClickStart(e) {
+  handleClickOpen(e) {
     e.preventDefault();
-    // TODO: write something to start talk
+    this.context.store.dispatch(timerActions.openTimer());
+    document.querySelector('dialog#timer-frame').showModal();
   }
 
   render() {
@@ -23,7 +26,7 @@ export default class Talk extends React.Component {
         </div>
 
         { this.props.i === 0 &&
-          <a href="#" className="p-talk-card-button__active mdl-color--indigo-500 mdl-color-text--white" onClick={e => this.handleClickStart(e)}>
+          <a href="#" className="p-talk-card-button__active mdl-color--indigo-500 mdl-color-text--white" onClick={e => this.handleClickOpen(e)}>
             <i className="material-icons">play_circle_filled</i>
           </a>
         }
@@ -34,6 +37,10 @@ export default class Talk extends React.Component {
     );
   }
 }
+
+Talk.contextTypes = {
+  store: PropTypes.object,
+};
 
 Talk.propTypes = {
   talk: PropTypes.instanceOf(Immutable.Map).isRequired,
