@@ -51,7 +51,7 @@ class SignUp extends React.Component {
     const { submitted, title, talkerName, response, isValid, open } = this.props;
     return (
       <dialog className="mdl-dialog p-room__section--center" id="signup-form">
-        <button className="mdl-button mdl-js-button mdl-button--icon p-signup__close" onClick={e => this.handleClickClose(e)}>
+        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
           <i className="material-icons">cancel</i>
         </button>
 

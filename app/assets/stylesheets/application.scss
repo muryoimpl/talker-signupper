@@ -14,8 +14,10 @@
  *= require_self
  */
 
+// FLOCSS based style
 @import 'foundation/variables';
 @import 'foundation/base';
+@import 'object/component/dialog';
 @import 'object/project/authorization';
 @import 'object/project/header';
 @import 'object/project/room';

@@ -41,7 +41,7 @@ class Authorization extends React.Component {
 
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
-        <button className="mdl-button mdl-js-button mdl-button--icon p-authorization__close p-signup__close" onClick={e => this.handleClickClose(e)}>
+        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
           <i className="material-icons">cancel</i>
         </button>
 
