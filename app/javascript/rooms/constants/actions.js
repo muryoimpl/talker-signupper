@@ -35,3 +35,7 @@ export const CLEAR_PASSWORD = 'CLEAR_PASSWORD';
 export const AUTHORIZED = 'AUTHORIZED';
 export const STORE_AUTH_RESPONSE = 'STORE_AUTH_RESPONSE';
 export const CLEAR_AUTH_RESPONSE = 'CLEAR_AUTH_RESPONSE';
+
+// timer
+export const OPEN_TIMER = 'OPEN_TIMER';
+export const CLOSE_TIMER = 'CLOSE_TIMER';
