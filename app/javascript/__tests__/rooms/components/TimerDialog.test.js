@@ -3,14 +3,14 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 
-import Timer from '../../../rooms/components/Timer';
+import TimerDialog from '../../../rooms/components/TimerDialog';
 
 const mockStore = configureStore();
 
 test('Timer', () => {
   const initialState = { timer: { open: false } };
   const store = mockStore(initialState);
-  const wrapper = mount(<Provider store={store}><Timer /></Provider>);
+  const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
 
   // TODO: ちゃんとした contents を表示するようにしたら、その内容でチェックする
   expect(
@@ -21,7 +21,7 @@ test('Timer', () => {
 test('Timer', () => {
   const initialState = { timer: { open: true } };
   const store = mockStore(initialState);
-  const wrapper = mount(<Provider store={store}><Timer /></Provider>);
+  const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
 
   wrapper.find('button.c-dialog__close').simulate('click');
   const actions = store.getActions();

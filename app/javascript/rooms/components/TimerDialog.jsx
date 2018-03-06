@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions/timer';
 
-class Timer extends React.Component {
+class TimerDialog extends React.Component {
   handleClickClose(e) {
     if (e) e.preventDefault();
     this.close();
@@ -41,14 +41,14 @@ class Timer extends React.Component {
   }
 }
 
-Timer.contextTypes = {
+TimerDialog.contextTypes = {
   store: PropTypes.object,
 };
 
-Timer.propTypes = {
+TimerDialog.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
 export default connect(state => ({
   open: state.timer.open,
-}))(Timer);
+}))(TimerDialog);
