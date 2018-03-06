@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/timer';
+import Timer from './Timer';
 
 class TimerDialog extends React.Component {
   handleClickClose(e) {
@@ -34,7 +35,7 @@ class TimerDialog extends React.Component {
         <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
           <i className="material-icons">cancel</i>
         </button>
-        TIMER
+        <Timer />
         {open ? this.open() : this.close()}
       </dialog>
     );
