@@ -24,14 +24,14 @@ class TimerDialog extends React.Component {
   open() {
     const { store } = this.context;
     if (!this.props.open) {
-      store.dispatch(actions.openTimer());
+      store.dispatch(actions.openTimer({ title: this.props.title, talkerName: this.props.talkerName }));
     }
   }
 
   render() {
     const { open } = this.props;
     return (
-      <dialog className="mdl-dialog" id="timer-frame">
+      <dialog className="mdl-dialog" id="timer-frame" style={{ height: '50%', width: '50%' }}>
         <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
           <i className="material-icons">cancel</i>
         </button>
@@ -48,8 +48,17 @@ TimerDialog.contextTypes = {
 
 TimerDialog.propTypes = {
   open: PropTypes.bool.isRequired,
+  title: PropTypes.string,
+  talkerName: PropTypes.string,
+};
+
+TimerDialog.defaultProps = {
+  title: '',
+  talkerName: '',
 };
 
 export default connect(state => ({
   open: state.timer.open,
+  title: state.timer.title,
+  talkerName: state.timer.talkerName,
 }))(TimerDialog);

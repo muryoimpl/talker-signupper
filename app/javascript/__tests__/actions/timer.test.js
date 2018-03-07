@@ -1,9 +1,10 @@
 import { openTimer, closeTimer } from '../../rooms/actions/timer';
 
 test('openTimer action', () => {
-  expect(openTimer()).toEqual({ type: 'OPEN_TIMER' });
+  const payload = { title: 'hi', talkerName: 'Ken' };
+  expect(openTimer(payload)).toEqual({ type: 'OPEN_TIMER', payload });
 });
 
 test('closeTimer action', () => {
-  expect(closeTimer(true)).toEqual({ type: 'CLOSE_TIMER' });
+  expect(closeTimer()).toEqual({ type: 'CLOSE_TIMER' });
 });

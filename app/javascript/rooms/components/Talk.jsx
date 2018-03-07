@@ -7,7 +7,10 @@ import * as timerActions from '../actions/timer';
 export default class Talk extends React.Component {
   handleClickOpen(e) {
     e.preventDefault();
-    this.context.store.dispatch(timerActions.openTimer());
+    this.context.store.dispatch(timerActions.openTimer({
+      tittle: this.props.talk.get('title'),
+      talkerName: this.props.talk.get('talker_name'),
+    }));
     document.querySelector('dialog#timer-frame').showModal();
   }
 

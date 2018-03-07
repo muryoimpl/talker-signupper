@@ -4,9 +4,9 @@ import * as Types from '../constants/actions';
 export default function timer(timerState = new Timer(), action) {
   switch (action.type) {
     case Types.OPEN_TIMER:
-      return timerState.merge({ open: true });
+      return timerState.merge({ open: true, title: action.payload.title, talkerName: action.payload.talkerName });
     case Types.CLOSE_TIMER:
-      return timerState.merge({ open: false });
+      return timerState.merge({ open: false, title: '', talkerName: '' });
     default:
       return timerState;
   }
