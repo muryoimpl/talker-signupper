@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 import Dialog from './Dialog';
 import Header from './Header';
-import Timer from './Timer';
+import TimerDialog from './TimerDialog';
 
 class Layout extends React.Component {
   render() {
     return (
       <div className="content">
         <Dialog />
-        <Timer />
+        <TimerDialog />
         <Header />
         {this.props.children}
       </div>
