@@ -16,6 +16,7 @@
 
 // FLOCSS based style
 @import 'foundation/variables';
+@import 'foundation/mixin';
 @import 'foundation/base';
 @import 'object/component/dialog';
 @import 'object/project/authorization';
@@ -23,5 +24,6 @@
 @import 'object/project/room';
 @import 'object/project/signup';
 @import 'object/project/talk';
+@import 'object/project/timer';
 @import 'object/utility/override';
 @import 'object/utility/utility';

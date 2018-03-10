@@ -31,7 +31,7 @@ class TimerDialog extends React.Component {
   render() {
     const { open } = this.props;
     return (
-      <dialog className="mdl-dialog" id="timer-frame" style={{ height: '50%', width: '50%' }}>
+      <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
         <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
           <i className="material-icons">cancel</i>
         </button>

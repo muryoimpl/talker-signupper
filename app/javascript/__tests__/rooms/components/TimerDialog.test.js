@@ -12,9 +12,8 @@ test('Timer', () => {
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
 
-  // TODO: ちゃんとした contents を表示するようにしたら、その内容でチェックする
   expect(
-    wrapper.contains('TIMER'),
+    wrapper.contains('05:00'),
   ).toBe(true);
 });
 
