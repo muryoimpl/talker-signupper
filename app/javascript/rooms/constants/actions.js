@@ -38,4 +38,9 @@ export const CLEAR_AUTH_RESPONSE = 'CLEAR_AUTH_RESPONSE';
 
 // timer
 export const OPEN_TIMER = 'OPEN_TIMER';
+export const START_TIMER = 'START_TIMER';
+export const STOP_TIMER = 'STOP_TIMER';
 export const CLOSE_TIMER = 'CLOSE_TIMER';
+export const SET_TIMER_ID = 'SET_TIMER_ID';
+export const UPDATE_REMAINING = 'UPDATE_REMAINING';
+export const CLEAR_TIMER = 'CLEAR_TIMER';
