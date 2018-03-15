@@ -65,3 +65,4 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include RequestSpecHelper, type: :request
 end
+# rubocop:enable Style/BlockDelimiters
