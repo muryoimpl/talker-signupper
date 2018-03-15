@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Room < ApplicationRecord
   ALLOWED_PATTERN = /\A[0-9a-zA-Z!$\+\-@_]+\z/
   has_secure_password

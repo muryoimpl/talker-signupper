@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'ApplicationController/Api::ApplicationController', type: :request do
   context 'No route match' do
     include_context 'show exceptions'

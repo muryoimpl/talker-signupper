@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Api::Rooms::Talks::ShuffleController < Api::ApplicationController
   def create
     room = Room.find_by!(name: params[:name])

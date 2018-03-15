@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Api::RoomsController < Api::ApplicationController
   def show
     room = Room.includes(:talks).find_by(name: params[:name])

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module RequestSpecHelper
   # NOTE: http://qiita.com/upinetree/items/5410f130c91909db347c
   shared_context 'show exceptions', show_exceptions: true do

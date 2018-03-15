@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class Api::Rooms::TalksController < Api::ApplicationController
   def create
     find_room!

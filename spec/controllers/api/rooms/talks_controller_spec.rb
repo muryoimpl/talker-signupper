@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe Api::Rooms::TalksController, type: :controller do
   render_views
 

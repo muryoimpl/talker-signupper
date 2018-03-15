@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class RoomsController < ApplicationController
   def index
     @room = Room.new
