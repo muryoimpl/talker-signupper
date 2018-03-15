@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find_by(name: params[:name])
 
-    unless @room
+    unless @room # rubocop:disable Style/GuardClause
       flash[:not_exist_alert] = I18n.t('errors.room_is_not_found')
       redirect_to rooms_path(name: params[:name])
     end
