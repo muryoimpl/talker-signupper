@@ -15,11 +15,9 @@ class Api::Rooms::TalksController < Api::ApplicationController
     render_json(:create, :bad_request, talk: talk&.json_attributes(@room), errors: talks_error(e))
   end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
