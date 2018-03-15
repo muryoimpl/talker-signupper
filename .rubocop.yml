@@ -2,7 +2,7 @@ inherit_gem:
   deka_eiwakun: "config/rubocop.yml"
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   Include:
     - app/**/*.rb
     - config/**/*.rb
@@ -18,3 +18,16 @@ Metrics/AbcSize:
 
 Metrics/MethodLength:
   Max: 20
+
+Style/RescueStandardError:
+  Enabled: false
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
