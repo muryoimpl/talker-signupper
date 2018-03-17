@@ -58,7 +58,7 @@ class Talks extends React.Component {
   }
 
   render() {
-    const { entries, loading } = this.props;
+    const { entries, done, loading } = this.props;
     const height = window.innerHeight - 150;
 
     return (
@@ -76,6 +76,20 @@ class Talks extends React.Component {
             </TalksGroup>
           ))}
         </TransitionGroup>
+
+        {done.size > 0 &&
+          <hr className="p-room__hr" />
+        }
+
+        {done.size > 0 &&
+          <TransitionGroup>
+            {done.map((talk, i) => (
+              <TalksGroup timeout={300} key={`talk-group-done-${talk.get('id')}`}>
+                <Talk talk={talk} key={`done-${talk.get('id')}`} i={i} />
+              </TalksGroup>
+            ))}
+          </TransitionGroup>
+        }
       </div>
     );
   }
@@ -83,6 +97,7 @@ class Talks extends React.Component {
 
 Talks.propTypes = {
   entries: PropTypes.instanceOf(Immutable.List),
+  done: PropTypes.instanceOf(Immutable.List),
   name: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
 };
@@ -92,11 +107,13 @@ Talks.contextTypes = {
 };
 
 Talks.defaultProps = {
-  entries: [],
+  entries: new Immutable.List(),
+  done: new Immutable.List(),
   loading: true,
 };
 
 export default connect(state => ({
   entries: state.talks.entries,
+  done: state.talks.done,
   loading: state.talks.loading,
 }))(Talks);

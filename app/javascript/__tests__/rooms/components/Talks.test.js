@@ -34,7 +34,7 @@ test('Show noEntry component', () => {
 
 test('Show talk', () => {
   const entry = new Immutable.Map({ id: 1, talker_name: 'muryoimpl', title: 'hi' });
-  const initialState = { talks: { loading: false, entries: new Immutable.List([entry]) } };
+  const initialState = { talks: { loading: false, entries: new Immutable.List([entry]), done: new Immutable.List() } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Talks name={'aaaa'} /></Provider>);
 
@@ -49,7 +49,6 @@ test('Show talk', () => {
           ))}
         </TransitionGroup>
       </div>,
-
     ),
   ).toBe(true);
 });
