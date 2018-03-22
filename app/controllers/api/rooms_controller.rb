@@ -7,7 +7,7 @@ class Api::RoomsController < Api::ApplicationController
     render action: :show, status: status(room), locals: {
       status: status(room),
       error: error_message(room),
-      room: room&.json_attributes
+      room: room
     }
   rescue => e
     log_error(e)

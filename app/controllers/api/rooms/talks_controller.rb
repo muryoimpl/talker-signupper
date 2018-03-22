@@ -7,13 +7,13 @@ class Api::Rooms::TalksController < Api::ApplicationController
     talk.save!
 
     broadcast_to("room-#{params[:name]}") do
-      render_json(:create, :created, talk: talk.json_attributes(@room), errors: nil)
+      render_json(:create, :created, talk: talk, room: @room, errors: nil)
     end
     head :ok
   rescue ActiveRecord::RecordNotFound, ActiveRecord::RecordInvalid, ActionController::ParameterMissing => e
     log_warn(e)
     talk = e.class == ActiveRecord::RecordInvalid ? e.record : nil
-    render_json(:create, :bad_request, talk: talk&.json_attributes(@room), errors: talks_error(e))
+    render_json(:create, :bad_request, talk: talk, room: @room, errors: talks_error(e))
   end
 
   def update; end

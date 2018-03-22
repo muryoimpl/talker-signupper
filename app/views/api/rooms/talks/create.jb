@@ -4,5 +4,5 @@
   status: status,
   errors: errors,
   action: 'create-talk',
-  talk: talk
+  talk: talk&.json_attributes(room)
 }

@@ -4,5 +4,5 @@
   status: status,
   error: error,
   action: 'show-room',
-  room: room
+  room: room&.json_attributes
 }

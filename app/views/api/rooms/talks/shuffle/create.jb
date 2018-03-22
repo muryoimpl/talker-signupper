@@ -4,5 +4,5 @@
   status: status,
   error: error,
   action: 'shuffled-talks',
-  room: room
+  room: room&.json_attributes
 }
