@@ -28,13 +28,13 @@ export default class Talk extends React.Component {
           </div>
         </div>
 
-        { this.props.i === 0 &&
+        { (this.props.i === 0 && !this.props.done) &&
           <a href="#" className="p-talk-card-button__active mdl-color--indigo-500 mdl-color-text--white" onClick={e => this.handleClickOpen(e)}>
             <i className="material-icons">play_circle_filled</i>
           </a>
         }
-        { this.props.i !== 0 &&
-          <header className="p-talk-card-button mdl-color--teal-100 mdl-color-text--white" />
+        { (this.props.i !== 0 || this.props.done) &&
+          <header className={`p-talk-card-button mdl-color-text--white ${this.props.done ? 'mdl-color--grey-400' : 'mdl-color--teal-100'}`} />
         }
       </section>
     );
@@ -45,7 +45,12 @@ Talk.contextTypes = {
   store: PropTypes.object,
 };
 
+Talk.defaultProps = {
+  done: false,
+};
+
 Talk.propTypes = {
   talk: PropTypes.instanceOf(Immutable.Map).isRequired,
   i: PropTypes.number.isRequired,
+  done: PropTypes.bool,
 };

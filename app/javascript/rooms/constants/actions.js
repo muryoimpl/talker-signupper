@@ -21,6 +21,7 @@ export const SET_TALKS = 'SET_TALKS';
 export const ADD_TALK = 'ADD_TALK';
 export const LOADING = 'LOADING';
 export const SHUFFLE_ORDER = 'SHUFFLE_ORDER';
+export const NEXT_TALK = 'NEXT_TALK';
 
 // dialogs
 export const SHOW_DIALOG = 'SHOW_DIALOG';

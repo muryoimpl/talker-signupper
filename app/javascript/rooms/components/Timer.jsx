@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Immutable from 'immutable';
 
 import * as timerActions from '../actions/timer';
+import * as talkActions from '../actions/talks';
 import { minsSelector, secsSelector } from '../selectors/timerSelector';
 import { zeroPad } from '../utils/timer';
 import { DEFAULT_REMAINING } from '../models/timer';
@@ -28,6 +30,14 @@ class Timer extends React.Component {
       this.prevTime = currentTime;
     } else {
       this.reset();
+      this.props.store.dispatch(talkActions.nextTalk());
+      const nextEntry = this.props.entries.first();
+      this.props.store.dispatch(
+        timerActions.openTimer({
+          title: nextEntry.get('title'),
+          talkerName: nextEntry.get('talkerName'),
+        }),
+      );
     }
   }
 
@@ -88,6 +98,7 @@ Timer.propTypes = {
   mins: PropTypes.number,
   secs: PropTypes.number,
   running: PropTypes.bool,
+  entries: PropTypes.instanceOf(Immutable.List).isRequired,
 };
 
 Timer.defaultProps = {
@@ -108,4 +119,5 @@ export default connect(state => ({
   mins: minsSelector(state.timer),
   secs: secsSelector(state.timer),
   running: state.timer.running,
+  entries: state.talks.entries,
 }))(Timer);

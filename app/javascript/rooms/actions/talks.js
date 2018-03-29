@@ -19,3 +19,7 @@ export function loading(isLoading) {
 export function shuffleOrder() {
   return { type: Types.SHUFFLE_ORDER };
 }
+
+export function nextTalk() {
+  return { type: Types.NEXT_TALK };
+}

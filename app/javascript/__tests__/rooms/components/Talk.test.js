@@ -38,11 +38,23 @@ test('show link to start talk if it is first talk', () => {
 test('show element which is not a link if it is not first talk', () => {
   const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
   const talk = new Immutable.Map(talkJSON);
-  const wrapper = shallow(<Talk i={1} talk={talk} />);
+  const wrapper = shallow(<Talk i={1} talk={talk} done={false} />);
 
   expect(
     wrapper.containsMatchingElement(
-      <header className="p-talk-card-button mdl-color--teal-100 mdl-color-text--white" />,
+      <header className="p-talk-card-button mdl-color-text--white mdl-color--teal-100" />,
+    ),
+  ).toBe(true);
+});
+
+test('show element which is not a link if it is done', () => {
+  const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
+  const talk = new Immutable.Map(talkJSON);
+  const wrapper = shallow(<Talk i={1} talk={talk} done />);
+
+  expect(
+    wrapper.containsMatchingElement(
+      <header className="p-talk-card-button mdl-color-text--white mdl-color--grey-400" />,
     ),
   ).toBe(true);
 });

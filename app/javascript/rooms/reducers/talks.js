@@ -10,6 +10,11 @@ export default function talks(talk = new Talk(), action) {
       return talk.merge({ entries: talk.entries.push(Immutable.Map(action.talk)) });
     case Types.LOADING:
       return talk.merge({ loading: action.loading });
+    case Types.NEXT_TALK: {
+      const nextDone = talk.done.push(talk.entries.first());
+      const nextEntries = talk.entries.shift();
+      return talk.merge({ entries: nextEntries, done: nextDone });
+    }
     case Types.FETCH_TALKS:
     case Types.SHUFFLE_ORDER:
     default:

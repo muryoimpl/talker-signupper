@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import Immutable from 'immutable';
 
 import { DEFAULT_REMAINING } from '../../../rooms/models/timer';
 import TimerDialog from '../../../rooms/components/TimerDialog';
@@ -17,6 +18,9 @@ test('Timer: show', () => {
       timerId: null,
       remaining: DEFAULT_REMAINING,
       running: false,
+    },
+    talks: {
+      entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
     },
   };
   const store = mockStore(initialState);
@@ -39,6 +43,9 @@ test('Timer: running', () => {
       remaining: DEFAULT_REMAINING,
       running: true,
     },
+    talks: {
+      entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+    },
   };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
@@ -59,6 +66,9 @@ test('Timer: stopping', () => {
       timerId: 100,
       remaining: DEFAULT_REMAINING,
       running: false,
+    },
+    talks: {
+      entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
     },
   };
   const store = mockStore(initialState);
@@ -81,6 +91,9 @@ test('Timer: click close button', () => {
       timerId: null,
       remaining: DEFAULT_REMAINING,
       running: false,
+    },
+    talks: {
+      entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
     },
   };
   const store = mockStore(initialState);

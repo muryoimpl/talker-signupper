@@ -72,12 +72,12 @@ class Talks extends React.Component {
         <TransitionGroup>
           {entries.map((talk, i) => (
             <TalksGroup timeout={300} key={`talk-group-${talk.get('id')}`}>
-              <Talk talk={talk} key={talk.get('id')} i={i} />
+              <Talk talk={talk} key={talk.get('id')} i={i} done={false} />
             </TalksGroup>
           ))}
         </TransitionGroup>
 
-        {done.size > 0 &&
+        {(done.size > 0 && entries.size !== 0) &&
           <hr className="p-room__hr" />
         }
 
@@ -85,7 +85,7 @@ class Talks extends React.Component {
           <TransitionGroup>
             {done.map((talk, i) => (
               <TalksGroup timeout={300} key={`talk-group-done-${talk.get('id')}`}>
-                <Talk talk={talk} key={`done-${talk.get('id')}`} i={i} />
+                <Talk talk={talk} key={`done-${talk.get('id')}`} i={i} done />
               </TalksGroup>
             ))}
           </TransitionGroup>
