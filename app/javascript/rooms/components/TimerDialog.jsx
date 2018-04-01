@@ -24,7 +24,7 @@ class TimerDialog extends React.Component {
   open() {
     const { store } = this.context;
     if (!this.props.open) {
-      store.dispatch(actions.openTimer({ title: this.props.title, talkerName: this.props.talkerName }));
+      store.dispatch(actions.openTimer());
     }
   }
 
@@ -48,17 +48,8 @@ TimerDialog.contextTypes = {
 
 TimerDialog.propTypes = {
   open: PropTypes.bool.isRequired,
-  title: PropTypes.string,
-  talkerName: PropTypes.string,
-};
-
-TimerDialog.defaultProps = {
-  title: '',
-  talkerName: '',
 };
 
 export default connect(state => ({
   open: state.timer.open,
-  title: state.timer.title,
-  talkerName: state.timer.talkerName,
 }))(TimerDialog);

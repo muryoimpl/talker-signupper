@@ -3,12 +3,11 @@ import Immutable from 'immutable';
 import timer from '../../rooms/reducers/timer';
 
 test('OPEN_TIMER', () => {
-  const initialState = Immutable.Record({ open: false, title: '', talkerName: '' })();
-  const payload = { title: 'hi', talkerName: 'KenKen' };
+  const initialState = Immutable.Record({ open: false })();
   expect(
-    timer(initialState, { type: 'OPEN_TIMER', payload }),
+    timer(initialState, { type: 'OPEN_TIMER' }),
   ).toEqual(
-    initialState.merge({ open: true, title: 'hi', talkerName: 'KenKen' }),
+    initialState.merge({ open: true }),
   );
 });
 

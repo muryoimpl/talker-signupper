@@ -23,3 +23,8 @@ export function shuffleOrder() {
 export function nextTalk() {
   return { type: Types.NEXT_TALK };
 }
+
+export function pushToCurrent(talk) {
+  const payload = { title: talk.get('title'), talkerName: talk.get('talker_name') };
+  return { type: Types.PUSH_TO_CURRENT, payload };
+}

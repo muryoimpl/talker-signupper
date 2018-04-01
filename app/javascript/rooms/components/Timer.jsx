@@ -32,12 +32,8 @@ class Timer extends React.Component {
       this.reset();
       this.props.store.dispatch(talkActions.nextTalk());
       const nextEntry = this.props.entries.first();
-      this.props.store.dispatch(
-        timerActions.openTimer({
-          title: nextEntry.get('title'),
-          talkerName: nextEntry.get('talkerName'),
-        }),
-      );
+      this.props.store.dispatch(talkActions.pushToCurrent(nextEntry));
+      this.props.store.dispatch(timerActions.openTimer());
     }
   }
 
@@ -112,8 +108,8 @@ Timer.defaultProps = {
 };
 
 export default connect(state => ({
-  title: state.timer.title,
-  talkerName: state.timer.talkerName,
+  title: state.talks.current.get('title'),
+  talkerName: state.talks.current.get('talkerName'),
   timerId: state.timer.timerId,
   remaining: state.timer.remaining,
   mins: minsSelector(state.timer),

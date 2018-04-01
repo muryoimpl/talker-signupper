@@ -21,6 +21,7 @@ test('Timer: show', () => {
     },
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+      current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
   };
   const store = mockStore(initialState);
@@ -45,6 +46,7 @@ test('Timer: running', () => {
     },
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+      current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
   };
   const store = mockStore(initialState);
@@ -69,6 +71,7 @@ test('Timer: stopping', () => {
     },
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+      current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
   };
   const store = mockStore(initialState);
@@ -94,6 +97,7 @@ test('Timer: click close button', () => {
     },
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+      current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
   };
   const store = mockStore(initialState);

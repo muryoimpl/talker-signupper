@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 
 import * as timerActions from '../actions/timer';
+import * as talkActions from '../actions/talks';
 
 export default class Talk extends React.Component {
   handleClickOpen(e) {
     e.preventDefault();
-    this.context.store.dispatch(timerActions.openTimer({
-      title: this.props.talk.get('title'),
-      talkerName: this.props.talk.get('talker_name'),
-    }));
+    this.context.store.dispatch(talkActions.pushToCurrent(this.props.talk));
+    this.context.store.dispatch(timerActions.openTimer());
     document.querySelector('dialog#timer-frame').showModal();
   }
 
@@ -47,10 +46,11 @@ Talk.contextTypes = {
 
 Talk.defaultProps = {
   done: false,
+  talk: Immutable.Map(),
 };
 
 Talk.propTypes = {
-  talk: PropTypes.instanceOf(Immutable.Map).isRequired,
+  talk: PropTypes.instanceOf(Immutable.Map),
   i: PropTypes.number.isRequired,
   done: PropTypes.bool,
 };

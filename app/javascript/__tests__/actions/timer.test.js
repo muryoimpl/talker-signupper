@@ -1,8 +1,7 @@
 import { openTimer, closeTimer, startTimer, stopTimer, setTimerId, updateRemaining } from '../../rooms/actions/timer';
 
 test('openTimer action', () => {
-  const payload = { title: 'hi', talkerName: 'Ken' };
-  expect(openTimer(payload)).toEqual({ type: 'OPEN_TIMER', payload });
+  expect(openTimer()).toEqual({ type: 'OPEN_TIMER' });
 });
 
 test('startTimer action', () => {
