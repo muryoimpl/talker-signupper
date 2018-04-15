@@ -5,7 +5,7 @@ import Immutable from 'immutable';
 
 import * as timerActions from '../actions/timer';
 import * as talkActions from '../actions/talks';
-import { minsSelector, secsSelector } from '../selectors/timerSelector';
+import { timeSelector, MIN, SEC } from '../selectors/timerSelector';
 import { zeroPad } from '../utils/timer';
 import { DEFAULT_REMAINING } from '../models/timer';
 
@@ -61,7 +61,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    const { title, talkerName, mins, secs, running, timerId } = this.props;
+    const { title, talkerName, time, running, timerId } = this.props;
     return (
       <div className="p-timer__clock-frame">
         <div className="mdl-card__title p-timer__title">
@@ -71,7 +71,7 @@ class Timer extends React.Component {
 
         <div className="p-timer__body">
           <span className="p-timer__clock">
-            {zeroPad(mins)}:{zeroPad(secs)}
+            {zeroPad(time[MIN])}:{zeroPad(time[SEC])}
           </span>
         </div>
 
@@ -91,8 +91,7 @@ Timer.propTypes = {
   store: PropTypes.object.isRequired,
   timerId: PropTypes.number,
   remaining: PropTypes.number,
-  mins: PropTypes.number,
-  secs: PropTypes.number,
+  time: PropTypes.arrayOf(PropTypes.number),
   running: PropTypes.bool,
   entries: PropTypes.instanceOf(Immutable.List).isRequired,
 };
@@ -102,8 +101,7 @@ Timer.defaultProps = {
   talkerName: '',
   timerId: null,
   remaining: 0,
-  mins: 5,
-  secs: 0,
+  time: [0, 0],
   running: false,
 };
 
@@ -112,8 +110,7 @@ export default connect(state => ({
   talkerName: state.talks.current.get('talkerName'),
   timerId: state.timer.timerId,
   remaining: state.timer.remaining,
-  mins: minsSelector(state.timer),
-  secs: secsSelector(state.timer),
+  time: timeSelector(state.timer),
   running: state.timer.running,
   entries: state.talks.entries,
 }))(Timer);
