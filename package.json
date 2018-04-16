@@ -3,10 +3,10 @@
   "private": true,
   "jest": {
     "testMatch": [
-      "**/__tests__/**/*.test.js?(x)"
+      "**/*.test.js?(x)"
     ],
     "setupFiles": [
-      "./app/javascript/__tests__/helpers/setup-test-env.js"
+      "./app/javascript/rooms/utils/tests/setup-test-env.js"
     ]
   },
   "scripts": {
