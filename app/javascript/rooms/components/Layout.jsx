@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Dialog from './Dialog';
+import MessageDialog from './MessageDialog';
 import Header from './Header';
 import TimerDialog from './TimerDialog';
 
@@ -9,7 +9,7 @@ class Layout extends React.Component {
   render() {
     return (
       <div className="content">
-        <Dialog />
+        <MessageDialog />
         <TimerDialog />
         <Header />
         {this.props.children}
