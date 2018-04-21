@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SignUp from './SignUp';
+import SignUp from './Signup';
 import Talks from './Talks';
 import AuthorizationDialog from './AuthorizationDialog';
 

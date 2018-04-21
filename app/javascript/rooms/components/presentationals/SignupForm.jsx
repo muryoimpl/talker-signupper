@@ -1,50 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import * as actions from '../actions/signups';
-import signupFormSelector from '../selectors/signupFormSelector';
-
-class SignUp extends React.Component {
+export default class SignupForm extends React.Component {
   handleClickSignUp(e) {
     e.preventDefault();
-    const { store } = this.context;
-    const { title, talkerName } = this.props;
-    store.dispatch(actions.registerSignuppersTalk(this.props.roomName, { title, talkerName }));
+    const { roomName, title, talkerName } = this.props;
+    this.props.registerTalk(roomName, title, talkerName);
   }
 
   handleClickClose(e) {
     e.preventDefault();
-    const { store } = this.context;
-    store.dispatch(actions.clearSignupState());
+    this.props.clearSignupForm();
     this.close();
   }
 
-  changeTitle(title) {
-    const { store } = this.context;
-    store.dispatch(actions.changeTitle(title));
-  }
-
-  changeName(name) {
-    const { store } = this.context;
-    store.dispatch(actions.changeName(name));
-  }
-
   close() {
-    const { store } = this.context;
     const dom = document.querySelector('dialog#signup-form');
     if (dom && dom.getAttribute('open') === '') dom.close();
-
-    if (this.props.open) {
-      store.dispatch(actions.updateDialogOpen(false));
-    }
+    if (this.props.open) this.props.closeSignupDialog();
   }
 
   open() {
-    const { store } = this.context;
-    if (!this.props.open) {
-      store.dispatch(actions.updateDialogOpen(true));
-    }
+    this.props.openSignupDialog(this.props.open);
   }
 
   render() {
@@ -56,7 +33,6 @@ class SignUp extends React.Component {
         </button>
 
         <section className="mdl-grid">
-
           <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
             <div className="mdl-card__title">
               <h2 className="mdl-card__title-text"> Sign up your talk</h2>
@@ -67,7 +43,7 @@ class SignUp extends React.Component {
                   id="signup-name"
                   className="mdl-textfield__input"
                   type="text"
-                  onChange={e => this.changeName(e.target.value)}
+                  onChange={e => this.props.changeTalkerName(e.target.value)}
                   value={talkerName}
                   disabled={submitted}
                   autoComplete="off"
@@ -80,7 +56,7 @@ class SignUp extends React.Component {
                   id="signup-title"
                   className="mdl-textfield__input"
                   type="text"
-                  onChange={e => this.changeTitle(e.target.value)}
+                  onChange={e => this.props.changeTitle(e.target.value)}
                   value={title}
                   disabled={submitted}
                   autoComplete="off"
@@ -111,7 +87,7 @@ class SignUp extends React.Component {
   }
 }
 
-SignUp.propTypes = {
+SignupForm.propTypes = {
   submitted: PropTypes.bool,
   title: PropTypes.string,
   talkerName: PropTypes.string,
@@ -119,9 +95,15 @@ SignUp.propTypes = {
   isValid: PropTypes.bool,
   roomName: PropTypes.string,
   open: PropTypes.bool,
+  registerTalk: PropTypes.func.isRequired,
+  changeTitle: PropTypes.func.isRequired,
+  changeTalkerName: PropTypes.func.isRequired,
+  clearSignupForm: PropTypes.func.isRequired,
+  openSignupDialog: PropTypes.func.isRequired,
+  closeSignupDialog: PropTypes.func.isRequired,
 };
 
-SignUp.defaultProps = {
+SignupForm.defaultProps = {
   submitted: false,
   title: '',
   talkerName: '',
@@ -130,17 +112,3 @@ SignUp.defaultProps = {
   roomName: '',
   open: false,
 };
-
-SignUp.contextTypes = {
-  store: PropTypes.object,
-};
-
-export default connect(state => ({
-  submitted: state.signups.submitted,
-  title: state.signups.title,
-  talkerName: state.signups.talkerName,
-  response: state.signups.response,
-  roomName: state.headers.roomName,
-  isValid: signupFormSelector(state.signups),
-  open: state.signups.open,
-}))(SignUp);
