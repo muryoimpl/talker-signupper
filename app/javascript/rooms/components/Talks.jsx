@@ -10,7 +10,7 @@ import * as dialogsActions from '../actions/dialogs';
 import * as globalActions from '../actions/globals';
 import Talk from './Talk';
 import NoEntry from './presentationals/NoEntry';
-import Spinner from './Spinner';
+import Spinner from './presentationals/Spinner';
 
 class Talks extends React.Component {
   componentDidMount() {
