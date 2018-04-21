@@ -61,7 +61,7 @@ class Timer extends React.Component {
   }
 
   render() {
-    const { title, talkerName, time, running, timerId } = this.props;
+    const { title, talkerName, time, running, timerId, connected } = this.props;
     return (
       <div className="p-timer__clock-frame">
         <div className="mdl-card__title p-timer__title">
@@ -76,7 +76,7 @@ class Timer extends React.Component {
         </div>
 
         <div className="mdl-dialog__actions">
-          <button type="button" className="mdl-button" disabled={running} onClick={() => this.start()}>Start</button>
+          <button type="button" className="mdl-button" disabled={!connected || running} onClick={() => this.start()}>Start</button>
           <button type="button" className="mdl-button" disabled={!running} onClick={() => this.stop()}>Stop</button>
           <button type="button" className="mdl-button" disabled={running || !timerId} onClick={() => this.reset()}>Reset</button>
         </div>
@@ -94,6 +94,7 @@ Timer.propTypes = {
   time: PropTypes.arrayOf(PropTypes.number),
   running: PropTypes.bool,
   entries: PropTypes.instanceOf(Immutable.List).isRequired,
+  connected: PropTypes.bool,
 };
 
 Timer.defaultProps = {
@@ -103,6 +104,7 @@ Timer.defaultProps = {
   remaining: 0,
   time: [0, 0],
   running: false,
+  connected: false,
 };
 
 export default connect(state => ({
@@ -113,4 +115,5 @@ export default connect(state => ({
   time: timeSelector(state.timer),
   running: state.timer.running,
   entries: state.talks.entries,
+  connected: state.globals.connected,
 }))(Timer);

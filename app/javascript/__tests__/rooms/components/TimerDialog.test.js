@@ -23,6 +23,9 @@ test('Timer: show', () => {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
       current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
+    globals: {
+      connected: true,
+    },
   };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
@@ -30,6 +33,34 @@ test('Timer: show', () => {
 
   const elements = wrapper.find('div.mdl-dialog__actions');
   expect(elements.containsMatchingElement(<button type="button" className="mdl-button">Start</button>)).toBe(true);
+  expect(elements.containsMatchingElement(<button type="button" className="mdl-button" disabled>Stop</button>)).toBe(true);
+  expect(elements.containsMatchingElement(<button type="button" className="mdl-button" disabled>Reset</button>)).toBe(true);
+});
+
+test('Timer: disabled start button when WebSocket is disconnected', () => {
+  const initialState = {
+    timer: {
+      open: true,
+      title: '',
+      talkerName: '',
+      timerId: null,
+      remaining: DEFAULT_REMAINING,
+      running: false,
+    },
+    talks: {
+      entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
+      current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
+    },
+    globals: {
+      connected: false,
+    },
+  };
+  const store = mockStore(initialState);
+  const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
+  expect(wrapper.find('.p-timer__clock').text()).toMatch(/05:00/);
+
+  const elements = wrapper.find('div.mdl-dialog__actions');
+  expect(elements.containsMatchingElement(<button type="button" className="mdl-button" disabled>Start</button>)).toBe(true);
   expect(elements.containsMatchingElement(<button type="button" className="mdl-button" disabled>Stop</button>)).toBe(true);
   expect(elements.containsMatchingElement(<button type="button" className="mdl-button" disabled>Reset</button>)).toBe(true);
 });
@@ -47,6 +78,9 @@ test('Timer: running', () => {
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
       current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
+    },
+    globals: {
+      connected: true,
     },
   };
   const store = mockStore(initialState);
@@ -73,6 +107,9 @@ test('Timer: stopping', () => {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
       current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
     },
+    globals: {
+      connected: true,
+    },
   };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><TimerDialog /></Provider>);
@@ -98,6 +135,9 @@ test('Timer: click close button', () => {
     talks: {
       entries: new Immutable.List(Immutable.Map({ title: 'hi', talkerName: 'heyman' })),
       current: Immutable.Map({ title: 'hi', talkerName: 'heyman' }),
+    },
+    globals: {
+      connected: true,
     },
   };
   const store = mockStore(initialState);
