@@ -5,19 +5,16 @@ import SignUp from './SignUp';
 import Talks from './Talks';
 import AuthorizationDialog from './AuthorizationDialog';
 
-class Room extends React.Component {
-  render() {
-    const style = { marginTop: 70 };
-
-    return (
-      <div style={style}>
-        <SignUp />
-        <AuthorizationDialog />
-        <Talks name={this.props.match.params.name} />
-      </div>
-    );
-  }
-}
+const Room = ({ match }) => {
+  const style = { marginTop: 70 };
+  return (
+    <div style={style}>
+      <SignUp />
+      <AuthorizationDialog />
+      <Talks name={match.params.name} />
+    </div>
+  );
+};
 
 Room.propTypes = {
   match: PropTypes.object.isRequired,
