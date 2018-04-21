@@ -4,7 +4,7 @@ import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import sinon from 'sinon';
 
-import Authorization from '../Authorization';
+import AuthorizationDialog from '../AuthorizationDialog';
 
 const mockStore = configureStore();
 
@@ -16,7 +16,7 @@ test.skip('show Authorization dialog', () => {
   const close = sinon.mock(document).expects('querySelector').withArgs('dialog#authorization-form');
   const showModal = sinon.mock(document, 'querySelector').withArgs('dialog#authorization-form').expects('showModal');
 
-  const wrapper = mount(<Provider store={store}><Authorization /></Provider>);
+  const wrapper = mount(<Provider store={store}><AuthorizationDialog /></Provider>);
   wrapper.find('#shuffle').simulate('change', { target: { value: 'true' } });
 
   expect(close.verify()).toBe(true);

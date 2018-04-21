@@ -1,39 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
-import * as authActions from '../actions/authorization';
-import * as talkActions from '../actions/talks';
-import authorizationFormSelector from '../selectors/authorizationFormSelector';
-import { wait } from '../utils/timer';
-
-class Authorization extends React.Component {
-  async handleClickAuthorize(e) {
+export default class AuthorizationForm extends React.Component {
+  handleClickAuthorize(e) {
     e.preventDefault();
-    const { store } = this.context;
-    store.dispatch(talkActions.loading(true));
-    store.dispatch(talkActions.shuffleOrder());
-    await wait(1000);
-    store.dispatch(talkActions.loading(false));
+    this.props.authorize();
   }
 
-  handleClickClose(e) {
-    if (e) e.preventDefault();
-    this.close();
-    if (!this.props.authorized) {
-      const { store } = this.context;
-      store.dispatch(authActions.clearPassword());
-      store.dispatch(authActions.clearAuthResponse());
-    }
-  }
-
-  changePassword(password) {
-    const { store } = this.context;
-    store.dispatch(authActions.changePassword(password));
-  }
-
-  close() {
+  handleClickClose() {
     document.querySelector('dialog#authorization-form').close();
+    this.props.closeAuthorizationDialog(this.props.authorized);
   }
 
   render() {
@@ -41,7 +17,7 @@ class Authorization extends React.Component {
 
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
-        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
+        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={() => this.handleClickClose(authorized)}>
           <i className="material-icons">cancel</i>
         </button>
 
@@ -57,7 +33,7 @@ class Authorization extends React.Component {
                   id="password"
                   className="mdl-textfield__input"
                   type="password"
-                  onChange={e => this.changePassword(e.target.value)}
+                  onChange={e => this.props.changePassword(e.target.value)}
                   value={password}
                   disabled={submitted}
                   autoComplete="off"
@@ -67,7 +43,7 @@ class Authorization extends React.Component {
 
               <div className="mdl-card__supporting-text">
                 {response && response.get('status') === 401 &&
-                  <p className="error">Password is incorrect</p>
+                <p className="error">Password is incorrect</p>
                 }
               </div>
             </div>
@@ -78,41 +54,32 @@ class Authorization extends React.Component {
                 onClick={e => this.handleClickAuthorize(e)}
                 disabled={submitted || !isValid}
               >
-                Submit
+                  Submit
               </button>
             </div>
           </form>
         </section>
-        { authorized && this.handleClickClose() }
+        { authorized && this.handleClickClose(authorized) }
       </dialog>
     );
   }
 }
 
-Authorization.propTypes = {
+AuthorizationForm.propTypes = {
   password: PropTypes.string,
   submitted: PropTypes.bool,
   response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isValid: PropTypes.bool,
   authorized: PropTypes.bool,
+  changePassword: PropTypes.func.isRequired,
+  authorize: PropTypes.func.isRequired,
+  closeAuthorizationDialog: PropTypes.func.isRequired,
 };
 
-Authorization.defaultProps = {
+AuthorizationForm.defaultProps = {
   submitted: false,
   password: '',
   response: null,
   isValid: false,
   authorized: false,
 };
-
-Authorization.contextTypes = {
-  store: PropTypes.object,
-};
-
-export default connect(state => ({
-  submitted: state.authorization.submitted,
-  password: state.authorization.password,
-  response: state.authorization.response,
-  isValid: authorizationFormSelector(state.authorization),
-  authorized: state.authorization.authorized,
-}))(Authorization);
