@@ -46,3 +46,4 @@ export const CLOSE_TIMER = 'CLOSE_TIMER';
 export const SET_TIMER_ID = 'SET_TIMER_ID';
 export const UPDATE_REMAINING = 'UPDATE_REMAINING';
 export const CLEAR_TIMER = 'CLEAR_TIMER';
+export const SET_PREV_TIME = 'SET_PREV_TIME';

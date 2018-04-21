@@ -9,6 +9,7 @@ const TimerBase = Immutable.Record({
   timerId: null,
   remaining: DEFAULT_REMAINING,
   running: false,
+  prevTime: null,
 });
 
 export default class Timer extends TimerBase {

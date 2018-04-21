@@ -29,3 +29,8 @@ export function updateRemaining(remaining) {
   const payload = { remaining };
   return { type: Types.UPDATE_REMAINING, payload };
 }
+
+export function setPrevTime(prevTime) {
+  const payload = { prevTime };
+  return { type: Types.SET_PREV_TIME, payload };
+}

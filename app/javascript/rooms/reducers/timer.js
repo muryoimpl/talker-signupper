@@ -12,11 +12,13 @@ export default function timer(timerState = new Timer(), action) {
     case Types.UPDATE_REMAINING:
       return timerState.merge({ remaining: action.payload.remaining });
     case Types.CLEAR_TIMER:
-      return timerState.merge({ remaining: DEFAULT_REMAINING, timerId: null });
+      return timerState.merge({ remaining: DEFAULT_REMAINING, timerId: null, prevTime: null });
     case Types.START_TIMER:
       return timerState.merge({ running: true });
     case Types.STOP_TIMER:
       return timerState.merge({ running: false });
+    case Types.SET_PREV_TIME:
+      return timerState.merge({ prevTime: action.payload.prevTime });
     default:
       return timerState;
   }
