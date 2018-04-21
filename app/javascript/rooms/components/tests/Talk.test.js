@@ -1,13 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Immutable from 'immutable';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 
 import Talk from '../../../rooms/components/Talk';
+
+const mockStore = configureStore();
 
 test('show talk information', () => {
   const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
   const talk = new Immutable.Map(talkJSON);
-  const wrapper = shallow(<Talk i={0} talk={talk} />);
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><Talk i={0} talk={talk} done={false} /></Provider>);
 
   expect(
     wrapper.containsMatchingElement(
@@ -24,7 +29,8 @@ test('show talk information', () => {
 test('show link to start talk if it is first talk', () => {
   const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
   const talk = new Immutable.Map(talkJSON);
-  const wrapper = shallow(<Talk i={0} talk={talk} />);
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><Talk i={0} talk={talk} done={false} /></Provider>);
 
   expect(
     wrapper.containsMatchingElement(
@@ -38,7 +44,8 @@ test('show link to start talk if it is first talk', () => {
 test('show element which is not a link if it is not first talk', () => {
   const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
   const talk = new Immutable.Map(talkJSON);
-  const wrapper = shallow(<Talk i={1} talk={talk} done={false} />);
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><Talk i={1} talk={talk} done={false} /></Provider>);
 
   expect(
     wrapper.containsMatchingElement(
@@ -50,7 +57,8 @@ test('show element which is not a link if it is not first talk', () => {
 test('show element which is not a link if it is done', () => {
   const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
   const talk = new Immutable.Map(talkJSON);
-  const wrapper = shallow(<Talk i={1} talk={talk} done />);
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><Talk i={1} talk={talk} done /></Provider>);
 
   expect(
     wrapper.containsMatchingElement(
