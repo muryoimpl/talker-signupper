@@ -6,7 +6,7 @@ import Immutable from 'immutable';
 import { TransitionGroup } from 'react-transition-group';
 
 import Talks from '../Talks';
-import NoEntry from '../NoEntry';
+import NoEntry from '../presentationals/NoEntry';
 import TalksGroup from '../TalksGroup';
 import Talk from '../Talk';
 
