@@ -7,7 +7,7 @@ import { TransitionGroup } from 'react-transition-group';
 
 import Talks from '../Talks';
 import NoEntry from '../presentationals/NoEntry';
-import TalksGroup from '../TalksGroup';
+import TalksGroup from '../presentationals/TalksGroup';
 import Talk from '../Talk';
 
 const mockStore = configureStore();

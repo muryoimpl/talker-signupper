@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { TransitionGroup } from 'react-transition-group';
 
-import TalksGroup from '../TalksGroup';
+import TalksGroup from './TalksGroup';
 import Talk from '../Talk';
 import NoEntry from './NoEntry';
 import Spinner from './Spinner';
