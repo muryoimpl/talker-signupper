@@ -1,0 +1,102 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Immutable from 'immutable';
+
+import { MIN, SEC } from '../../selectors/timerSelector';
+import { zeroPad } from '../../utils/timer';
+
+export default class Timer extends React.Component {
+  componentDidMount() {
+    this.props.clearTimer();
+  }
+
+  handleClickClose(e) {
+    e.preventDefault();
+    const dom = document.querySelector('dialog#timer-frame');
+    if (dom && dom.getAttribute('open') === '') dom.close();
+    this.props.closeTimer(this.props.open);
+  }
+
+  tick() {
+    const currentTime = Date.now();
+    const elapsed = currentTime - this.props.prevTime;
+    const remaining = this.props.remaining - elapsed;
+
+    if (remaining >= 0) {
+      this.props.tick(remaining);
+    } else {
+      this.props.resetTimer(this.props.timerId);
+      this.props.prepareNextTalk();
+      const nextEntry = this.props.entries.first();
+      this.props.showNextTalk(nextEntry);
+    }
+  }
+
+  start() {
+    this.props.setPrevTime(Date.now());
+    const timerId = setInterval(() => this.tick(), 1000);
+    this.props.startTimer(timerId);
+  }
+
+  render() {
+    const { title, talkerName, time, running, timerId, connected } = this.props;
+    return (
+      <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
+        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
+          <i className="material-icons">cancel</i>
+        </button>
+        <div className="p-timer__clock-frame">
+          <div className="mdl-card__title p-timer__title">
+            <h3 className="mdl-card__title-text tac p-timer__title">{title}</h3>
+          </div>
+          <div className="mdl-card__supporting-text p-timer__talker-name">{talkerName}</div>
+
+          <div className="p-timer__body">
+            <span className="p-timer__clock">
+              {zeroPad(time[MIN])}:{zeroPad(time[SEC])}
+            </span>
+          </div>
+
+          <div className="mdl-dialog__actions">
+            <button type="button" className="mdl-button" disabled={!connected || running} onClick={() => this.start()}>Start</button>
+            <button type="button" className="mdl-button" disabled={!running} onClick={() => this.props.stopTimer(timerId)}>Stop</button>
+            <button type="button" className="mdl-button" disabled={running || !timerId} onClick={() => this.props.resetTimer()}>Reset</button>
+          </div>
+        </div>
+      </dialog>
+    );
+  }
+}
+
+Timer.propTypes = {
+  title: PropTypes.string,
+  talkerName: PropTypes.string,
+  timerId: PropTypes.number,
+  remaining: PropTypes.number,
+  prevTime: PropTypes.number,
+  time: PropTypes.arrayOf(PropTypes.number),
+  running: PropTypes.bool,
+  entries: PropTypes.instanceOf(Immutable.List).isRequired,
+  connected: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
+  closeTimer: PropTypes.func.isRequired,
+  clearTimer: PropTypes.func.isRequired,
+  setPrevTime: PropTypes.func.isRequired,
+  resetTimer: PropTypes.func.isRequired,
+  stopTimer: PropTypes.func.isRequired,
+  startTimer: PropTypes.func.isRequired,
+  prepareNextTalk: PropTypes.func.isRequired,
+  showNextTalk: PropTypes.func.isRequired,
+  tick: PropTypes.func.isRequired,
+};
+
+Timer.defaultProps = {
+  title: '',
+  talkerName: '',
+  timerId: null,
+  remaining: 0,
+  time: [0, 0],
+  running: false,
+  connected: false,
+  prevTime: null,
+};

@@ -1,55 +1,70 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { timeSelector } from '../selectors/timerSelector';
 import * as actions from '../actions/timer';
-import Timer from './Timer';
+import * as talkActions from '../actions/talks';
+import Timer from './presentationals/Timer';
 
-class TimerDialog extends React.Component {
-  handleClickClose(e) {
-    if (e) e.preventDefault();
-    this.close();
-  }
+const mapStateToProps = state => ({
+  title: state.talks.current.get('title'),
+  talkerName: state.talks.current.get('talkerName'),
+  timerId: state.timer.timerId,
+  remaining: state.timer.remaining,
+  time: timeSelector(state.timer),
+  running: state.timer.running,
+  entries: state.talks.entries,
+  connected: state.globals.connected,
+  open: state.timer.open,
+  prevTime: state.timer.prevTime,
+});
 
-  close() {
-    const { store } = this.context;
-    const dom = document.querySelector('dialog#timer-frame');
-    if (dom && dom.getAttribute('open') === '') dom.close();
-
-    if (this.props.open) {
-      store.dispatch(actions.closeTimer());
-    }
-  }
-
-  open() {
-    const { store } = this.context;
-    if (!this.props.open) {
-      store.dispatch(actions.openTimer());
-    }
-  }
-
-  render() {
-    const { open } = this.props;
-    return (
-      <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
-        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
-          <i className="material-icons">cancel</i>
-        </button>
-        <Timer store={this.context.store} />
-        {open ? this.open() : this.close()}
-      </dialog>
-    );
-  }
+function setPreviousTime(time, dispatch) {
+  dispatch(actions.setPrevTime(time));
 }
 
-TimerDialog.contextTypes = {
-  store: PropTypes.object,
-};
+function tickAndNext(remaining, prev, dispatch) {
+  dispatch(actions.updateRemaining(remaining));
+  setPreviousTime(prev, dispatch);
+}
 
-TimerDialog.propTypes = {
-  open: PropTypes.bool.isRequired,
-};
+const mapDispatchToProps = dispatch => ({
+  closeTimer: (open) => {
+    if (open) dispatch(actions.closeTimer());
+  },
+  openTimer: (open) => {
+    if (!open) dispatch(actions.openTimer());
+  },
+  clearTimer: () => {
+    dispatch(actions.clearTimer());
+  },
+  setPrevTime: (prev) => {
+    // dispatch(actions.setPrevTime(prev));
+    setPreviousTime(prev, dispatch);
+  },
+  stopTimer: (timerId) => {
+    clearInterval(timerId);
+    dispatch(actions.stopTimer());
+  },
+  resetTimer(timerId) {
+    clearInterval(timerId);
+    dispatch(actions.stopTimer());
+    dispatch(actions.clearTimer());
+  },
+  startTimer: (timerId) => {
+    dispatch(actions.setTimerId(timerId));
+    dispatch(actions.startTimer());
+  },
+  prepareNextTalk: () => {
+    dispatch(talkActions.nextTalk());
+  },
+  showNextTalk: (talk) => {
+    dispatch(talkActions.pushToCurrent(talk));
+    dispatch(actions.openTimer());
+  },
+  tick: (remaining) => {
+    tickAndNext(remaining, Date.now(), dispatch);
+  },
+});
 
-export default connect(state => ({
-  open: state.timer.open,
-}))(TimerDialog);
+const TimerDialog = connect(mapStateToProps, mapDispatchToProps)(Timer);
+export default TimerDialog;
