@@ -38,7 +38,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.clearTimer());
   },
   setPrevTime: (prev) => {
-    // dispatch(actions.setPrevTime(prev));
     setPreviousTime(prev, dispatch);
   },
   stopTimer: (timerId) => {
