@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import * as authActions from '../actions/authorization';
 import * as talkActions from '../actions/talks';
 import authorizationFormSelector from '../selectors/authorizationFormSelector';
-import { wait } from '../utils/timer';
 import AuthorizationForm from './presentationals/AuthorizationForm';
 
 const mapStateToProps = state => ({
@@ -15,11 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  authorize: async () => {
-    dispatch(talkActions.loading(true));
+  authorize: () => {
     dispatch(talkActions.shuffleOrder());
-    await wait(1000);
-    dispatch(talkActions.loading(false));
   },
   closeAuthorizationDialog: (authorized) => {
     if (!authorized) {

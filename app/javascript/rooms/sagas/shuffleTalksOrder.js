@@ -3,6 +3,8 @@ import config from '../config';
 
 import * as restClient from '../utils/restClient';
 import * as authActions from '../actions/authorization';
+import * as talkActions from '../actions/talks';
+import { wait } from '../utils/timer';
 
 export const getAllState = state => state;
 
@@ -12,8 +14,15 @@ export function getShuffledTalks(roomName, password) {
 }
 
 export function* shuffleTalksOrder() {
-  const state = yield select(getAllState);
+  let state = yield select(getAllState);
   const response = yield call(getShuffledTalks, state.headers.roomName, state.authorization.password);
   yield put(authActions.storeAuthResponse(response));
   yield put(authActions.authorized(response.status === 200));
+
+  state = yield select(getAllState);
+  if (state.authorization.authorized) {
+    yield put(talkActions.loading(true));
+    yield call(wait, 1000);
+    yield put(talkActions.loading(false));
+  }
 }
