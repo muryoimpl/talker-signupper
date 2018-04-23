@@ -5,6 +5,7 @@ import * as Types from '../constants/actions';
 export default function talks(talk = new Talk(), action) {
   switch (action.type) {
     case Types.SET_TALKS:
+      // TODO: entries と done に振り分けて、それぞれ merge させる必要があります
       return talk.merge({ entries: action.entries });
     case Types.ADD_TALK:
       return talk.merge({ entries: talk.entries.push(Immutable.Map(action.talk)) });
