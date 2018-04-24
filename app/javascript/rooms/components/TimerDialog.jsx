@@ -28,11 +28,11 @@ function tickAndNext(remaining, prev, dispatch) {
 }
 
 const mapDispatchToProps = dispatch => ({
-  closeTimer: (open) => {
-    if (open) dispatch(actions.closeTimer());
+  closeTimer: () => {
+    dispatch(actions.closeTimer());
   },
-  openTimer: (open) => {
-    if (!open) dispatch(actions.openTimer());
+  openTimer: () => {
+    dispatch(actions.openTimer());
   },
   clearTimer: () => {
     dispatch(actions.clearTimer());

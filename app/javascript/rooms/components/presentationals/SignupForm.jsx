@@ -2,16 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CloseButton from './CloseButton';
+import DialogTitle from './DialogTitle';
 
 export default class SignupForm extends React.Component {
   handleClickSignUp(e) {
     e.preventDefault();
     const { roomName, title, talkerName } = this.props;
     this.props.registerTalk(roomName, title, talkerName);
-  }
-
-  open() {
-    this.props.openSignupDialog(this.props.open);
   }
 
   render() {
@@ -22,9 +19,8 @@ export default class SignupForm extends React.Component {
 
         <section className="mdl-grid">
           <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
-            <div className="mdl-card__title">
-              <h2 className="mdl-card__title-text"> Sign up your talk</h2>
-            </div>
+            <DialogTitle title="Sign up your talk" />
+
             <div className="mdl-card__supporting-text p-room__card-body">
               <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__name">
                 <input
@@ -81,12 +77,10 @@ SignupForm.propTypes = {
   response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isValid: PropTypes.bool,
   roomName: PropTypes.string,
-  open: PropTypes.bool,
   registerTalk: PropTypes.func.isRequired,
   changeTitle: PropTypes.func.isRequired,
   changeTalkerName: PropTypes.func.isRequired,
   clearSignupForm: PropTypes.func.isRequired,
-  openSignupDialog: PropTypes.func.isRequired,
 };
 
 SignupForm.defaultProps = {
@@ -96,5 +90,4 @@ SignupForm.defaultProps = {
   response: null,
   isValid: false,
   roomName: '',
-  open: false,
 };

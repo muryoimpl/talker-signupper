@@ -4,17 +4,11 @@ import Immutable from 'immutable';
 
 import { MIN, SEC } from '../../selectors/timerSelector';
 import { zeroPad } from '../../utils/timer';
+import CloseButton from './CloseButton';
 
 export default class Timer extends React.Component {
   componentDidMount() {
     this.props.clearTimer();
-  }
-
-  handleClickClose(e) {
-    e.preventDefault();
-    const dom = document.querySelector('dialog#timer-frame');
-    if (dom && dom.getAttribute('open') === '') dom.close();
-    this.props.closeTimer(this.props.open);
   }
 
   tick() {
@@ -42,9 +36,8 @@ export default class Timer extends React.Component {
     const { title, talkerName, time, running, timerId, connected } = this.props;
     return (
       <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
-        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
-          <i className="material-icons">cancel</i>
-        </button>
+        <CloseButton onClick={this.props.closeTimer} selector="dialog#timer-frame" />
+
         <div className="p-timer__clock-frame">
           <div className="mdl-card__title p-timer__title">
             <h3 className="mdl-card__title-text tac p-timer__title">{title}</h3>
@@ -78,7 +71,6 @@ Timer.propTypes = {
   running: PropTypes.bool,
   entries: PropTypes.instanceOf(Immutable.List).isRequired,
   connected: PropTypes.bool,
-  open: PropTypes.bool.isRequired,
   closeTimer: PropTypes.func.isRequired,
   clearTimer: PropTypes.func.isRequired,
   setPrevTime: PropTypes.func.isRequired,

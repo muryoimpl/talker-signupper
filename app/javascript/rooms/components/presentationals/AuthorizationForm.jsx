@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CloseButton from './CloseButton';
+import DialogTitle from './DialogTitle';
 
 export default class AuthorizationForm extends React.Component {
   handleClickAuthorize(e) {
@@ -10,18 +11,16 @@ export default class AuthorizationForm extends React.Component {
   }
 
   render() {
-    const { password, submitted, response, isValid, authorized } = this.props;
+    const { password, submitted, response, isValid } = this.props;
 
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
         <CloseButton onClick={this.props.closeAuthorizationDialog} selector={'dialog#authorization-form'} />
 
         <section className="mdl-grid">
-
           <form className={`${submitted ? 'p-authorization__form--inactive' : 'p-authorization__form--active'}`}>
-            <div className="mdl-card__title">
-              <h2 className="mdl-card__title-text"> Enter room password</h2>
-            </div>
+            <DialogTitle title="Enter room password" />
+
             <div className="mdl-card__supporting-text p-room__card-body">
               <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__password">
                 <input
@@ -54,7 +53,6 @@ export default class AuthorizationForm extends React.Component {
             </div>
           </form>
         </section>
-        { authorized && this.handleClickClose(authorized) }
       </dialog>
     );
   }
@@ -65,7 +63,6 @@ AuthorizationForm.propTypes = {
   submitted: PropTypes.bool,
   response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isValid: PropTypes.bool,
-  authorized: PropTypes.bool,
   changePassword: PropTypes.func.isRequired,
   authorize: PropTypes.func.isRequired,
   closeAuthorizationDialog: PropTypes.func.isRequired,
