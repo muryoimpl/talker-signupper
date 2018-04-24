@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CloseButton from './CloseButton';
+
 export default class AuthorizationForm extends React.Component {
   handleClickAuthorize(e) {
     e.preventDefault();
     this.props.authorize();
-  }
-
-  handleClickClose() {
-    document.querySelector('dialog#authorization-form').close();
-    this.props.closeAuthorizationDialog(this.props.authorized);
   }
 
   render() {
@@ -17,9 +14,7 @@ export default class AuthorizationForm extends React.Component {
 
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
-        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={() => this.handleClickClose(authorized)}>
-          <i className="material-icons">cancel</i>
-        </button>
+        <CloseButton onClick={this.props.closeAuthorizationDialog} selector={'dialog#authorization-form'} />
 
         <section className="mdl-grid">
 

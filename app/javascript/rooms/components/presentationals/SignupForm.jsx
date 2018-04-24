@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import CloseButton from './CloseButton';
+
 export default class SignupForm extends React.Component {
   handleClickSignUp(e) {
     e.preventDefault();
@@ -8,29 +10,15 @@ export default class SignupForm extends React.Component {
     this.props.registerTalk(roomName, title, talkerName);
   }
 
-  handleClickClose(e) {
-    e.preventDefault();
-    this.props.clearSignupForm();
-    this.close();
-  }
-
-  close() {
-    const dom = document.querySelector('dialog#signup-form');
-    if (dom && dom.getAttribute('open') === '') dom.close();
-    if (this.props.open) this.props.closeSignupDialog();
-  }
-
   open() {
     this.props.openSignupDialog(this.props.open);
   }
 
   render() {
-    const { submitted, title, talkerName, response, isValid, open } = this.props;
+    const { submitted, title, talkerName, response, isValid } = this.props;
     return (
       <dialog className="mdl-dialog p-room__section--center" id="signup-form">
-        <button className="mdl-button mdl-js-button mdl-button--icon c-dialog__close" onClick={e => this.handleClickClose(e)}>
-          <i className="material-icons">cancel</i>
-        </button>
+        <CloseButton onClick={this.props.clearSignupForm} className={'c-dialog__close'} selector="dialog#signup-form" />
 
         <section className="mdl-grid">
           <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
@@ -81,7 +69,6 @@ export default class SignupForm extends React.Component {
             </div>
           </form>
         </section>
-        {open ? this.open() : this.close()}
       </dialog>
     );
   }
@@ -100,7 +87,6 @@ SignupForm.propTypes = {
   changeTalkerName: PropTypes.func.isRequired,
   clearSignupForm: PropTypes.func.isRequired,
   openSignupDialog: PropTypes.func.isRequired,
-  closeSignupDialog: PropTypes.func.isRequired,
 };
 
 SignupForm.defaultProps = {

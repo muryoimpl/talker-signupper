@@ -17,11 +17,9 @@ const mapDispatchToProps = dispatch => ({
   authorize: () => {
     dispatch(talkActions.shuffleOrder());
   },
-  closeAuthorizationDialog: (authorized) => {
-    if (!authorized) {
-      dispatch(authActions.clearPassword());
-      dispatch(authActions.clearAuthResponse());
-    }
+  closeAuthorizationDialog: () => {
+    dispatch(authActions.clearPassword());
+    dispatch(authActions.clearAuthResponse());
   },
   changePassword: (password) => {
     dispatch(authActions.changePassword(password));
