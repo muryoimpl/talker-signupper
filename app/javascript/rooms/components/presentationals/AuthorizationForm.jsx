@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CloseButton from './CloseButton';
+import CloseButton, { closeDialog } from './CloseButton';
 import DialogTitle from './DialogTitle';
 
 export default class AuthorizationForm extends React.Component {
@@ -11,7 +11,7 @@ export default class AuthorizationForm extends React.Component {
   }
 
   render() {
-    const { password, submitted, response, isValid } = this.props;
+    const { password, submitted, response, isValid, authorized } = this.props;
 
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
@@ -53,6 +53,7 @@ export default class AuthorizationForm extends React.Component {
             </div>
           </form>
         </section>
+        {authorized && closeDialog('dialog#authorization-form')}
       </dialog>
     );
   }
@@ -63,6 +64,7 @@ AuthorizationForm.propTypes = {
   submitted: PropTypes.bool,
   response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isValid: PropTypes.bool,
+  authorized: PropTypes.bool.isRequired,
   changePassword: PropTypes.func.isRequired,
   authorize: PropTypes.func.isRequired,
   closeAuthorizationDialog: PropTypes.func.isRequired,

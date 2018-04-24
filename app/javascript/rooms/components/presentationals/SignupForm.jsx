@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import CloseButton from './CloseButton';
+import CloseButton, { closeDialog } from './CloseButton';
 import DialogTitle from './DialogTitle';
 
 export default class SignupForm extends React.Component {
@@ -12,7 +12,7 @@ export default class SignupForm extends React.Component {
   }
 
   render() {
-    const { submitted, title, talkerName, response, isValid } = this.props;
+    const { submitted, title, talkerName, response, isValid, open } = this.props;
     return (
       <dialog className="mdl-dialog p-room__section--center" id="signup-form">
         <CloseButton onClick={this.props.clearSignupForm} className={'c-dialog__close'} selector="dialog#signup-form" />
@@ -65,6 +65,7 @@ export default class SignupForm extends React.Component {
             </div>
           </form>
         </section>
+        {!open && closeDialog('dialog#signup-form')}
       </dialog>
     );
   }
@@ -77,6 +78,7 @@ SignupForm.propTypes = {
   response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   isValid: PropTypes.bool,
   roomName: PropTypes.string,
+  open: PropTypes.bool.isRequired,
   registerTalk: PropTypes.func.isRequired,
   changeTitle: PropTypes.func.isRequired,
   changeTalkerName: PropTypes.func.isRequired,

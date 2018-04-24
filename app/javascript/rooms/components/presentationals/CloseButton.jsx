@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const handleClickClose = (e, onClick, selector) => {
-  e.preventDefault();
+export const closeDialog = (selector) => {
   const dom = document.querySelector(selector);
   if (dom && dom.getAttribute('open') === '') dom.close();
+};
+
+const handleClickClose = (e, onClick, selector) => {
+  e.preventDefault();
+  closeDialog(selector);
   onClick();
 };
 
