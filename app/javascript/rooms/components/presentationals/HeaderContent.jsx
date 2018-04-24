@@ -46,7 +46,7 @@ export default class HeaderContent extends React.Component {
       <header className="layout-header mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
           <span className="mdl-layout-title">
-            <span><a className="text-like" href="/">Talker SignUpper</a></span>
+            <span><a className="text-like" href="/">Talker Signupper</a></span>
           </span>
 
           <span className="p-room__room-name">
