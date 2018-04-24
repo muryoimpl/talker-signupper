@@ -1,12 +1,21 @@
 import * as Immutable from 'immutable';
-import Talk from '../models/talk';
+import Talk, { progress } from '../models/talk';
 import * as Types from '../constants/actions';
 
 export default function talks(talk = new Talk(), action) {
   switch (action.type) {
-    case Types.SET_TALKS:
-      // TODO: entries と done に振り分けて、それぞれ merge させる必要があります
-      return talk.merge({ entries: action.entries });
+    case Types.SET_TALKS: {
+      const allTalks = action.payload.talks.reduce((acc, cur) => {
+        if (cur.progress === progress.done.key) {
+          acc.done.push(cur);
+        } else {
+          acc.entries.push(cur);
+        }
+        return acc;
+      }, { entries: [], done: [] });
+
+      return talk.merge({ entries: allTalks.entries, done: allTalks.done });
+    }
     case Types.ADD_TALK:
       return talk.merge({ entries: talk.entries.push(Immutable.Map(action.talk)) });
     case Types.LOADING:

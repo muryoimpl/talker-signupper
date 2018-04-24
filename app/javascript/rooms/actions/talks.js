@@ -5,7 +5,8 @@ export function fetchTalks() {
 }
 
 export function setTalks(talks) {
-  return { type: Types.SET_TALKS, entries: talks };
+  const payload = { talks };
+  return { type: Types.SET_TALKS, payload };
 }
 
 export function addTalk(talk) {

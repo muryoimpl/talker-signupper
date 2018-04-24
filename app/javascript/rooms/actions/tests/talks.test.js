@@ -6,7 +6,7 @@ test('fetchTalks action', () => {
 
 test('setTalks action', () => {
   const talks = [{ id: 1, talkerName: 'impl', title: 'hi', room_id: 1 }];
-  expect(setTalks(talks)).toEqual({ type: 'SET_TALKS', entries: talks });
+  expect(setTalks(talks)).toEqual({ type: 'SET_TALKS', payload: { talks } });
 });
 
 test('loading action', () => {

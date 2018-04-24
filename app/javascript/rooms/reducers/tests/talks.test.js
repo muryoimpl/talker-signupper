@@ -8,13 +8,13 @@ test('FETCH_TALKS', () => {
 });
 
 test('SET_TALKS', () => {
-  const initialState = Immutable.Record({ entries: new Immutable.List() })();
+  const initialState = Immutable.Record({ entries: new Immutable.List(), done: new Immutable.List() })();
   const entryTalks = [{ id: 1, title: 'hi', talkerName: 'impl', room_id: 1 }];
 
   expect(
-    talks(initialState, { type: 'SET_TALKS', entries: entryTalks }),
+    talks(initialState, { type: 'SET_TALKS', payload: { talks: entryTalks } }),
   ).toEqual(
-    initialState.merge({ entries: entryTalks }),
+    initialState.merge({ entries: entryTalks, done: [] }),
   );
 });
 
