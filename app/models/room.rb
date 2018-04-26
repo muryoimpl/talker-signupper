@@ -14,7 +14,7 @@ class Room < ApplicationRecord
   end
 
   def shuffle_talks!
-    re_numbered_talks = talks.to_a.shuffle.map.with_index {|talk, i|
+    re_numbered_talks = talks.where(progress: 0).to_a.shuffle.map.with_index {|talk, i|
       talk.order_number = i * 10
       talk
     }

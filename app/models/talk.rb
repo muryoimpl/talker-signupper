@@ -7,7 +7,7 @@ class Talk < ApplicationRecord
   validates :title, uniqueness: {scope: :room_id, message: I18n.t('errors.messages.taken')}
   validates :talker_name, presence: true, length: {maximum: 50}
 
-  scope :ordered_by_number, -> { order('order_number desc NULLS LAST, id asc') }
+  scope :ordered_by_number, -> { order('progress DESC, order_number desc NULLS LAST, id asc') }
 
   enum progress: {entried: 0, started: 1, oneFifths: 2, twoFifths: 3, threeFifths: 4, fourFifths: 5, done: 6}
 
