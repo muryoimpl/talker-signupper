@@ -14,11 +14,14 @@ services:
 
 bundler_args: "--without development --deployment"
 
+before_install:
+  - nvm install 8.11.1
+  - npm config set spin false
+  - npm install -g yarn
+
 install:
   - bundle install
-  - nvm install node
   - node -v
-  - npm i -g yarn
   - bin/yarn
 
 before_script:
