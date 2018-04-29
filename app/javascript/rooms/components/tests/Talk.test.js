@@ -9,19 +9,23 @@ import Talk from '../../../rooms/components/Talk';
 const mockStore = configureStore();
 
 test('show talk information', () => {
-  const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
+  const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1, progress: 'entried' };
   const talk = new Immutable.Map(talkJSON);
   const store = mockStore({});
   const wrapper = mount(<Provider store={store}><Talk i={0} talk={talk} done={false} /></Provider>);
 
   expect(
     wrapper.containsMatchingElement(
-      <div className="p-talk-card mdl-card">
-        <div className="p-talk-card__text mdl-card__supporting-text">
-          <h3 className="p-talk-title">hi</h3>
-          <div className="p-talk-talker">muryoimpl</div>
-        </div>
+      <div className="p-talk-card__text mdl-card__supporting-text">
+        <h3 className="p-talk-title">hi</h3>
+        <div className="p-talk-talker">muryoimpl</div>
       </div>,
+    ),
+  ).toBe(true);
+
+  expect(
+    wrapper.containsMatchingElement(
+      <div className="mdl-js-progress mdl-progress mdl-progress__indeterminate" />,
     ),
   ).toBe(true);
 });

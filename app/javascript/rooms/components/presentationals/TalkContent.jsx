@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 
+import Progress from './Progress';
+import { progressPercent } from '../../models/talk';
+
 export default class TalkContent extends React.Component {
   handleClickOpen(e) {
     e.preventDefault();
@@ -21,6 +24,10 @@ export default class TalkContent extends React.Component {
             <h3 className="p-talk-title">{title}</h3>
             <div className="p-talk-talker">{talkerName}</div>
           </div>
+
+          {(i === 0 && talk.get('progress') !== 'done') &&
+            <Progress progress={progressPercent[talk.get('progress')]} type="indeterminate" />
+          }
         </div>
 
         { (i === 0 && !done) &&

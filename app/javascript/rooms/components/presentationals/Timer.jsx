@@ -5,6 +5,8 @@ import Immutable from 'immutable';
 import { MIN, SEC } from '../../selectors/timerSelector';
 import { zeroPad } from '../../utils/timer';
 import CloseButton from './CloseButton';
+import Progress from './Progress';
+import { DEFAULT_REMAINING } from '../../models/timer';
 
 export default class Timer extends React.Component {
   componentDidMount() {
@@ -33,7 +35,7 @@ export default class Timer extends React.Component {
   }
 
   render() {
-    const { title, talkerName, time, running, timerId, connected } = this.props;
+    const { title, talkerName, time, running, timerId, connected, remaining } = this.props;
     return (
       <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
         <CloseButton onClick={this.props.closeTimer} selector="dialog#timer-frame" />
@@ -49,6 +51,7 @@ export default class Timer extends React.Component {
               {zeroPad(time[MIN])}:{zeroPad(time[SEC])}
             </span>
           </div>
+          <Progress progress={((DEFAULT_REMAINING - remaining) / DEFAULT_REMAINING) * 100} />
 
           <div className="mdl-dialog__actions">
             <button type="button" className="mdl-button" disabled={!connected || running} onClick={() => this.start()}>Start</button>

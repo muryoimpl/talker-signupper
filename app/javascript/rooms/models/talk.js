@@ -16,5 +16,14 @@ export const progress = {
   done: { value: 5, key: 'done' },
 };
 
+export const progressPercent = {
+  entried: 0,
+  oneFifths: 20,
+  twoFifths: 40,
+  threeFifths: 60,
+  fourFifths: 80,
+  done: 100,
+};
+
 export default class Talk extends TalkBase {
 }
