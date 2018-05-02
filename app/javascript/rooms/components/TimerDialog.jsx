@@ -8,6 +8,7 @@ import Timer from './presentationals/Timer';
 const mapStateToProps = state => ({
   title: state.talks.current.get('title'),
   talkerName: state.talks.current.get('talkerName'),
+  talkId: state.talks.current.get('id'),
   timerId: state.timer.timerId,
   remaining: state.timer.remaining,
   time: timeSelector(state.timer),

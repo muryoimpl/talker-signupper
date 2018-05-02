@@ -26,7 +26,7 @@ export default function talks(talk = new Talk(), action) {
       return talk.merge({ entries: nextEntries, done: nextDone });
     }
     case Types.PUSH_TO_CURRENT: {
-      const current = Immutable.Map({ title: action.payload.title, talkerName: action.payload.talkerName });
+      const current = Immutable.Map({ title: action.payload.title, talkerName: action.payload.talkerName, id: action.payload.id });
       return talk.merge({ current });
     }
     case Types.FETCH_TALKS:

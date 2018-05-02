@@ -26,6 +26,6 @@ export function nextTalk() {
 }
 
 export function pushToCurrent(talk) {
-  const payload = { title: talk.get('title'), talkerName: talk.get('talker_name') };
+  const payload = { title: talk.get('title'), talkerName: talk.get('talker_name'), id: talk.get('id') };
   return { type: Types.PUSH_TO_CURRENT, payload };
 }
