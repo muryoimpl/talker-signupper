@@ -17,6 +17,8 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    patch '/talks/:id/progress', to: 'talks/progress#update', constraints: {id: /\d+/}, as: :talks_progress
   end
 
   mount ActionCable.server => '/cable'
