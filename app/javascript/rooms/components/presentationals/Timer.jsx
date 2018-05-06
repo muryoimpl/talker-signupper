@@ -20,8 +20,10 @@ export default class Timer extends React.Component {
 
     if (remaining >= 0) {
       this.props.tick(remaining);
+      // TODO: 状況ごとに progress を更新する処理を書く
     } else {
-      this.props.resetTimer(this.props.timerId);
+      this.props.updateProgress(this.props.talkId, 'done');
+      this.props.clearTimer(this.props.timerId);
       this.props.prepareNextTalk();
       const nextEntry = this.props.entries.first();
       this.props.showNextTalk(nextEntry);
@@ -83,6 +85,7 @@ Timer.propTypes = {
   prepareNextTalk: PropTypes.func.isRequired,
   showNextTalk: PropTypes.func.isRequired,
   tick: PropTypes.func.isRequired,
+  updateProgress: PropTypes.func.isRequired,
 };
 
 Timer.defaultProps = {

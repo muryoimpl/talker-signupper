@@ -145,5 +145,5 @@ test('Timer: click close button', () => {
 
   wrapper.find('button.c-dialog__close').simulate('click');
   const actions = store.getActions();
-  expect(actions).toEqual([{ type: 'CLEAR_TIMER' }, { type: 'CLOSE_TIMER' }]);
+  expect(actions).toEqual([{ type: 'STOP_TIMER' }, { type: 'CLEAR_TIMER' }, { type: 'CLOSE_TIMER' }]);
 });

@@ -23,6 +23,8 @@ export const LOADING = 'LOADING';
 export const SHUFFLE_ORDER = 'SHUFFLE_ORDER';
 export const NEXT_TALK = 'NEXT_TALK';
 export const PUSH_TO_CURRENT = 'PUSH_TO_CURRENT';
+export const UPDATE_TALK_PROGRESS = 'UPDATE_TALK_PROGRESS';
+export const REQUEST_PROGRESS_UPDATE = 'REQUEST_PROGRESS_UPDATE';
 
 // dialogs
 export const SHOW_DIALOG = 'SHOW_DIALOG';

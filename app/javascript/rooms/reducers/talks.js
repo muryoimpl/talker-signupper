@@ -34,6 +34,12 @@ export default function talks(talk = new Talk(), action) {
       const current = Immutable.Map({ title: action.payload.title, talkerName: action.payload.talkerName, id: action.payload.id });
       return talk.merge({ current });
     }
+    case Types.UPDATE_TALK_PROGRESS: {
+      const current = talk.entries.first();
+      current.progress = action.payload.progress;
+      const entries = talk.entries.update(0, () => current);
+      return talk.merge({ entries });
+    }
     default: // includes Types.FETCH_TALKS, Types.SHUFFLE_ORDER
       return talk;
   }
