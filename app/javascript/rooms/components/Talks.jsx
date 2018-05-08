@@ -11,6 +11,19 @@ const mapStateToProps = state => ({
   loading: state.talks.loading,
 });
 
+const actionForReceivedJSON = (response) => {
+  switch (response.action) {
+    case 'create-talk':
+      dispatch(talkActions.addTalk(response.talk));
+      break;
+    case 'shuffled-talks':
+      dispatch(talkActions.setTalks(response.room.talks));
+      break;
+    default:
+      console.error(`unknown action: ${response.action}`); // eslint-disable-line no-console
+  }
+}
+
 const mapDispatchToProps = dispatch => ({
   showLoading: (load) => {
     dispatch(talkActions.loading(load));
@@ -31,16 +44,7 @@ const mapDispatchToProps = dispatch => ({
       return;
     }
 
-    switch (response.action) {
-      case 'create-talk':
-        dispatch(talkActions.addTalk(response.talk));
-        break;
-      case 'shuffled-talks':
-        dispatch(talkActions.setTalks(response.room.talks));
-        break;
-      default:
-        console.error(`unknown action: ${response.action}`); // eslint-disable-line no-console
-    }
+    actionForReceivedJSON(response)
   },
 });
 
