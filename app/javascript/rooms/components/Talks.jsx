@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
   loading: state.talks.loading,
 });
 
-const actionForReceivedJSON = (response) => {
+const actionForReceivedJSON = (dispatch, response) => {
   switch (response.action) {
     case 'create-talk':
       dispatch(talkActions.addTalk(response.talk));
@@ -22,7 +22,7 @@ const actionForReceivedJSON = (response) => {
     default:
       console.error(`unknown action: ${response.action}`); // eslint-disable-line no-console
   }
-}
+};
 
 const mapDispatchToProps = dispatch => ({
   showLoading: (load) => {
@@ -44,7 +44,7 @@ const mapDispatchToProps = dispatch => ({
       return;
     }
 
-    actionForReceivedJSON(response)
+    actionForReceivedJSON(dispatch, response);
   },
 });
 
