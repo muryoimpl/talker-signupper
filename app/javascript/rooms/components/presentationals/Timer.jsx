@@ -67,7 +67,6 @@ export default class Timer extends React.Component {
 Timer.propTypes = {
   title: PropTypes.string,
   talkerName: PropTypes.string,
-  talkId: PropTypes.string,
   timerId: PropTypes.number,
   remaining: PropTypes.number,
   prevTime: PropTypes.number,
