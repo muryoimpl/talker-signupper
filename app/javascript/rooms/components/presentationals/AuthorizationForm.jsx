@@ -3,16 +3,12 @@ import PropTypes from 'prop-types';
 
 import CloseButton, { closeDialog } from './CloseButton';
 import DialogTitle from './DialogTitle';
+import PasswordInput from './PasswordInput';
+import AuthorizationButton from './AuthorizationButton';
 
 export default class AuthorizationForm extends React.Component {
-  handleClickAuthorize(e) {
-    e.preventDefault();
-    this.props.authorize();
-  }
-
   render() {
     const { password, submitted, response, isValid, authorized } = this.props;
-
     return (
       <dialog className="mdl-dialog p-room__section--center" id="authorization-form">
         <CloseButton onClick={this.props.closeAuthorizationDialog} selector={'dialog#authorization-form'} />
@@ -22,18 +18,7 @@ export default class AuthorizationForm extends React.Component {
             <DialogTitle title="Enter room password" />
 
             <div className="mdl-card__supporting-text p-room__card-body">
-              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__password">
-                <input
-                  id="password"
-                  className="mdl-textfield__input"
-                  type="password"
-                  onChange={e => this.props.changePassword(e.target.value)}
-                  value={password}
-                  disabled={submitted}
-                  autoComplete="off"
-                />
-                <label className="mdl-textfield__label" htmlFor="password"> Password </label>
-              </div>
+              <PasswordInput onChange={this.props.changePassword} value={password} disabled={submitted} />
 
               <div className="mdl-card__supporting-text">
                 {response && response.get('status') === 401 &&
@@ -42,14 +27,7 @@ export default class AuthorizationForm extends React.Component {
               </div>
             </div>
             <div className="mdl-card__actions mdl-card--border">
-              <button
-                id="authorization-button"
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent p-room__button--create"
-                onClick={e => this.handleClickAuthorize(e)}
-                disabled={submitted || !isValid}
-              >
-                  Submit
-              </button>
+              <AuthorizationButton disabled={submitted || !isValid} onClick={this.props.authorize} />
             </div>
           </form>
         </section>
