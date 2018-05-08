@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
-import { TransitionGroup } from 'react-transition-group';
 
-import TalksGroup from './TalksGroup';
-import Talk from '../Talk';
 import NoEntry from './NoEntry';
 import Spinner from './Spinner';
+import Entries from './Entries';
+import Done from './Done';
 
 export default class TalksLayout extends React.Component {
   componentDidMount() {
@@ -27,37 +26,22 @@ export default class TalksLayout extends React.Component {
   }
 
   render() {
-    const { entries, done, loading } = this.props;
     const height = window.innerHeight - 150;
-
     return (
       <div>
-        {loading &&
-          <Spinner height={height} loading={loading} />
+        {this.props.loading &&
+          <Spinner height={height} />
         }
-        {entries.size === 0 &&
+        {(this.props.entries.size === 0 && this.props.done.size === 0) &&
           <NoEntry />
         }
-        <TransitionGroup>
-          {entries.map((talk, i) => (
-            <TalksGroup timeout={300} key={`talk-group-${talk.get('id')}`}>
-              <Talk talk={talk} key={talk.get('id')} i={i} done={false} />
-            </TalksGroup>
-          ))}
-        </TransitionGroup>
+        <Entries entries={this.props.entries} />
 
-        {(done.size > 0 && entries.size !== 0) &&
+        {(this.props.done.size > 0 && this.props.entries.size !== 0) &&
           <hr className="p-room__hr" />
         }
-
-        {done.size > 0 &&
-          <TransitionGroup>
-            {done.map((talk, i) => (
-              <TalksGroup timeout={300} key={`talk-group-done-${talk.get('id')}`}>
-                <Talk talk={talk} key={`done-${talk.get('id')}`} i={i} done />
-              </TalksGroup>
-            ))}
-          </TransitionGroup>
+        {this.props.done.size > 0 &&
+          <Done done={this.props.done} />
         }
       </div>
     );

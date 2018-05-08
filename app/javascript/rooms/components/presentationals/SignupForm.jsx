@@ -3,73 +3,33 @@ import PropTypes from 'prop-types';
 
 import CloseButton, { closeDialog } from './CloseButton';
 import DialogTitle from './DialogTitle';
+import SignupSubmitButton from './SignupSubmitButton';
+import SignupErrors from './SignupErrors';
+import TextInput from './TextInput';
 
-export default class SignupForm extends React.Component {
-  handleClickSignUp(e) {
-    e.preventDefault();
-    const { roomName, title, talkerName } = this.props;
-    this.props.registerTalk(roomName, title, talkerName);
-  }
+const SignupForm = ({ submitted, title, talkerName, response, isValid, open, roomName, changeTalkerName, changeTitle, registerTalk, clearSignupForm }) => (
+  <dialog className="mdl-dialog p-room__section--center" id="signup-form">
+    <CloseButton onClick={clearSignupForm} className={'c-dialog__close'} selector="dialog#signup-form" />
 
-  render() {
-    const { submitted, title, talkerName, response, isValid, open } = this.props;
-    return (
-      <dialog className="mdl-dialog p-room__section--center" id="signup-form">
-        <CloseButton onClick={this.props.clearSignupForm} className={'c-dialog__close'} selector="dialog#signup-form" />
+    <section className="mdl-grid">
+      <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
+        <DialogTitle title="Sign up your talk" />
 
-        <section className="mdl-grid">
-          <form className={`${submitted ? 'p-signup__form--inactive' : 'p-signup__form--active'}`}>
-            <DialogTitle title="Sign up your talk" />
-
-            <div className="mdl-card__supporting-text p-room__card-body">
-              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__name">
-                <input
-                  id="signup-name"
-                  className="mdl-textfield__input"
-                  type="text"
-                  onChange={e => this.props.changeTalkerName(e.target.value)}
-                  value={talkerName}
-                  disabled={submitted}
-                  autoComplete="off"
-                />
-                <label className="mdl-textfield__label" htmlFor="signup-name"> Talker name</label>
-              </div>
-
-              <div className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label ml5 p-room__name">
-                <input
-                  id="signup-title"
-                  className="mdl-textfield__input"
-                  type="text"
-                  onChange={e => this.props.changeTitle(e.target.value)}
-                  value={title}
-                  disabled={submitted}
-                  autoComplete="off"
-                />
-                <label className="mdl-textfield__label" htmlFor="signup-title">Title</label>
-              </div>
-              <div className="mdl-card__supporting-text">
-                {response && response.get('errors') && response.get('errors').map(e =>
-                  <p className="error" key={e}>{e}</p>,
-                )}
-              </div>
-            </div>
-            <div className="mdl-card__actions mdl-card--border">
-              <button
-                id="signup"
-                className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent p-room__button--create"
-                onClick={e => this.handleClickSignUp(e)}
-                disabled={submitted || !isValid}
-              >
-                SignUp
-              </button>
-            </div>
-          </form>
-        </section>
-        {!open && closeDialog('dialog#signup-form')}
-      </dialog>
-    );
-  }
-}
+        <div className="mdl-card__supporting-text p-room__card-body">
+          <TextInput id="signup-name" onChange={changeTalkerName} value={talkerName} disabled={Boolean(submitted)} label="Talker name" />
+          <TextInput id="signup-title" onChange={changeTitle} value={title} disabled={Boolean(submitted)} label="Title" />
+          {response && response.get('errors') &&
+            <SignupErrors errors={response.get('errors')} />
+          }
+        </div>
+        <div className="mdl-card__actions mdl-card--border">
+          <SignupSubmitButton disabled={submitted || !isValid} onClick={() => registerTalk(roomName, title, talkerName)} />
+        </div>
+      </form>
+    </section>
+    {!open && closeDialog('dialog#signup-form')}
+  </dialog>
+);
 
 SignupForm.propTypes = {
   submitted: PropTypes.bool,
@@ -93,3 +53,5 @@ SignupForm.defaultProps = {
   isValid: false,
   roomName: '',
 };
+
+export default SignupForm;

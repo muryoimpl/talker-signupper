@@ -3,12 +3,11 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import Immutable from 'immutable';
-import { TransitionGroup } from 'react-transition-group';
 
 import Talks from '../Talks';
 import NoEntry from '../presentationals/NoEntry';
-import TalksGroup from '../presentationals/TalksGroup';
-import Talk from '../Talk';
+import Entries from '../presentationals/Entries';
+import Done from '../presentationals/Done';
 
 const mockStore = configureStore();
 // prevent App.talks and App.cable.subscriptions.create from operating anything
@@ -32,7 +31,7 @@ test('Show noEntry component', () => {
   expect(wrapper.contains(<NoEntry />)).toBe(true);
 });
 
-test('Show talk', () => {
+test('Show entries talk', () => {
   const entry = new Immutable.Map({ id: 1, talker_name: 'muryoimpl', title: 'hi' });
   const initialState = { talks: { loading: false, entries: new Immutable.List([entry]), done: new Immutable.List() } };
   const store = mockStore(initialState);
@@ -41,13 +40,23 @@ test('Show talk', () => {
   expect(
     wrapper.contains(
       <div>
-        <TransitionGroup>
-          {initialState.talks.entries.map((talk, i) => (
-            <TalksGroup timeout={300} key={`talk-group-${talk.get('id')}`}>
-              <Talk talk={talk} key={talk.get('id')} i={i} />
-            </TalksGroup>
-          ))}
-        </TransitionGroup>
+        <Entries entries={initialState.talks.entries} />
+      </div>,
+    ),
+  ).toBe(true);
+});
+
+test('Show done talk', () => {
+  const done = new Immutable.Map({ id: 1, talker_name: 'muryoimpl', title: 'hi', progress: 'done' });
+  const initialState = { talks: { loading: false, entries: new Immutable.List([]), done: new Immutable.List([done]) } };
+  const store = mockStore(initialState);
+  const wrapper = mount(<Provider store={store}><Talks name={'aaaa'} /></Provider>);
+
+  expect(
+    wrapper.contains(
+      <div>
+        <Entries entries={initialState.talks.entries} />
+        <Done done={initialState.talks.done} />
       </div>,
     ),
   ).toBe(true);

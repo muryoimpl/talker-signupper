@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import AppTitle from './AppTitle';
+import RoomTag from './RoomTag';
+import ShuffleButton from './ShuffleButton';
+import EntryButton from './EntryButton';
+import LeaveButton from './LeaveButton';
+
 export default class HeaderContent extends React.Component {
   componentDidMount() {
     this.props.setRoomName(this.roomName());
@@ -11,79 +17,25 @@ export default class HeaderContent extends React.Component {
     return resources[resources.findIndex(elm => elm === 'rooms') + 1];
   }
 
-  clearDirty() {
-    const mdlInputs = document.querySelectorAll('.mdl-js-textfield');
-    for (let i = 0, l = mdlInputs.length; i < l; i += 1) {
-      mdlInputs[i].MaterialTextfield.checkDirty();
-    }
-  }
-
-  handleClickSignUp(e) {
-    e.preventDefault();
-    this.clearDirty();
-    document.querySelector('dialog#signup-form').showModal();
-    this.props.showSignUpDialog();
-  }
-
-  handleClickLeave(e) {
-    e.preventDefault();
-    this.props.backToRootPage();
-  }
-
-  async handleShuffleOrder(e) {
-    e.preventDefault();
-    if (this.props.authorized) {
-      await this.props.shuffleOrder();
-    } else {
-      document.querySelector('dialog#authorization-form').showModal();
-    }
-  }
-
   render() {
     const { roomName, connected } = this.props;
-
     return (
       <header className="layout-header mdl-layout__header mdl-layout__header--waterfall">
         <div className="mdl-layout__header-row">
-          <span className="mdl-layout-title">
-            <span><a className="text-like" href="/">Talker Signupper</a></span>
-          </span>
-
-          <span className="p-room__room-name">
-            <a className="p-room__room-name-link" href={window.location.href}>#{roomName}</a>
-          </span>
+          <AppTitle title="Talker Signupper" />
+          <RoomTag roomName={roomName} />
           <div className="mdl-layout-spacer" />
 
           <nav className="mdl-navigation">
-            <button
-              id="shuffle"
-              disabled={!connected}
-              className="mdl-button mdl-js-button mdl-button--raised p-header__shuffle"
-              onClick={e => this.handleShuffleOrder(e)}
-            >
-              shuffle
-            </button>
+            <ShuffleButton disabled={!connected} authorized={this.props.authorized} onClick={this.props.shuffleOrder} />
           </nav>
 
           <nav className="mdl-navigation">
-            <button
-              id="signup"
-              disabled={!connected}
-              className="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
-              onClick={e => this.handleClickSignUp(e)}
-            >
-              entry
-            </button>
+            <EntryButton disabled={!connected} onClick={this.props.showSignUpDialog} />
           </nav>
+
           <nav className="mdl-navigation">
-            <button
-              id="leave"
-              disabled={!connected}
-              className="ml10 mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
-              onClick={e => this.handleClickLeave(e)}
-            >
-              leave this room
-            </button>
+            <LeaveButton disabled={!connected} onClick={this.props.backToRootPage} />
           </nav>
         </div>
       </header>

@@ -14,7 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  authorize: () => {
+  authorize: (e) => {
+    e.preventDefault();
     dispatch(talkActions.shuffleOrder());
   },
   closeAuthorizationDialog: () => {

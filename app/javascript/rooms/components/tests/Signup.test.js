@@ -14,7 +14,7 @@ test('call changeTitle when title is changed', () => {
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Signup /></Provider>);
 
-  wrapper.find('#signup-title').simulate('change', { target: { value: 'hi' } });
+  wrapper.find('input#signup-title').simulate('change', { target: { value: 'hi' } });
   const actions = store.getActions();
   expect(actions).toEqual([{ type: 'CHANGE_TITLE', title: 'hi' }]);
 });
@@ -24,7 +24,7 @@ test('call changeName when name is changed', () => {
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Signup /></Provider>);
 
-  wrapper.find('#signup-name').simulate('change', { target: { value: 'Ken' } });
+  wrapper.find('input#signup-name').simulate('change', { target: { value: 'Ken' } });
   const actions = store.getActions();
   expect(actions).toEqual([{ type: 'CHANGE_NAME', talkerName: 'Ken' }]);
 });
