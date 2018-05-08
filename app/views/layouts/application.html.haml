@@ -17,4 +17,6 @@
         = yield
 
     %footer.mdl-mega-footer
-      %p.tac Copyright &copy; 2017 muryoimpl
+      - if Rails.env.production?
+        = render 'rooms/banner'
+      %p.tac{style: 'margin-bottom: 0'} Copyright &copy; 2018 muryoimpl
