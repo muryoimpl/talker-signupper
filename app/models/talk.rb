@@ -12,6 +12,6 @@ class Talk < ApplicationRecord
   enum progress: {entried: 0, started: 1, oneFifths: 2, twoFifths: 3, threeFifths: 4, fourFifths: 5, done: 6}
 
   def json_attributes(room)
-    attributes.merge(room: room.attributes)
+    attributes.merge(room: room.attributes.except('password_digest'))
   end
 end
