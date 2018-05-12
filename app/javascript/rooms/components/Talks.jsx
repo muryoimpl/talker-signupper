@@ -19,6 +19,9 @@ const actionForReceivedJSON = (dispatch, response) => {
     case 'shuffled-talks':
       dispatch(talkActions.setTalks(response.room.talks));
       break;
+    case 'update-progress':
+      dispatch(talkActions.updateProgress(response.id, response.progress));
+      break;
     default:
       console.error(`unknown action: ${response.action}`); // eslint-disable-line no-console
   }

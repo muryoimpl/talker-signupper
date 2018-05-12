@@ -20,8 +20,10 @@ export default class Timer extends React.Component {
 
     if (remaining >= 0) {
       this.props.tick(remaining);
+      // TODO: 状況ごとに progress を更新する処理を書く
     } else {
-      this.props.resetTimer(this.props.timerId);
+      this.props.updateTalkProgress(this.props.talkId, 'done');
+      this.props.clearTimer(this.props.timerId);
       this.props.prepareNextTalk();
       const nextEntry = this.props.entries.first();
       this.props.showNextTalk(nextEntry);
@@ -35,7 +37,7 @@ export default class Timer extends React.Component {
   }
 
   render() {
-    const { title, talkerName, time, running, timerId, connected, remaining } = this.props;
+    const { title, talkerName, time, running, timerId, connected, remaining, talkId } = this.props;
     return (
       <dialog className="mdl-dialog p-timer__dialog-frame" id="timer-frame">
         <CloseButton onClick={this.props.closeTimer} selector="dialog#timer-frame" />
@@ -56,7 +58,7 @@ export default class Timer extends React.Component {
           <div className="mdl-dialog__actions">
             <button type="button" className="mdl-button" disabled={!connected || running} onClick={() => this.start()}>Start</button>
             <button type="button" className="mdl-button" disabled={!running} onClick={() => this.props.stopTimer(timerId)}>Stop</button>
-            <button type="button" className="mdl-button" disabled={running || !timerId} onClick={() => this.props.resetTimer()}>Reset</button>
+            <button type="button" className="mdl-button" disabled={running || !timerId} onClick={() => this.props.resetTimer(timerId, talkId)}>Reset</button>
           </div>
         </div>
       </dialog>
@@ -68,6 +70,7 @@ Timer.propTypes = {
   title: PropTypes.string,
   talkerName: PropTypes.string,
   timerId: PropTypes.number,
+  talkId: PropTypes.number,
   remaining: PropTypes.number,
   prevTime: PropTypes.number,
   time: PropTypes.arrayOf(PropTypes.number),
@@ -83,12 +86,13 @@ Timer.propTypes = {
   prepareNextTalk: PropTypes.func.isRequired,
   showNextTalk: PropTypes.func.isRequired,
   tick: PropTypes.func.isRequired,
+  updateTalkProgress: PropTypes.func.isRequired,
 };
 
 Timer.defaultProps = {
   title: '',
   talkerName: '',
-  talkId: '',
+  talkId: 0,
   timerId: null,
   remaining: 0,
   time: [0, 0],

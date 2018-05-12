@@ -35,7 +35,9 @@ const mapDispatchToProps = dispatch => ({
   openTimer: () => {
     dispatch(actions.openTimer());
   },
-  clearTimer: () => {
+  clearTimer: (timerId) => {
+    if (timerId) clearInterval(timerId);
+    dispatch(actions.stopTimer());
     dispatch(actions.clearTimer());
   },
   setPrevTime: (prev) => {
@@ -45,10 +47,14 @@ const mapDispatchToProps = dispatch => ({
     clearInterval(timerId);
     dispatch(actions.stopTimer());
   },
-  resetTimer(timerId) {
+  resetTimer(timerId, talkId) {
     clearInterval(timerId);
+    dispatch(talkActions.requestProgressUpdate(talkId, 'entried'));
     dispatch(actions.stopTimer());
     dispatch(actions.clearTimer());
+  },
+  updateTalkProgress(talkId, progress) {
+    dispatch(talkActions.requestProgressUpdate(talkId, progress));
   },
   startTimer: (timerId) => {
     dispatch(actions.setTimerId(timerId));

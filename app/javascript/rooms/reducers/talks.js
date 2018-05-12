@@ -15,6 +15,13 @@ function classifyTalks(fetchedTalks) {
   return allTalks;
 }
 
+function updateProgress(talk, payload) {
+  const index = talk.entries.findIndex(item => item.get('id') === payload.id);
+  const targetTalk = talk.entries.get(index);
+  const entries = talk.entries.update(index, () => targetTalk.merge({ progress: payload.progress }));
+  return entries;
+}
+
 export default function talks(talk = new Talk(), action) {
   switch (action.type) {
     case Types.SET_TALKS: {
@@ -33,6 +40,10 @@ export default function talks(talk = new Talk(), action) {
     case Types.PUSH_TO_CURRENT: {
       const current = Immutable.Map({ title: action.payload.title, talkerName: action.payload.talkerName, id: action.payload.id });
       return talk.merge({ current });
+    }
+    case Types.UPDATE_PROGRESS: {
+      const entries = updateProgress(talk, action.payload);
+      return talk.merge({ entries });
     }
     default: // includes Types.FETCH_TALKS, Types.SHUFFLE_ORDER
       return talk;

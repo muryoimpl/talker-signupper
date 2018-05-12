@@ -27,3 +27,19 @@ test('SHUFFLE_ORDER', () => {
   const initialState = Immutable.Record({ entries: [], loading: false })();
   expect(talks(initialState, { type: 'SHUFFLE_ORDER' })).toEqual(initialState);
 });
+
+test('UPDATE_PROGRESS', () => {
+  const firstEntry = Immutable.Map({
+    id: 1, title: 'a', talker_name: 'a', order_number: 10, progress: 'fourFifths',
+  });
+  const entries = Immutable.List([firstEntry]);
+  const initialState = Immutable.Record({ entries, loading: false })();
+
+  expect(
+    talks(initialState, { type: 'UPDATE_PROGRESS', payload: { id: 1, progress: 'entried' } }),
+  ).toEqual(
+    initialState.merge({
+      entries: Immutable.List([firstEntry.merge({ progress: 'entried' })]),
+    }),
+  );
+});
