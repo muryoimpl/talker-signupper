@@ -16,10 +16,6 @@ class Api::RoomsController < Api::ApplicationController
 
   private
 
-  def find_room!
-    Room.find_by!(name: params[:name])
-  end
-
   def status(room)
     room ? 200 : 404
   end
