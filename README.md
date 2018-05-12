@@ -2,6 +2,7 @@
 
 [![Build Status(develop)](https://travis-ci.org/muryoimpl/talker-signupper.svg?branch=develop)](https://travis-ci.org/muryoimpl/talker-signupper)
 [![Maintainability](https://api.codeclimate.com/v1/badges/caa1bfd1224c708fdcad/maintainability)](https://codeclimate.com/github/muryoimpl/talker-signupper/maintainability)
+[![codecov](https://codecov.io/gh/muryoimpl/talker-signupper/branch/develop/graph/badge.svg)](https://codecov.io/gh/muryoimpl/talker-signupper)
 
 **Now Under Building...**
 

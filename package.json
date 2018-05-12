@@ -7,10 +7,13 @@
     ],
     "setupFiles": [
       "./app/javascript/rooms/utils/tests/setup-test-env.js"
-    ]
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true
   },
   "scripts": {
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest --verbose && codecov",
+    "testlocal": "NODE_ENV=test jest --verbose",
     "lint": "eslint --color ./app/javascript"
   },
   "dependencies": {
