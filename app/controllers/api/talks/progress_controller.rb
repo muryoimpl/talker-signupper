@@ -10,6 +10,12 @@ class Api::Talks::ProgressController < Api::ApplicationController
     end
 
     talk.update!(progress_params)
+
+    room = talk.room
+    broadcast_to("room-#{room.name}") do
+      render_json(:update, :ok, talk: talk, room: room, errors: nil)
+    end
+
     head :ok
   rescue ActiveRecord::RecordNotFound
     head :not_found

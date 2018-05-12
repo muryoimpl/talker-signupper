@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+{
+  status: status,
+  action: 'update-progress',
+  talk: {
+    id: talk&.id,
+    title: talk&.title,
+    talker_name: talk&.talker_name,
+    room_id: talk&.room_id,
+    created_at: talk&.created_at,
+    updated_at: talk&.updated_at,
+    order_number: talk&.order_number,
+    progress: talk&.progress,
+    room: {
+      id: room&.id,
+      name: room&.name,
+      created_at: room&.created_at,
+      updated_at: room&.updated_at
+    }
+  }
+}
