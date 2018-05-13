@@ -10,6 +10,10 @@ const SignupErrors = ({ errors }) => (
 );
 
 SignupErrors.propTypes = {
-  errors: PropTypes.object.isRequired,
+  errors: PropTypes.object || PropTypes.array,
+};
+
+SignupErrors.defaultProps = {
+  errors: [],
 };
 export default SignupErrors;
