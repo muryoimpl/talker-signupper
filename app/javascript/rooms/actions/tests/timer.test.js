@@ -1,4 +1,4 @@
-import { openTimer, closeTimer, startTimer, stopTimer, setTimerId, updateRemaining } from '../timer';
+import { openTimer, closeTimer, startTimer, stopTimer, setTimerId, updateRemaining, setPrevTime } from '../timer';
 
 test('openTimer action', () => {
   expect(openTimer()).toEqual({ type: 'OPEN_TIMER' });
@@ -24,4 +24,10 @@ test('setTimerId action', () => {
 test('updateRemaining action', () => {
   const payload = { remaining: 1000 };
   expect(updateRemaining(1000)).toEqual({ type: 'UPDATE_REMAINING', payload });
+});
+
+test('setPrevTime action', () => {
+  const current = Date.now();
+  const payload = { prevTime: current };
+  expect(setPrevTime(current)).toEqual({ type: 'SET_PREV_TIME', payload });
 });
