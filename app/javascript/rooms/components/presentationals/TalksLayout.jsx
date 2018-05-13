@@ -11,18 +11,6 @@ export default class TalksLayout extends React.Component {
   componentDidMount() {
     this.props.showLoading(true);
     this.props.fetchTalks(this.props.entries);
-
-    App.talks = App.cable.subscriptions.create({ channel: 'RoomChannel', name: `${this.props.name}` }, {
-      received: (data) => {
-        this.props.receiveJSON(data);
-      },
-      connected: () => {
-        this.props.changeSocketState(true);
-      },
-      disconnected: () => {
-        this.props.changeSocketState(false);
-      },
-    });
   }
 
   render() {
@@ -51,12 +39,9 @@ export default class TalksLayout extends React.Component {
 TalksLayout.propTypes = {
   entries: PropTypes.instanceOf(Immutable.List),
   done: PropTypes.instanceOf(Immutable.List),
-  name: PropTypes.string.isRequired,
   showLoading: PropTypes.func.isRequired,
-  receiveJSON: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
   fetchTalks: PropTypes.func.isRequired,
-  changeSocketState: PropTypes.func.isRequired,
 };
 
 TalksLayout.defaultProps = {
