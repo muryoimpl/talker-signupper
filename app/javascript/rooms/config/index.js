@@ -4,6 +4,7 @@ import production from './production';
 
 const envName = process.env.NODE_ENV;
 
+/* istanbul ignore next */
 function environmentConfig() {
   switch (envName) {
     case 'production':
