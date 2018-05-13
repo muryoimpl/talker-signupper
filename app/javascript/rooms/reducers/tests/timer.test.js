@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 
 import timer from '../timer';
+import Timer from '../../models/timer';
 
 test('OPEN_TIMER', () => {
   const initialState = Immutable.Record({ open: false })();
@@ -76,4 +77,9 @@ test('SET_PREV_TIME', () => {
   ).toEqual(
     initialState.merge({ prevTime: current }),
   );
+});
+
+test('unknown type', () => {
+  const initialState = new Timer();
+  expect(timer(undefined, { type: 'UNKNOWN' })).toEqual(initialState);
 });

@@ -1,6 +1,7 @@
 import Immutable from 'immutable';
 
 import authorizations from '../authorization';
+import Authorization from '../../models/authorization';
 
 test('CHANGE_PASSWORD', () => {
   const initialState = Immutable.Record({ password: '', submitted: false, authorized: false })();
@@ -60,4 +61,9 @@ test('CLEAR_AUTH_RESPONSE', () => {
   ).toEqual(
     initialState.merge({ response: null }),
   );
+});
+
+test('unknown type', () => {
+  const initialState = new Authorization();
+  expect(authorizations(undefined, { type: 'UNKNOWN' })).toEqual(initialState);
 });
