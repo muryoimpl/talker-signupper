@@ -1,7 +1,9 @@
 import { call, select, put } from 'redux-saga/effects';
+import axios from 'axios';
 
 import { shuffleTalksOrder, getShuffledTalks, getAllState } from '../shuffleTalksOrder';
 import { wait } from '../../utils/timer';
+import config from '../../config/test';
 
 const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
 const getAuth = obj => ({ authorization: { password: 'Passw0rd', response: null, authorized: obj.authorized } });
@@ -57,4 +59,21 @@ test('shuffleTalksOrder: shuffle fails', async () => {
 
   ret = saga.next(getState(notAuthorized));
   expect(saga.next()).toEqual({ done: true, value: undefined });
+});
+
+test('getAllState', () => {
+  const state = { headers: { roomName: 'hi' } };
+  expect(getAllState(state)).toEqual(state);
+});
+
+jest.mock('axios', () => ({
+  post: jest.fn(() => Promise.resolve({ status: 201 })),
+}));
+
+test('getShuffledTalks', async () => {
+  const roomName = 'aaaa';
+  const params = { password: 'password' };
+  const url = `${config.API_HOST}/api/rooms/${roomName}/talks/shuffle`;
+  await getShuffledTalks(roomName, 'password');
+  expect(axios.post).toHaveBeenCalledWith(url, params);
 });

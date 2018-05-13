@@ -4,6 +4,7 @@ import rootSaga from '../index';
 import { registerSignuppersTalk } from '../requestForTalk';
 import { fetchTalks } from '../fetchTalks';
 import { shuffleTalksOrder } from '../shuffleTalksOrder';
+import { updateTalkProgress } from '../updateTalkProgress';
 import * as Types from '../../constants/actions';
 
 test('fork registerSignuppersTalk', () => {
@@ -17,4 +18,9 @@ test('fork registerSignuppersTalk', () => {
 
   ret = saga.next();
   expect(ret.value).toEqual(takeLatest(Types.SHUFFLE_ORDER, shuffleTalksOrder));
+
+  ret = saga.next();
+  expect(ret.value).toEqual(takeLatest(Types.REQUEST_PROGRESS_UPDATE, updateTalkProgress));
+
+  expect(saga.next()).toEqual({ done: true, value: undefined });
 });

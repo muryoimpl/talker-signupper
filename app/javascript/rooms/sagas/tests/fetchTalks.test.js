@@ -1,10 +1,12 @@
 import { take, call, select, put } from 'redux-saga/effects';
 import nock from 'nock';
+import axios from 'axios';
 
 import * as Types from '../../constants/actions';
-import { fetchTalksByRoom, fetchTalks, getHeaders } from '../fetchTalks';
+import { fetchTalksByRoom, fetchTalks, getHeaders, getAllState } from '../fetchTalks';
 import * as talksActions from '../../actions/talks';
 import * as dialogsActions from '../../actions/dialogs';
+import config from '../../config/test';
 
 const getHeadersState = () => ({ headers: { roomName: 'aaaa', signup: true } });
 
@@ -111,4 +113,25 @@ test('registerSignuppersTalk: request occurs error', async () => {
 
   ret = saga.next();
   expect(ret.value, put(talksActions.loading(false)));
+});
+
+test('getAllState', () => {
+  const state = { headers: { roomName: 'hi' }, globals: { connected: false } };
+  expect(getAllState(state)).toEqual(state);
+});
+
+test('getHeaders', () => {
+  const state = { headers: { roomName: 'hi' }, globals: { connected: false } };
+  expect(getHeaders(state)).toEqual({ roomName: 'hi' });
+});
+
+jest.mock('axios', () => ({
+  get: jest.fn(() => Promise.resolve({ status: 200 })),
+}));
+
+test('fetchTalksByRoom', async () => {
+  const roomName = 'aaaa';
+  const url = `${config.API_HOST}/api/rooms/${roomName}`;
+  await fetchTalksByRoom(roomName);
+  expect(axios.get).toHaveBeenCalledWith(url);
 });

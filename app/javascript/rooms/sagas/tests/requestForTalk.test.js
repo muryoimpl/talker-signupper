@@ -1,9 +1,11 @@
 import { put, call, select } from 'redux-saga/effects';
 import nock from 'nock';
+import axios from 'axios';
 
 import { registerSignuppersTalk, postTalk, getAllState, postEntry } from '../requestForTalk';
 import * as headerActions from '../../actions/headers';
 import * as signupActions from '../../actions/signups';
+import config from '../../config/test';
 
 const getSignup = () => ({ signups: { title: 'hi', talkerName: 'Ken' } });
 const getHeader = () => ({ headers: { roomName: 'aaaa', signup: true } });
@@ -125,4 +127,21 @@ test('postEntry: request failed, returned 400', async () => {
 
   ret = saga.next();
   expect(ret).toEqual({ done: true, value: undefined });
+});
+
+test('getAllState', () => {
+  const state = { headers: { roomName: 'hi' } };
+  expect(getAllState(state)).toEqual(state);
+});
+
+jest.mock('axios', () => ({
+  post: jest.fn(() => Promise.resolve({ status: 201 })),
+}));
+
+test('postTalk', async () => {
+  const roomName = 'aaaa';
+  const params = { title: 'hi', talkerName: 'ken' };
+  const url = `${config.API_HOST}/api/rooms/${roomName}/talks`;
+  await postTalk(roomName, params);
+  expect(axios.post).toHaveBeenCalledWith(url, { talk: { title: 'hi', talker_name: 'ken' } });
 });

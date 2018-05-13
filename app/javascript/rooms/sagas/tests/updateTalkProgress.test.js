@@ -1,6 +1,8 @@
 import { call } from 'redux-saga/effects';
+import axios from 'axios';
 
 import { updateTalkProgress, patchTalkProgress } from '../updateTalkProgress';
+import config from '../../config/test';
 
 test('updateTalkProgress: update successfully', async () => {
   const saga = updateTalkProgress({ payload: { id: 1, progress: 'entried' } });
@@ -20,4 +22,16 @@ test('updateTalkProgress: update fails', async () => {
   ret = saga.next({ status: 404 });
 
   expect(saga.next()).toEqual({ done: true, value: undefined });
+});
+
+jest.mock('axios', () => ({
+  patch: jest.fn(() => Promise.resolve({ status: 200 })),
+}));
+
+test('patchTalkProgress', async () => {
+  const talkId = 1;
+  const params = { progress: 'oneFifths' };
+  const url = `${config.API_HOST}/api/talks/${talkId}/progress`;
+  await patchTalkProgress(talkId, 'oneFifths');
+  expect(axios.patch).toHaveBeenCalledWith(url, params);
 });
