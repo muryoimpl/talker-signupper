@@ -1,8 +1,12 @@
+import Immutable from 'immutable';
 import {
   fetchTalks,
+  addTalk,
   setTalks,
   loading,
   shuffleOrder,
+  nextTalk,
+  pushToCurrent,
   requestProgressUpdate,
   updateProgress,
 } from '../talks';
@@ -16,12 +20,29 @@ test('setTalks action', () => {
   expect(setTalks(talks)).toEqual({ type: 'SET_TALKS', payload: { talks } });
 });
 
+test('addTalk action', () => {
+  const talk = { id: 1, talkerName: 'impl', title: 'hi', room_id: 1 };
+  expect(addTalk(talk)).toEqual({ type: 'ADD_TALK', talk });
+});
+
 test('loading action', () => {
   expect(loading(true)).toEqual({ type: 'LOADING', loading: true });
 });
 
 test('shuffleOrder action', () => {
   expect(shuffleOrder()).toEqual({ type: 'SHUFFLE_ORDER' });
+});
+
+test('nextTalk action', () => {
+  expect(nextTalk()).toEqual({ type: 'NEXT_TALK' });
+});
+
+test('pushToCurrent action', () => {
+  const talk = Immutable.Map({ id: 1, talkerName: 'impl', title: 'hi', room_id: 1 });
+  expect(pushToCurrent(talk)).toEqual({
+    type: 'PUSH_TO_CURRENT',
+    payload: { title: talk.get('title'), talkerName: talk.get('talker_name'), id: talk.get('id') },
+  });
 });
 
 test('requestProgressUpdate action', () => {
