@@ -9,6 +9,4 @@ export function isOK(status) {
   }
 }
 
-export function isError(status) {
-  return !isOK(status);
-}
+export default isOK;

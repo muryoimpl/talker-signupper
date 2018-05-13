@@ -9,3 +9,8 @@ test('password less than 6 characters', () => {
   const state = { password: 'abcde' };
   expect(authorizationFormSelector(state)).toEqual(false);
 });
+
+test('password is blank', () => {
+  const state = { password: '' };
+  expect(authorizationFormSelector(state)).toEqual(false);
+});
