@@ -10,6 +10,9 @@ globals:
   it: true
   expect: true
   jest: true
+  describe: true
+  beforeEach: true
+  afterEach: true
 
 rules:
   react/prefer-stateless-function: 0

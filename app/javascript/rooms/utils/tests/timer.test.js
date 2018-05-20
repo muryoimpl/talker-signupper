@@ -11,8 +11,14 @@ test('zeroPad: 2 digit', () => {
 });
 
 // NOTE: https://facebook.github.io/jest/docs/ja/timer-mocks.html
-test('wait', () => {
-  wait(1).then(() => {});
-  jest.runAllTimers();
-  expect(setTimeout).toHaveBeenCalledTimes(1);
+describe('wait', () => {
+  afterEach(() => {
+    jest.clearAllTimers();
+  });
+
+  test('wait', () => {
+    wait(1).then(() => {});
+    jest.runAllTimers();
+    expect(setTimeout).toHaveBeenCalledTimes(1);
+  });
 });
