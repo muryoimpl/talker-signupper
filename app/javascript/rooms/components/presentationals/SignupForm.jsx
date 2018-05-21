@@ -35,7 +35,7 @@ SignupForm.propTypes = {
   submitted: PropTypes.bool,
   title: PropTypes.string,
   talkerName: PropTypes.string,
-  response: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  response: PropTypes.oneOfType([PropTypes.object]),
   isValid: PropTypes.bool,
   roomName: PropTypes.string,
   open: PropTypes.bool.isRequired,

@@ -14,6 +14,6 @@ SignupErrors.propTypes = {
 };
 
 SignupErrors.defaultProps = {
-  errors: [],
+  errors: null,
 };
 export default SignupErrors;

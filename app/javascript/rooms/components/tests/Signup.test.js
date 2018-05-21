@@ -30,7 +30,7 @@ test('call changeName when name is changed', () => {
 });
 
 test('call handleClickSignUp when signup button is clicked', () => {
-  const response = new Immutable.Map({ status: 201, errors: [] });
+  const response = new Immutable.Map({ status: 201, errors: null });
   const initialState = { headers: { submitted: false }, signups: { open: false, title: 'hi', talkerName: 'Ken', submitted: false, response } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Signup /></Provider>);
