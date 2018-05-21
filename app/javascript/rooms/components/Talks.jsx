@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import * as talkActions from '../actions/talks';
-import * as globalActions from '../actions/globals';
 
 import TalksLayout from './presentationals/TalksLayout';
 
@@ -18,9 +17,6 @@ const mapDispatchToProps = dispatch => ({
     if (!entries || entries.size === 0) {
       dispatch(talkActions.fetchTalks());
     }
-  },
-  changeSocketState: (state) => {
-    dispatch(globalActions.changeSocketState(state));
   },
 });
 
