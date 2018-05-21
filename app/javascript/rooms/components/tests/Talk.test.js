@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import Immutable from 'immutable';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import sinon from 'sinon';
 
 import Talk from '../../../rooms/components/Talk';
 
@@ -69,4 +70,23 @@ test('show element which is not a link if it is done', () => {
       <header className="p-talk-card-button mdl-color-text--white mdl-color--grey-400" />,
     ),
   ).toBe(true);
+});
+
+test('click first talk', () => {
+  // NOTE: http://thejoemorgan.com/2016/07/05/using-sinon-to-test-document-functions/
+  const selector = sinon.stub(document, 'querySelector');
+  selector.returns({ showModal: () => {} });
+
+  const talkJSON = { id: 1, title: 'hi', talker_name: 'muryoimpl', room_id: 1 };
+  const talk = new Immutable.Map(talkJSON);
+  const store = mockStore({});
+  const wrapper = mount(<Provider store={store}><Talk i={0} talk={talk} done={false} /></Provider>);
+
+  wrapper.find('a.p-talk-card-button__active').simulate('click');
+  const actions = store.getActions();
+  expect(actions).toEqual([
+    { type: 'PUSH_TO_CURRENT', payload: { id: 1, title: 'hi', talkerName: 'muryoimpl' } },
+    { type: 'OPEN_TIMER' },
+  ]);
+  store.clearActions();
 });
