@@ -61,3 +61,20 @@ test('Show done talk', () => {
     ),
   ).toBe(true);
 });
+
+test('Show entries and done', () => {
+  const entry = new Immutable.Map({ id: 1, talker_name: 'muryoimpl', title: 'hi', progress: 'entried' });
+  const done = new Immutable.Map({ id: 2, talker_name: 'muryoimpl', title: 'hi2', progress: 'done' });
+  const initialState = { talks: { loading: false, entries: new Immutable.List([entry]), done: new Immutable.List([done]) } };
+  const store = mockStore(initialState);
+  const wrapper = mount(<Provider store={store}><Talks name={'aaaa'} /></Provider>);
+  expect(
+    wrapper.contains(
+      <div>
+        <Entries entries={initialState.talks.entries} />
+        <hr className="p-room__hr" />
+        <Done done={initialState.talks.done} />
+      </div>,
+    ),
+  ).toBe(true);
+});
