@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   showSignUpDialog: () => {
     dispatch(signupActions.updateDialogOpen(true));
   },
-  backToRootPage: () => {
+  backToRootPage: /* istanbul ignore next */() => {
     const history = createHistory();
     history.push('/');
     history.go();
@@ -28,7 +28,8 @@ const mapDispatchToProps = dispatch => ({
   shuffleOrder: async () => {
     dispatch(talkActions.loading(true));
     dispatch(talkActions.shuffleOrder());
-    await wait(1000);
+    /* istanbul ignore if */
+    if (process.env.NODE_ENV !== 'test') await wait(1000);
     dispatch(talkActions.loading(false));
   },
 });
