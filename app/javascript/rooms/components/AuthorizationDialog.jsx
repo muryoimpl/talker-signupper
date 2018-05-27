@@ -16,6 +16,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   authorize: (e) => {
     e.preventDefault();
+    // TODO: ここを固定にしないようにしないと再利用できない
     dispatch(talkActions.shuffleOrder());
   },
   closeAuthorizationDialog: () => {
