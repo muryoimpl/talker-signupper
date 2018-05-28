@@ -10,7 +10,7 @@ const SignupErrors = ({ errors }) => (
 );
 
 SignupErrors.propTypes = {
-  errors: PropTypes.oneOf([PropTypes.object, PropTypes.array]),
+  errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 SignupErrors.defaultProps = {

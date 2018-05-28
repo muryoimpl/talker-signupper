@@ -27,12 +27,6 @@ const mapDispatchToProps = dispatch => ({
   changeTalkerName: (name) => {
     dispatch(actions.changeName(name));
   },
-  closeSignupDialog: () => {
-    dispatch(actions.updateDialogOpen(false));
-  },
-  openSignupDialog(open) {
-    if (!open) dispatch(actions.updateDialogOpen(true));
-  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

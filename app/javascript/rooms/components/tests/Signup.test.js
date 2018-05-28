@@ -31,11 +31,39 @@ test('call changeName when name is changed', () => {
 
 test('call handleClickSignUp when signup button is clicked', () => {
   const response = new Immutable.Map({ status: 201, errors: null });
-  const initialState = { headers: { submitted: false }, signups: { open: false, title: 'hi', talkerName: 'Ken', submitted: false, response } };
+  const initialState = { headers: { roomName: 'aaaa' }, signups: { open: false, title: 'hi', talkerName: 'Ken', submitted: false, response } };
   const store = mockStore(initialState);
   const wrapper = mount(<Provider store={store}><Signup /></Provider>);
 
   wrapper.find('#signup').simulate('click');
   const actions = store.getActions();
   expect(actions).toEqual([{ type: 'REGISTER_SIGNUPPER_TALK' }]);
+});
+
+test('Click close button', () => {
+  const initialState = { headers: { roomName: 'aaaa' }, signups: { open: true, title: 'hi', talkerName: 'Ken', submitted: false, response: null } };
+  const store = mockStore(initialState);
+  const wrapper = mount(<Provider store={store}><Signup /></Provider>);
+
+  wrapper.find('button.c-dialog__close').simulate('click');
+  const actions = store.getActions();
+  expect(actions).toEqual([{ type: 'CLEAR_SIGNUP_STATE' }]);
+});
+
+test('Show errors', () => {
+  const initialState = {
+    headers: { roomName: 'aaaa' },
+    signups: {
+      response: Immutable.Map({ errors: ['error has occurred'] }),
+      open: true,
+      title: 'hi',
+      talkerName: 'Ken',
+      submitted: false,
+    },
+  };
+  const store = mockStore(initialState);
+  const wrapper = mount(<Provider store={store}><Signup /></Provider>);
+
+  console.log(wrapper.html());
+  expect(wrapper.find('p.error').text()).toEqual('error has occurred');
 });
