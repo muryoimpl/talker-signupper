@@ -7,7 +7,7 @@ import NotificationReceiver from './presentationals/NotificationReceiver';
 
 const mapStateToProps = state => state;
 
-const actionForReceivedJSON = (dispatch, response) => {
+export const actionForReceivedJSON = (dispatch, response) => {
   switch (response.action) {
     case 'create-talk':
       dispatch(talkActions.addTalk(response.talk));
@@ -23,7 +23,7 @@ const actionForReceivedJSON = (dispatch, response) => {
   }
 };
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   receiveJSON: (data) => {
     const response = JSON.parse(data);
 
